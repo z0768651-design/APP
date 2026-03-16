@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="card">
+    <view class="date-section">
+      <text class="date">{{date}}</text>
+      <text class="weekday">{{weekday}}</text>
+    </view>
+
+    <view class="clock-section">
+      <text class="period">{{period}}</text>
+      <view class="time-display">
+        <text class="time-unit">{{hours}}</text>
+        <text class="colon">:</text>
+        <text class="time-unit">{{minutes}}</text>
+        <text class="colon">:</text>
+        <text class="seconds-unit">{{seconds}}</text>
+      </view>
+    </view>
+  </view>
+</view>
