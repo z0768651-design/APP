@@ -1,12 +1,26 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/add/index",
+    "pages/detail/index",
+    "pages/settings/index"
   ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#1a1a2e",
-    "navigationBarTitleText": "时间",
+    "navigationBarBackgroundColor": "#0a0a1a",
+    "navigationBarTitleText": "像素冰箱",
     "navigationBarTextStyle": "white"
+  },
+  "tabBar": {
+    "color": "#888888",
+    "selectedColor": "#4fc3f7",
+    "backgroundColor": "#111130",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "❄ 冰箱" },
+      { "pagePath": "pages/add/index", "text": "+ 添加" },
+      { "pagePath": "pages/settings/index", "text": "⚙ 设置" }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

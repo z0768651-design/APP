@@ -1,19 +1,175 @@
-<view class="container">
-  <view class="card">
-    <view class="date-section">
-      <text class="date">{{date}}</text>
-      <text class="weekday">{{weekday}}</text>
+<!-- 像素冰箱 - 主页 -->
+<scroll-view scroll-y class="page-wrap">
+
+  <!-- ===== 像素艺术冰箱外观 ===== -->
+  <view class="fridge-scene">
+
+    <!-- 顶部标题栏 -->
+    <view class="fridge-title-bar">
+      <text class="fridge-title-text">❄ PIXEL FRIDGE ❄</text>
+      <text class="fridge-subtitle">像素冰箱管家</text>
     </view>
 
-    <view class="clock-section">
-      <text class="period">{{period}}</text>
-      <view class="time-display">
-        <text class="time-unit">{{hours}}</text>
-        <text class="colon">:</text>
-        <text class="time-unit">{{minutes}}</text>
-        <text class="colon">:</text>
-        <text class="seconds-unit">{{seconds}}</text>
+    <!-- 冰箱主体 -->
+    <view class="fridge-body" bindtap="toggleFridge">
+      <!-- 冰箱顶部装饰 -->
+      <view class="fridge-top-bar">
+        <view class="fridge-vent">
+          <view class="vent-line"></view>
+          <view class="vent-line"></view>
+          <view class="vent-line"></view>
+        </view>
+        <text class="fridge-brand">PIXEL-COOL</text>
+        <view class="fridge-vent">
+          <view class="vent-line"></view>
+          <view class="vent-line"></view>
+          <view class="vent-line"></view>
+        </view>
+      </view>
+
+      <!-- 冷冻层 -->
+      <view class="fridge-door freezer-door {{fridgeOpen ? 'door-open' : ''}}">
+        <view class="door-inner">
+          <view class="door-label">
+            <text class="door-label-icon">❄</text>
+            <text class="door-label-text">冷冻层</text>
+          </view>
+          <!-- 冷冻食材预览 -->
+          <view class="freezer-grid">
+            <view wx:for="{{frozenItems}}" wx:key="id" class="freezer-item">
+              <text class="item-emoji">{{item.icon}}</text>
+            </view>
+            <view wx:if="{{frozenItems.length === 0}}" class="freezer-empty">
+              <text class="empty-text">空</text>
+            </view>
+          </view>
+        </view>
+        <!-- 把手 -->
+        <view class="door-handle-wrap">
+          <view class="door-handle"></view>
+        </view>
+      </view>
+
+      <!-- 隔板 -->
+      <view class="fridge-shelf-bar"></view>
+
+      <!-- 冷藏层 -->
+      <view class="fridge-door main-door {{fridgeOpen ? 'door-open' : ''}}">
+        <view class="door-inner main-inner">
+          <view class="door-label">
+            <text class="door-label-icon">🌡</text>
+            <text class="door-label-text">冷藏层</text>
+            <text class="door-item-count">{{previewItems.length + (remainingCount > 0 ? '+' + remainingCount : '')}} 件</text>
+          </view>
+          <!-- 冷藏食材预览网格 -->
+          <view class="main-preview-grid">
+            <view wx:for="{{previewItems}}" wx:key="id" class="preview-item">
+              <text class="preview-emoji">{{item.icon}}</text>
+              <view class="preview-dot dot-{{item.status}}"></view>
+            </view>
+            <view wx:if="{{remainingCount > 0}}" class="preview-more">
+              <text class="more-text">+{{remainingCount}}</text>
+            </view>
+            <view wx:if="{{previewItems.length === 0}}" class="main-empty">
+              <text class="empty-text-main">冰箱是空的</text>
+              <text class="empty-hint-main">点击 + 添加食材</text>
+            </view>
+          </view>
+        </view>
+        <!-- 把手 -->
+        <view class="door-handle-wrap">
+          <view class="door-handle"></view>
+        </view>
+      </view>
+
+      <!-- 底部脚 -->
+      <view class="fridge-feet">
+        <view class="fridge-foot"></view>
+        <view class="fridge-foot"></view>
+      </view>
+    </view>
+
+    <!-- 状态统计条 -->
+    <view class="stats-bar">
+      <view class="stat-item">
+        <text class="stat-number">{{totalCount}}</text>
+        <text class="stat-label">总食材</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-number soon-color">{{expiringCount}}</text>
+        <text class="stat-label">快过期</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-number expired-color">{{expiredCount}}</text>
+        <text class="stat-label">已过期</text>
       </view>
     </view>
   </view>
-</view>
+
+  <!-- ===== 分类筛选 ===== -->
+  <scroll-view scroll-x class="category-scroll">
+    <view class="category-list">
+      <view
+        wx:for="{{categories}}"
+        wx:key="id"
+        class="category-tab {{activeCategory === item.id ? 'tab-active' : ''}}"
+        data-id="{{item.id}}"
+        bindtap="onCategoryTap"
+      >
+        <text class="cat-icon">{{item.icon}}</text>
+        <text class="cat-name">{{item.name}}</text>
+      </view>
+    </view>
+  </scroll-view>
+
+  <!-- ===== 食材网格列表 ===== -->
+  <view class="items-section">
+    <!-- 空状态 -->
+    <view wx:if="{{filteredItems.length === 0}}" class="empty-state">
+      <text class="empty-state-icon">🧊</text>
+      <text class="empty-state-text">该分类暂无食材</text>
+      <view class="pixel-btn empty-add-btn" bindtap="onAddTap">
+        <text>+ 去添加</text>
+      </view>
+    </view>
+
+    <!-- 食材卡片网格 -->
+    <view class="items-grid">
+      <view
+        wx:for="{{filteredItems}}"
+        wx:key="id"
+        class="item-card status-border-{{item.status}}"
+        data-id="{{item.id}}"
+        bindtap="onItemTap"
+      >
+        <!-- 状态角标 -->
+        <view class="item-status-dot dot-{{item.status}}"></view>
+
+        <!-- 冰冻标记 -->
+        <text wx:if="{{item.frozen}}" class="frozen-badge">❄</text>
+
+        <!-- 食材图标 -->
+        <text class="item-icon">{{item.icon}}</text>
+
+        <!-- 食材信息 -->
+        <text class="item-name">{{item.name}}</text>
+        <text class="item-qty">{{item.quantity}}{{item.unit}}</text>
+        <text class="item-expiry status-{{item.status}}">{{item.expiryText}}</text>
+
+        <!-- 删除按钮 -->
+        <view
+          class="item-delete-btn"
+          data-id="{{item.id}}"
+          data-name="{{item.name}}"
+          catchtap="onDeleteItem"
+        >
+          <text>✕</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view style="height: 40rpx;"></view>
+</scroll-view>

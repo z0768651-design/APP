@@ -1,45 +1,93 @@
+const storage = require('../../utils/storage')
+const { CATEGORIES } = require('../../utils/ingredients')
+
 Page({
   data: {
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
-    date: '',
-    weekday: '',
-    period: ''
+    allItems: [],
+    filteredItems: [],
+    categories: CATEGORIES,
+    activeCategory: 'all',
+    previewItems: [],
+    frozenItems: [],
+    remainingCount: 0,
+    totalCount: 0,
+    expiringCount: 0,
+    expiredCount: 0,
+    fridgeOpen: true
   },
-
-  timer: null,
 
   onLoad() {
-    this.updateTime()
-    this.timer = setInterval(() => {
-      this.updateTime()
-    }, 1000)
+    this.loadData()
   },
 
-  onUnload() {
-    if (this.timer) {
-      clearInterval(this.timer)
-    }
+  onShow() {
+    this.loadData()
   },
 
-  updateTime() {
-    const now = new Date()
-    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六']
-    const months = ['一月', '二月', '三月', '四月', '五月', '六月',
-                    '七月', '八月', '九月', '十月', '十一月', '十二月']
+  loadData() {
+    const items = storage.getItems()
+    const enriched = items.map(item => ({
+      ...item,
+      status: storage.getFreshStatus(item.expiryDate),
+      expiryText: storage.getExpiryText(item.expiryDate)
+    }))
 
-    let hours = now.getHours()
-    const period = hours < 12 ? '上午' : hours < 18 ? '下午' : '晚上'
-    const hours12 = hours % 12 || 12
+    const expiredCount = enriched.filter(i => i.status === 'expired').length
+    const expiringCount = enriched.filter(i => i.status === 'soon').length
+    const mainItems = enriched.filter(i => !i.frozen)
+    const frozenItems = enriched.filter(i => i.frozen)
+    const previewItems = mainItems.slice(0, 8)
+    const remainingCount = Math.max(0, mainItems.length - 8)
 
     this.setData({
-      hours: String(hours12).padStart(2, '0'),
-      minutes: String(now.getMinutes()).padStart(2, '0'),
-      seconds: String(now.getSeconds()).padStart(2, '0'),
-      date: `${now.getFullYear()}年 ${months[now.getMonth()]} ${now.getDate()}日`,
-      weekday: weekdays[now.getDay()],
-      period
+      allItems: enriched,
+      frozenItems: frozenItems.slice(0, 4),
+      previewItems,
+      remainingCount,
+      totalCount: enriched.length,
+      expiringCount,
+      expiredCount
     })
+
+    this.filterByCategory(this.data.activeCategory)
+  },
+
+  filterByCategory(categoryId) {
+    const filtered = categoryId === 'all'
+      ? this.data.allItems
+      : this.data.allItems.filter(i => i.category === categoryId)
+    this.setData({ filteredItems: filtered, activeCategory: categoryId })
+  },
+
+  onCategoryTap(e) {
+    this.filterByCategory(e.currentTarget.dataset.id)
+  },
+
+  onItemTap(e) {
+    wx.navigateTo({ url: `/pages/detail/index?id=${e.currentTarget.dataset.id}` })
+  },
+
+  onDeleteItem(e) {
+    const { id, name } = e.currentTarget.dataset
+    wx.showModal({
+      title: '移除食材',
+      content: `确定要移除「${name}」吗？`,
+      confirmColor: '#ff5252',
+      success: (res) => {
+        if (res.confirm) {
+          storage.deleteItem(id)
+          this.loadData()
+          wx.showToast({ title: '已移除', icon: 'success' })
+        }
+      }
+    })
+  },
+
+  toggleFridge() {
+    this.setData({ fridgeOpen: !this.data.fridgeOpen })
+  },
+
+  onAddTap() {
+    wx.switchTab({ url: '/pages/add/index' })
   }
 })

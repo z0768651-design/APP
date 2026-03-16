@@ -1,0 +1,150 @@
+<!-- 添加食材页 -->
+<scroll-view scroll-y class="add-page">
+
+  <!-- ===== 搜索选择食材 ===== -->
+  <block wx:if="{{showSearch}}">
+    <view class="section-header">
+      <text class="section-title">[ 选择食材 ]</text>
+      <text class="section-hint">从数据库中搜索，或直接输入名称</text>
+    </view>
+
+    <!-- 搜索框 -->
+    <view class="search-wrap">
+      <text class="search-icon">🔍</text>
+      <input
+        class="search-input"
+        placeholder="搜索食材... (支持中/英/日/韩)"
+        placeholder-class="search-placeholder"
+        value="{{searchKeyword}}"
+        bindinput="onSearchInput"
+      />
+    </view>
+
+    <!-- 食材网格 -->
+    <view class="ingredient-grid">
+      <view
+        wx:for="{{searchResults}}"
+        wx:key="id"
+        class="ingredient-tile"
+        data-id="{{item.id}}"
+        bindtap="onTemplateTap"
+      >
+        <text class="tile-icon">{{item.icon}}</text>
+        <text class="tile-name">{{item.name}}</text>
+        <text class="tile-cat">{{item.categoryName}}</text>
+      </view>
+    </view>
+  </block>
+
+  <!-- ===== 填写详情 ===== -->
+  <block wx:else>
+    <!-- 返回按钮 -->
+    <view class="back-row" bindtap="onBackToSearch">
+      <text class="back-arrow">◀</text>
+      <text class="back-text">重新选择</text>
+    </view>
+
+    <!-- 选中的食材 -->
+    <view class="selected-card">
+      <text class="selected-emoji">{{form.icon}}</text>
+      <view class="selected-info">
+        <text class="selected-name">{{form.name}}</text>
+        <text class="selected-cat">{{form.categoryName}}</text>
+      </view>
+      <view class="selected-badge">已选</view>
+    </view>
+
+    <!-- 详情表单 -->
+    <view class="form-card">
+
+      <!-- 数量 -->
+      <view class="form-row">
+        <text class="form-label">📦 数量</text>
+        <view class="qty-controls">
+          <view class="qty-btn" bindtap="onDecQty">
+            <text>－</text>
+          </view>
+          <input
+            class="qty-input"
+            type="number"
+            value="{{form.quantity}}"
+            bindinput="onQuantityChange"
+          />
+          <view class="qty-btn" bindtap="onIncQty">
+            <text>＋</text>
+          </view>
+        </view>
+      </view>
+
+      <!-- 单位 -->
+      <view class="form-row">
+        <text class="form-label">📏 单位</text>
+        <picker
+          mode="selector"
+          range="{{units}}"
+          value="{{units.indexOf(form.unit)}}"
+          bindchange="onUnitChange"
+        >
+          <view class="picker-display">
+            <text class="picker-value">{{form.unit}}</text>
+            <text class="picker-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 过期日期 -->
+      <view class="form-row">
+        <text class="form-label">📅 过期日期</text>
+        <picker
+          mode="date"
+          value="{{form.expiryDate}}"
+          start="{{minDate}}"
+          end="{{maxDate}}"
+          bindchange="onDateChange"
+        >
+          <view class="picker-display">
+            <text class="picker-value">{{form.expiryDate}}</text>
+            <text class="picker-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 是否冷冻 -->
+      <view class="form-row form-row-switch">
+        <view class="form-label-group">
+          <text class="form-label">❄ 放入冷冻层</text>
+          <text class="form-sublabel">冷冻食材会在❄区域显示</text>
+        </view>
+        <switch
+          checked="{{form.frozen}}"
+          bindchange="onFrozenChange"
+          color="#4fc3f7"
+        />
+      </view>
+
+      <!-- 备注 -->
+      <view class="form-row form-row-col">
+        <text class="form-label">📝 备注（可选）</text>
+        <textarea
+          class="note-input"
+          placeholder="输入备注，如品牌、购买地点..."
+          placeholder-class="note-placeholder"
+          value="{{form.note}}"
+          bindinput="onNoteInput"
+          maxlength="100"
+        />
+      </view>
+
+    </view>
+
+    <!-- 提交按钮 -->
+    <view class="submit-wrap">
+      <view class="submit-btn" bindtap="onSubmit">
+        <text class="submit-icon">+</text>
+        <text class="submit-text">放入冰箱</text>
+      </view>
+    </view>
+  </block>
+
+  <view style="height: 60rpx;"></view>
+</scroll-view>

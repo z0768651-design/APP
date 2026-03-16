@@ -1,0 +1,180 @@
+<!-- 食材详情 + 语言学习页 -->
+<scroll-view scroll-y class="detail-page" wx:if="{{item}}">
+
+  <!-- ===== 食材主信息卡片 ===== -->
+  <view class="hero-card status-border-{{item.status}}">
+    <!-- 像素风角落装饰 -->
+    <view class="corner-tl"></view>
+    <view class="corner-tr"></view>
+    <view class="corner-bl"></view>
+    <view class="corner-br"></view>
+
+    <!-- 冰冻标记 -->
+    <view wx:if="{{item.frozen}}" class="frozen-tag">❄ 冷冻中</view>
+
+    <!-- 食材图标大图 -->
+    <text class="hero-icon">{{item.icon}}</text>
+
+    <!-- 中文名 -->
+    <view class="hero-name-row">
+      <text class="hero-name-cn">{{item.name}}</text>
+      <view class="speak-cn-btn {{speaking ? 'speaking' : ''}}" bindtap="onSpeakChinese">
+        <text class="speak-icon">🔊</text>
+      </view>
+    </view>
+
+    <!-- 保鲜状态 -->
+    <view class="expiry-badge status-bg-{{item.status}}">
+      <text class="expiry-badge-text">{{item.expiryText}}</text>
+    </view>
+
+    <!-- 基本信息 -->
+    <view class="hero-meta">
+      <view class="meta-item">
+        <text class="meta-label">数量</text>
+        <text class="meta-value">{{item.quantity}}{{item.unit}}</text>
+      </view>
+      <view class="meta-divider"></view>
+      <view class="meta-item">
+        <text class="meta-label">分类</text>
+        <text class="meta-value">{{item.categoryName}}</text>
+      </view>
+      <view class="meta-divider"></view>
+      <view class="meta-item">
+        <text class="meta-label">入库</text>
+        <text class="meta-value">{{item.addDate}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ===== 语言学习模块 ===== -->
+  <view wx:if="{{template}}" class="learn-section">
+    <view class="learn-header">
+      <text class="learn-title">[ 语言学习 ]</text>
+    </view>
+
+    <!-- 语言切换标签 -->
+    <scroll-view scroll-x class="lang-scroll">
+      <view class="lang-tabs">
+        <view
+          wx:for="{{languages}}"
+          wx:key="id"
+          class="lang-tab {{currentLang === item.id ? 'lang-tab-active' : ''}}"
+          data-id="{{item.id}}"
+          bindtap="onLangSwitch"
+        >
+          <text class="lang-flag">{{item.flag}}</text>
+          <text class="lang-name">{{item.name}}</text>
+        </view>
+      </view>
+    </scroll-view>
+
+    <!-- 翻译卡片 -->
+    <view class="translation-card" wx:if="{{translation}}">
+      <!-- 像素边框装饰 -->
+      <view class="pixel-corner-tl"></view>
+      <view class="pixel-corner-tr"></view>
+
+      <!-- 当前语言标志 -->
+      <text class="trans-lang-flag">{{currentLangInfo.flag}}</text>
+      <text class="trans-lang-name">{{currentLangInfo.name}}</text>
+
+      <!-- 外文单词 -->
+      <text class="trans-word">{{translation.name}}</text>
+
+      <!-- 音标 -->
+      <view class="phonetic-wrap">
+        <text class="phonetic-label">发音</text>
+        <text class="phonetic-text">{{translation.phonetic}}</text>
+      </view>
+
+      <!-- 朗读按钮 -->
+      <view class="speak-btn {{speaking ? 'speak-btn-active' : ''}}" bindtap="onSpeak">
+        <text class="speak-btn-icon">{{speaking ? '⏸' : '▶'}}</text>
+        <text class="speak-btn-text">{{speaking ? '朗读中...' : '朗读单词'}}</text>
+      </view>
+
+      <!-- 中文对照 -->
+      <view class="compare-row">
+        <view class="compare-item">
+          <text class="compare-label">🇨🇳 中文</text>
+          <text class="compare-word">{{item.name}}</text>
+        </view>
+        <view class="compare-arrow">→</view>
+        <view class="compare-item">
+          <text class="compare-label">{{currentLangInfo.flag}} {{currentLangInfo.name}}</text>
+          <text class="compare-word">{{translation.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 无模板提示 -->
+  <view wx:if="{{!template}}" class="no-template-hint">
+    <text class="hint-icon">📚</text>
+    <text class="hint-text">该食材暂无多语言数据</text>
+  </view>
+
+  <!-- ===== 编辑区域 ===== -->
+  <view class="edit-section">
+    <view class="edit-header" bindtap="toggleEdit">
+      <text class="edit-title">[ 编辑信息 ]</text>
+      <text class="edit-toggle">{{editing ? '▲ 收起' : '▼ 展开'}}</text>
+    </view>
+
+    <view wx:if="{{editing}}" class="edit-form">
+      <!-- 数量 -->
+      <view class="edit-row">
+        <text class="edit-label">数量</text>
+        <input
+          class="edit-input"
+          type="number"
+          value="{{editQty}}"
+          bindinput="onEditQty"
+        />
+        <text class="edit-unit">{{item.unit}}</text>
+      </view>
+
+      <!-- 过期日期 -->
+      <view class="edit-row">
+        <text class="edit-label">过期日期</text>
+        <picker mode="date" value="{{editExpiry}}" bindchange="onEditExpiry">
+          <view class="edit-picker">
+            <text class="edit-picker-text">{{editExpiry || '未设置'}}</text>
+            <text class="edit-picker-arrow">▼</text>
+          </view>
+        </picker>
+      </view>
+
+      <!-- 冷冻切换 -->
+      <view class="edit-row">
+        <text class="edit-label">❄ 冷冻层</text>
+        <view class="frozen-toggle {{item.frozen ? 'frozen-on' : 'frozen-off'}}" bindtap="onToggleFrozen">
+          <text class="frozen-toggle-text">{{item.frozen ? '已冷冻' : '未冷冻'}}</text>
+        </view>
+      </view>
+
+      <view class="edit-actions">
+        <view class="save-btn" bindtap="onSaveEdit">
+          <text>✓ 保存更改</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- ===== 备注 ===== -->
+  <view wx:if="{{item.note}}" class="note-card">
+    <text class="note-label">📝 备注</text>
+    <text class="note-content">{{item.note}}</text>
+  </view>
+
+  <!-- ===== 删除按钮 ===== -->
+  <view class="danger-zone">
+    <view class="delete-btn" bindtap="onDelete">
+      <text class="delete-icon">🗑</text>
+      <text class="delete-text">移出冰箱</text>
+    </view>
+  </view>
+
+  <view style="height: 60rpx;"></view>
+</scroll-view>

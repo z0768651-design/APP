@@ -1,0 +1,233 @@
+/* ===== 设置页 ===== */
+.settings-page {
+  min-height: 100vh;
+  background: #0a0a1a;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.settings-header {
+  text-align: center;
+  padding: 30rpx 0 40rpx;
+}
+.settings-title {
+  display: block;
+  font-size: 36rpx;
+  color: #4fc3f7;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 4rpx;
+}
+.settings-subtitle {
+  display: block;
+  font-size: 20rpx;
+  color: #333;
+  font-family: 'Courier New', monospace;
+  margin-top: 8rpx;
+  letter-spacing: 3rpx;
+}
+
+/* 分节 */
+.settings-section {
+  background: #111130;
+  border: 2px solid #222;
+  box-shadow: 4px 4px 0 #000;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+.section-label {
+  display: block;
+  font-size: 26rpx;
+  color: #4fc3f7;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+  letter-spacing: 2rpx;
+}
+.section-desc {
+  display: block;
+  font-size: 20rpx;
+  color: #444;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 20rpx;
+}
+
+/* 语言选项网格 */
+.lang-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14rpx;
+}
+.lang-option {
+  background: #0a0a1a;
+  border: 2px solid #2a2a50;
+  box-shadow: 3px 3px 0 #000;
+  padding: 20rpx 16rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  position: relative;
+}
+.lang-option.lang-selected {
+  background: #0d2040;
+  border-color: #4fc3f7;
+  box-shadow: 3px 3px 0 #000;
+}
+.lang-option:active {
+  box-shadow: 1px 1px 0 #000;
+  transform: translate(2px, 2px);
+}
+.lang-flag { font-size: 40rpx; }
+.lang-name {
+  font-size: 22rpx;
+  color: #aaa;
+  font-family: 'Courier New', monospace;
+}
+.lang-option.lang-selected .lang-name { color: #4fc3f7; }
+.lang-check {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  background: #4fc3f7;
+  color: #0a0a1a;
+  font-size: 16rpx;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  width: 28rpx;
+  height: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #000;
+}
+
+/* 状态统计 */
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+.stat-box {
+  background: #0a0a1a;
+  border: 2px solid #222;
+  padding: 24rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+.stat-box-danger { border-color: #3d1010; }
+.stat-big {
+  font-size: 60rpx;
+  color: #4fc3f7;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  line-height: 1;
+}
+.expired-num { color: #ff5252; }
+.stat-desc {
+  font-size: 20rpx;
+  color: #555;
+  font-family: 'Courier New', monospace;
+}
+
+/* 操作列表 */
+.action-list { display: flex; flex-direction: column; gap: 12rpx; margin-top: 16rpx; }
+.action-item {
+  background: #0a0a1a;
+  border: 2px solid #222;
+  box-shadow: 3px 3px 0 #000;
+  padding: 20rpx 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.action-item:active {
+  box-shadow: 1px 1px 0 #000;
+  transform: translate(2px, 2px);
+}
+.action-item-danger { border-color: #3d1010; }
+.action-icon-wrap {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
+  font-size: 28rpx;
+}
+.action-blue  { background: #0d2040; border-color: #4fc3f7; }
+.action-yellow{ background: #2d2000; border-color: #ffd54f; }
+.action-red   { background: #2d0000; border-color: #ff5252; }
+.action-info { flex: 1; }
+.action-title {
+  display: block;
+  font-size: 26rpx;
+  color: #ccc;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.action-title-danger { color: #ff5252; }
+.action-desc {
+  display: block;
+  font-size: 20rpx;
+  color: #444;
+  font-family: 'Courier New', monospace;
+  margin-top: 4rpx;
+}
+.action-arrow {
+  font-size: 20rpx;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+/* 颜色图例 */
+.legend-list { display: flex; flex-direction: column; gap: 16rpx; margin-top: 16rpx; }
+.legend-item { display: flex; align-items: center; gap: 16rpx; }
+.legend-dot {
+  width: 24rpx;
+  height: 24rpx;
+  border: 2px solid #000;
+  flex-shrink: 0;
+}
+.dot-fresh   { background: #69f0ae; }
+.dot-soon    { background: #ffd54f; }
+.dot-expired { background: #ff5252; }
+.dot-unknown { background: #555; }
+.legend-text {
+  font-size: 24rpx;
+  color: #888;
+  font-family: 'Courier New', monospace;
+}
+
+/* 底部 */
+.footer {
+  text-align: center;
+  padding: 40rpx 0 20rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+}
+.footer-pixel {
+  display: block;
+  font-size: 20rpx;
+  color: #1e1e40;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1rpx;
+}
+.footer-text {
+  display: block;
+  font-size: 22rpx;
+  color: #333;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2rpx;
+}
+.footer-sub {
+  display: block;
+  font-size: 18rpx;
+  color: #222;
+  font-family: 'Courier New', monospace;
+}
