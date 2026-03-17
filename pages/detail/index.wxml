@@ -50,7 +50,8 @@
   <!-- ===== 语言学习模块 ===== -->
   <view wx:if="{{template}}" class="learn-section">
     <view class="learn-header">
-      <text class="learn-title">[ 语言学习 ]</text>
+      <text class="learn-title">语言学习</text>
+      <view class="learn-tag">✦ LEARN</view>
     </view>
 
     <!-- 语言切换标签 -->

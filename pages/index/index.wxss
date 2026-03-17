@@ -1,431 +1,496 @@
-/* ===== 主页 - 像素冰箱 ===== */
+/* ===== 主页 - 清爽像素风 ===== */
 .page-wrap {
   min-height: 100vh;
-  background: #0a0a1a;
+  background: #f0fdf8;
 }
 
-/* ===== 冰箱场景区域 ===== */
-.fridge-scene {
-  padding: 24rpx 24rpx 0;
+/* ===== Header ===== */
+.page-header {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  padding: 36rpx 32rpx 20rpx;
 }
-
-/* 像素标题 */
-.fridge-title-bar {
-  text-align: center;
-  margin-bottom: 20rpx;
-}
-.fridge-title-text {
-  display: block;
-  font-size: 28rpx;
-  color: #4fc3f7;
+.header-left { display: flex; flex-direction: column; gap: 4rpx; }
+.header-greeting {
+  font-size: 24rpx;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
-  letter-spacing: 4rpx;
+}
+.header-title {
+  font-size: 44rpx;
+  color: #1e293b;
+  font-family: 'Courier New', monospace;
   font-weight: bold;
-}
-.fridge-subtitle {
-  display: block;
-  font-size: 22rpx;
-  color: #666;
   letter-spacing: 2rpx;
-  margin-top: 4rpx;
+}
+.header-icon-wrap {
+  width: 90rpx;
+  height: 90rpx;
+  background: #ffffff;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #14b8a6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-fridge-icon { font-size: 50rpx; }
+
+/* ===== 冰箱场景 ===== */
+.fridge-scene {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 24rpx 16rpx;
+  gap: 12rpx;
 }
 
-/* ===== 冰箱主体像素风格 ===== */
+/* 冰箱主体 */
 .fridge-body {
-  width: 560rpx;
-  background: #d0d8e0;
-  border: 4px solid #1a1a2e;
-  box-shadow: 6px 6px 0 #000, inset 2px 2px 0 #fff, inset -2px -2px 0 #999;
+  width: 520rpx;
+  background: #ffffff;
+  border: 4px solid #1e293b;
+  box-shadow: 6px 6px 0 #1e293b;
   position: relative;
-  border-radius: 0;
-  overflow: hidden;
+  flex-shrink: 0;
 }
 
-/* 顶部散热槽 */
+/* 顶部品牌栏 */
 .fridge-top-bar {
-  background: #b0b8c8;
-  border-bottom: 3px solid #1a1a2e;
-  padding: 10rpx 20rpx;
+  background: #f1f5f9;
+  border-bottom: 3px solid #1e293b;
+  padding: 14rpx 16rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.fridge-vent {
-  display: flex;
-  flex-direction: column;
-  gap: 4rpx;
-}
+.vent-group { display: flex; flex-direction: column; gap: 5rpx; }
 .vent-line {
-  width: 40rpx;
-  height: 4rpx;
-  background: #888;
-  box-shadow: 0 1px 0 #fff;
+  width: 36rpx;
+  height: 5rpx;
+  background: #cbd5e1;
+  border-radius: 0;
 }
+.brand-center { flex: 1; text-align: center; }
 .fridge-brand {
   font-size: 18rpx;
-  color: #444;
-  font-family: 'Courier New', monospace;
-  letter-spacing: 3rpx;
-  font-weight: bold;
-}
-
-/* 门体通用 */
-.fridge-door {
-  background: #e8eef4;
-  border-bottom: 3px solid #1a1a2e;
-  position: relative;
-  display: flex;
-  align-items: stretch;
-  transition: opacity 0.3s;
-}
-.fridge-door.door-open .door-inner {
-  background: #f5f8fc;
-}
-
-.door-inner {
-  flex: 1;
-  padding: 16rpx 18rpx;
-  border-right: 3px solid #bbb;
-}
-.door-label {
-  display: flex;
-  align-items: center;
-  margin-bottom: 12rpx;
-  gap: 8rpx;
-}
-.door-label-icon { font-size: 22rpx; }
-.door-label-text {
-  font-size: 20rpx;
-  color: #333;
+  color: #64748b;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   letter-spacing: 2rpx;
 }
-.door-item-count {
+
+/* 门体通用 */
+.fridge-door {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+}
+.door-inner {
+  flex: 1;
+  padding: 16rpx 16rpx 20rpx;
+}
+
+/* 标签 */
+.door-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+}
+.door-label-tag {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 5rpx 12rpx;
+  border: 2px solid #1e293b;
+}
+.freezer-tag { background: #dbeafe; }
+.main-tag    { background: #d1fae5; }
+.tag-icon  { font-size: 20rpx; }
+.tag-text  { font-size: 18rpx; color: #1e293b; font-family: 'Courier New', monospace; font-weight: bold; }
+.door-count-pill {
+  background: #14b8a6;
+  color: #ffffff;
   font-size: 18rpx;
-  color: #4fc3f7;
   font-family: 'Courier New', monospace;
-  margin-left: auto;
+  font-weight: bold;
+  padding: 4rpx 14rpx;
+  border: 2px solid #1e293b;
+  box-shadow: 2px 2px 0 #1e293b;
 }
 
 /* 把手 */
-.door-handle-wrap {
-  width: 24rpx;
+.door-handle-col {
+  width: 22rpx;
+  background: #f8fafc;
+  border-left: 2px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #cdd5de;
 }
-.door-handle {
-  width: 10rpx;
-  height: 60rpx;
-  background: #888;
-  border: 2px solid #555;
-  box-shadow: 1px 1px 0 #fff;
+.door-handle-bar {
+  width: 8rpx;
+  height: 56rpx;
+  background: #1e293b;
+  border-radius: 0;
+  box-shadow: 1px 0 0 #475569;
 }
 
 /* 冷冻层 */
-.freezer-door {
-  min-height: 100rpx;
-}
+.freezer-door { min-height: 110rpx; }
+.freezer-inner { background: #eff6ff; }
 .freezer-grid {
   display: flex;
   flex-direction: row;
-  gap: 10rpx;
   flex-wrap: wrap;
+  gap: 8rpx;
 }
 .freezer-item {
-  width: 52rpx;
-  height: 52rpx;
-  background: #c8dff8;
-  border: 2px solid #7ab;
+  width: 58rpx;
+  height: 58rpx;
+  background: #dbeafe;
+  border: 2px solid #93c5fd;
+  box-shadow: 2px 2px 0 #1e293b;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 2px 2px 0 #000;
 }
-.freezer-item .item-emoji { font-size: 30rpx; }
-.freezer-empty {
-  color: #aaa;
+.freeze-emoji { font-size: 32rpx; }
+
+/* 空状态 */
+.zone-empty {
+  padding: 10rpx 0;
+}
+.zone-empty-text {
   font-size: 20rpx;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
-  padding: 4rpx;
 }
 
 /* 隔板 */
-.fridge-shelf-bar {
-  height: 10rpx;
-  background: repeating-linear-gradient(90deg, #b0b8c8 0px, #b0b8c8 12px, #888 12px, #888 14px);
-  border-top: 2px solid #777;
-  border-bottom: 2px solid #ccc;
+.shelf-divider {
+  height: 14rpx;
+  background: #e2e8f0;
+  border-top: 2px solid #1e293b;
+  border-bottom: 2px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12rpx;
+}
+.shelf-screw {
+  width: 12rpx;
+  height: 12rpx;
+  background: #94a3b8;
+  border: 1px solid #64748b;
+  border-radius: 50%;
+}
+.shelf-line {
+  flex: 1;
+  height: 2px;
+  background: repeating-linear-gradient(90deg, #cbd5e1 0, #cbd5e1 6px, transparent 6px, transparent 12px);
+  margin: 0 8rpx;
 }
 
 /* 冷藏层 */
-.main-door {
-  min-height: 200rpx;
-}
-.main-inner { padding-bottom: 20rpx; }
-
+.main-door { min-height: 220rpx; border-top: none; }
+.main-inner { background: #f0fdf4; }
 .main-preview-grid {
   display: flex;
   flex-wrap: wrap;
   gap: 8rpx;
 }
-.preview-item {
-  width: 66rpx;
-  height: 66rpx;
-  background: #d8eaf8;
-  border: 2px solid #7ab;
-  box-shadow: 2px 2px 0 #000;
+.preview-cell {
+  width: 72rpx;
+  height: 72rpx;
+  background: #ffffff;
+  border: 2px solid #bbf7d0;
+  box-shadow: 2px 2px 0 #1e293b;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-.preview-emoji { font-size: 36rpx; }
-.preview-dot {
-  width: 10rpx;
-  height: 10rpx;
+.preview-emoji { font-size: 40rpx; }
+.freshness-dot {
   position: absolute;
   bottom: 4rpx;
   right: 4rpx;
-  border: 1px solid #000;
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 0;
 }
-.preview-more {
-  width: 66rpx;
-  height: 66rpx;
-  background: #333;
-  border: 2px solid #666;
+.preview-more-cell {
+  width: 72rpx;
+  height: 72rpx;
+  background: #f1f5f9;
+  border: 2px solid #cbd5e1;
+  box-shadow: 2px 2px 0 #1e293b;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.more-text {
-  font-size: 20rpx;
-  color: #4fc3f7;
+.more-num {
+  font-size: 22rpx;
+  color: #14b8a6;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
-.main-empty {
-  flex: 1;
+.main-zone-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20rpx 0;
+  padding: 20rpx;
+  gap: 8rpx;
 }
-.empty-text-main {
-  font-size: 22rpx;
-  color: #888;
-  font-family: 'Courier New', monospace;
-}
-.empty-hint-main {
-  font-size: 18rpx;
-  color: #4fc3f7;
-  font-family: 'Courier New', monospace;
-  margin-top: 8rpx;
-}
-.empty-text { font-size: 18rpx; color: #999; font-family: 'Courier New', monospace; }
+.zone-empty-emoji { font-size: 44rpx; }
 
-/* 底部脚 */
-.fridge-feet {
-  background: #b0b8c8;
-  border-top: 3px solid #1a1a2e;
+/* 冰箱底座 */
+.fridge-base {
+  background: #f1f5f9;
+  border-top: 3px solid #1e293b;
   display: flex;
   justify-content: space-around;
-  padding: 6rpx 40rpx;
+  padding: 8rpx 40rpx;
 }
 .fridge-foot {
-  width: 60rpx;
+  width: 56rpx;
   height: 16rpx;
-  background: #888;
-  border: 2px solid #555;
-  box-shadow: 2px 2px 0 #000;
+  background: #94a3b8;
+  border: 2px solid #1e293b;
+  box-shadow: 2px 2px 0 #1e293b;
 }
 
-/* 保鲜状态点 */
-.dot-fresh   { background: #69f0ae; border-color: #2e7d32; }
-.dot-soon    { background: #ffd54f; border-color: #f57f17; }
-.dot-expired { background: #ff5252; border-color: #b71c1c; }
-.dot-unknown { background: #555; border-color: #333; }
-
-/* ===== 统计条 ===== */
-.stats-bar {
-  width: 560rpx;
-  margin-top: 20rpx;
-  background: #111130;
-  border: 2px solid #4fc3f7;
-  box-shadow: 4px 4px 0 #000;
-  display: flex;
-  align-items: center;
-  padding: 16rpx 0;
-}
-.stat-item {
-  flex: 1;
+/* 冰箱旁装饰 */
+.fridge-deco {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 16rpx;
+  padding-top: 30rpx;
 }
-.stat-number {
-  font-size: 40rpx;
-  font-weight: bold;
-  color: #4fc3f7;
+.deco-sticker { font-size: 30rpx; opacity: 0.7; }
+
+/* 保鲜点颜色 */
+.dot-fresh   { background: #10b981; border: 2px solid #065f46; }
+.dot-soon    { background: #f59e0b; border: 2px solid #92400e; }
+.dot-expired { background: #fb7185; border: 2px solid #9f1239; }
+.dot-unknown { background: #cbd5e1; border: 2px solid #64748b; }
+
+/* ===== 统计行 ===== */
+.stats-row {
+  display: flex;
+  gap: 16rpx;
+  padding: 0 24rpx 24rpx;
+}
+.stat-card {
+  flex: 1;
+  background: #ffffff;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #1e293b;
+  padding: 20rpx 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+}
+.stat-total { box-shadow: 4px 4px 0 #14b8a6; }
+.stat-soon  { box-shadow: 4px 4px 0 #f59e0b; }
+.stat-expired { box-shadow: 4px 4px 0 #fb7185; }
+.stat-emoji { font-size: 30rpx; }
+.stat-num {
+  font-size: 44rpx;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
   line-height: 1.1;
 }
-.stat-number.soon-color { color: #ffd54f; }
-.stat-number.expired-color { color: #ff5252; }
-.stat-label {
+.soon-num    { color: #f59e0b; }
+.expired-num { color: #fb7185; }
+.stat-lbl {
   font-size: 18rpx;
-  color: #888;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
-  margin-top: 4rpx;
-}
-.stat-divider {
-  width: 2px;
-  height: 48rpx;
-  background: #333;
 }
 
-/* ===== 分类标签滚动 ===== */
+/* ===== 分类标签 ===== */
 .category-scroll {
   width: 100%;
-  margin-top: 28rpx;
-  white-space: nowrap;
+  margin-bottom: 20rpx;
 }
 .category-list {
   display: flex;
   flex-direction: row;
-  padding: 0 20rpx;
+  padding: 0 24rpx;
   gap: 12rpx;
+  white-space: nowrap;
 }
-.category-tab {
+.cat-chip {
   display: inline-flex;
   flex-direction: column;
   align-items: center;
-  padding: 12rpx 18rpx;
-  background: #111130;
-  border: 2px solid #333;
-  box-shadow: 3px 3px 0 #000;
+  padding: 12rpx 16rpx;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 3px 3px 0 #e2e8f0;
   white-space: nowrap;
-  min-width: 80rpx;
+  min-width: 78rpx;
 }
-.category-tab.tab-active {
-  background: #1a3a5c;
-  border-color: #4fc3f7;
-  box-shadow: 3px 3px 0 #000;
+.cat-chip.cat-chip-active {
+  background: #14b8a6;
+  border-color: #1e293b;
+  box-shadow: 3px 3px 0 #1e293b;
 }
-.cat-icon { font-size: 28rpx; }
-.cat-name {
+.cat-chip-icon { font-size: 28rpx; }
+.cat-chip-name {
   font-size: 18rpx;
-  color: #aaa;
+  color: #64748b;
   font-family: 'Courier New', monospace;
   margin-top: 4rpx;
 }
-.category-tab.tab-active .cat-name { color: #4fc3f7; }
+.cat-chip.cat-chip-active .cat-chip-name { color: #ffffff; font-weight: bold; }
 
-/* ===== 食材网格 ===== */
-.items-section {
-  padding: 20rpx 20rpx 0;
-}
+/* ===== 食材列表 ===== */
+.items-section { padding: 0 24rpx; }
 
+/* 空状态 */
 .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 80rpx 0;
+  gap: 12rpx;
 }
-.empty-state-icon { font-size: 80rpx; }
-.empty-state-text {
-  font-size: 26rpx;
-  color: #555;
+.empty-illus { font-size: 80rpx; }
+.empty-msg {
+  font-size: 28rpx;
+  color: #475569;
   font-family: 'Courier New', monospace;
-  margin-top: 16rpx;
-  margin-bottom: 32rpx;
+  font-weight: bold;
 }
-.empty-add-btn {
-  padding: 18rpx 40rpx;
-  font-size: 26rpx;
+.empty-hint {
+  font-size: 22rpx;
+  color: #94a3b8;
+  font-family: 'Courier New', monospace;
+}
+.add-first-btn {
+  margin-top: 12rpx;
+  background: #14b8a6;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #1e293b;
+  padding: 18rpx 48rpx;
+}
+.add-first-btn:active {
+  box-shadow: 1px 1px 0 #1e293b;
+  transform: translate(3px, 3px);
+}
+.add-first-text {
+  font-size: 28rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
 
+/* 食材卡片网格 */
 .items-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16rpx;
 }
-
 .item-card {
-  background: #111130;
-  border: 2px solid #333;
-  box-shadow: 4px 4px 0 #000;
-  padding: 20rpx 18rpx 18rpx;
-  position: relative;
+  background: #ffffff;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #1e293b;
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 20rpx;
 }
-.item-card.status-border-soon    { border-color: #ffd54f; }
-.item-card.status-border-expired { border-color: #ff5252; }
-.item-card.status-border-fresh   { border-color: #333; }
-.item-card.status-border-unknown { border-color: #333; }
+.item-card:active {
+  box-shadow: 2px 2px 0 #1e293b;
+  transform: translate(2px, 2px);
+}
 
-.item-status-dot {
-  width: 14rpx;
-  height: 14rpx;
-  position: absolute;
-  top: 12rpx;
-  left: 12rpx;
-  border: 1px solid #000;
+/* 顶色条 */
+.card-top-stripe {
+  width: 100%;
+  height: 18rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 10rpx;
+  gap: 6rpx;
+  margin-bottom: 14rpx;
 }
-.frozen-badge {
-  position: absolute;
-  top: 8rpx;
-  left: 30rpx;
+.stripe-fresh   { background: #d1fae5; }
+.stripe-soon    { background: #fef3c7; }
+.stripe-expired { background: #ffe4e6; }
+.stripe-unknown { background: #f1f5f9; }
+.card-status-dot {
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 0;
+}
+.card-freeze-badge {
   font-size: 18rpx;
-  color: #4fc3f7;
+  color: #60a5fa;
+  margin-left: auto;
 }
-.item-delete-btn {
+
+.card-icon {
+  font-size: 76rpx;
+  margin-bottom: 10rpx;
+}
+.card-name {
+  font-size: 26rpx;
+  color: #1e293b;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-align: center;
+  padding: 0 10rpx;
+}
+.card-qty {
+  font-size: 20rpx;
+  color: #94a3b8;
+  font-family: 'Courier New', monospace;
+  margin-top: 4rpx;
+}
+.card-expiry-row {
+  margin-top: 8rpx;
+  padding: 0 12rpx;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+.card-expiry {
+  font-size: 18rpx;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
+.expiry-fresh   { color: #10b981; }
+.expiry-soon    { color: #f59e0b; }
+.expiry-expired { color: #fb7185; }
+.expiry-unknown { color: #94a3b8; }
+
+.card-del-btn {
   position: absolute;
-  top: 8rpx;
+  top: 24rpx;
   right: 10rpx;
   width: 36rpx;
   height: 36rpx;
-  background: #1a1a3a;
-  border: 1px solid #444;
+  background: #fff1f2;
+  border: 2px solid #fecdd3;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18rpx;
-  color: #ff5252;
-}
-.item-icon {
-  font-size: 72rpx;
-  margin: 10rpx 0 8rpx;
-  image-rendering: pixelated;
-}
-.item-name {
-  font-size: 26rpx;
-  color: #e0e0e0;
+  color: #fb7185;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  text-align: center;
 }
-.item-qty {
-  font-size: 22rpx;
-  color: #888;
-  font-family: 'Courier New', monospace;
-  margin-top: 6rpx;
-}
-.item-expiry {
-  font-size: 20rpx;
-  font-family: 'Courier New', monospace;
-  margin-top: 8rpx;
-  text-align: center;
-}
-.item-expiry.status-fresh   { color: #69f0ae; }
-.item-expiry.status-soon    { color: #ffd54f; }
-.item-expiry.status-expired { color: #ff5252; }
-.item-expiry.status-unknown { color: #666; }
+.card-del-btn:active { background: #ffe4e6; }

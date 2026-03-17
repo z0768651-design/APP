@@ -1,63 +1,91 @@
 page {
-  background-color: #0a0a1a;
-  color: #e0e0e0;
+  background-color: #f0fdf8;
+  color: #1e293b;
   font-family: 'Courier New', Courier, monospace;
 }
 
-/* ===== 像素风全局设计系统 ===== */
+/* ===== 可爱像素全局设计系统 ===== */
+
+/* 主卡片 */
 .pixel-card {
-  background: #1a1a3a;
-  border: 2px solid #4fc3f7;
-  box-shadow: 4px 4px 0 #000;
+  background: #ffffff;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #1e293b;
+  border-radius: 0;
 }
 
+/* 主按钮 - 薄荷绿 */
 .pixel-btn {
-  background: #4fc3f7;
-  border: 2px solid #000;
-  box-shadow: 3px 3px 0 #000;
-  color: #0a0a1a;
+  background: #14b8a6;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #1e293b;
+  color: #ffffff;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   padding: 14rpx 28rpx;
   display: inline-block;
+  border-radius: 0;
 }
-
 .pixel-btn:active {
-  box-shadow: 1px 1px 0 #000;
-  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #1e293b;
+  transform: translate(3px, 3px);
 }
 
+/* 危险按钮 - 珊瑚红 */
 .pixel-btn-danger {
-  background: #ff5252;
-  border: 2px solid #000;
-  box-shadow: 3px 3px 0 #000;
-  color: #fff;
+  background: #fb7185;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #1e293b;
+  color: #ffffff;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+.pixel-btn-danger:active {
+  box-shadow: 1px 1px 0 #1e293b;
+  transform: translate(3px, 3px);
+}
+
+/* 轮廓按钮 */
+.pixel-btn-ghost {
+  background: #ffffff;
+  border: 3px solid #14b8a6;
+  box-shadow: 4px 4px 0 #14b8a6;
+  color: #14b8a6;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
 }
 
-.pixel-btn-ghost {
-  background: transparent;
-  border: 2px solid #4fc3f7;
-  box-shadow: 3px 3px 0 #000;
-  color: #4fc3f7;
-  font-family: 'Courier New', Courier, monospace;
+/* 保鲜状态文字色 */
+.status-fresh   { color: #10b981; }
+.status-soon    { color: #f59e0b; }
+.status-expired { color: #fb7185; }
+.status-unknown { color: #94a3b8; }
+
+/* 状态小圆点 */
+.dot-fresh   { background: #10b981; border: 2px solid #065f46; }
+.dot-soon    { background: #f59e0b; border: 2px solid #92400e; }
+.dot-expired { background: #fb7185; border: 2px solid #9f1239; }
+.dot-unknown { background: #cbd5e1; border: 2px solid #64748b; }
+
+/* 虚线装饰分割 */
+.pixel-divider {
+  height: 3px;
+  background: repeating-linear-gradient(90deg, #14b8a6 0px, #14b8a6 8px, transparent 8px, transparent 16px);
+  margin: 16rpx 0;
 }
 
-/* 保鲜状态颜色 */
-.status-fresh { color: #69f0ae; }
-.status-soon  { color: #ffd54f; }
-.status-expired { color: #ff5252; }
-.status-unknown { color: #888888; }
-
-.dot-fresh   { background: #69f0ae; }
-.dot-soon    { background: #ffd54f; }
-.dot-expired { background: #ff5252; }
-.dot-unknown { background: #555555; }
-
-/* 像素点缀用分割线 */
-.pixel-divider {
-  height: 2px;
-  background: repeating-linear-gradient(90deg, #4fc3f7 0px, #4fc3f7 8px, transparent 8px, transparent 16px);
-  margin: 16rpx 0;
+/* 像素标题装饰 */
+.pixel-title {
+  font-size: 30rpx;
+  color: #1e293b;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+.pixel-section-title {
+  font-size: 24rpx;
+  color: #14b8a6;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 2rpx;
 }

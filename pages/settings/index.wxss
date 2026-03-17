@@ -1,53 +1,54 @@
-/* ===== 设置页 ===== */
+/* ===== 设置页 - 清爽可爱 ===== */
 .settings-page {
   min-height: 100vh;
-  background: #0a0a1a;
+  background: #f0fdf8;
   padding: 24rpx;
   box-sizing: border-box;
 }
 
+/* 顶部 Header */
 .settings-header {
   text-align: center;
-  padding: 30rpx 0 40rpx;
+  padding: 24rpx 0 36rpx;
 }
 .settings-title {
   display: block;
-  font-size: 36rpx;
-  color: #4fc3f7;
+  font-size: 42rpx;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 4rpx;
+  letter-spacing: 2rpx;
 }
 .settings-subtitle {
   display: block;
   font-size: 20rpx;
-  color: #333;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
   margin-top: 8rpx;
   letter-spacing: 3rpx;
 }
 
-/* 分节 */
+/* 分节卡片 */
 .settings-section {
-  background: #111130;
-  border: 2px solid #222;
-  box-shadow: 4px 4px 0 #000;
+  background: #ffffff;
+  border: 3px solid #e2e8f0;
+  box-shadow: 4px 4px 0 #e2e8f0;
   padding: 24rpx;
-  margin-bottom: 24rpx;
+  margin-bottom: 20rpx;
 }
+.settings-section:first-of-type { box-shadow: 4px 4px 0 #14b8a6; }
 .section-label {
   display: block;
   font-size: 26rpx;
-  color: #4fc3f7;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   margin-bottom: 8rpx;
-  letter-spacing: 2rpx;
 }
 .section-desc {
   display: block;
   font-size: 20rpx;
-  color: #444;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
   margin-bottom: 20rpx;
 }
@@ -59,9 +60,9 @@
   gap: 14rpx;
 }
 .lang-option {
-  background: #0a0a1a;
-  border: 2px solid #2a2a50;
-  box-shadow: 3px 3px 0 #000;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  box-shadow: 3px 3px 0 #e2e8f0;
   padding: 20rpx 16rpx;
   display: flex;
   flex-direction: column;
@@ -70,27 +71,27 @@
   position: relative;
 }
 .lang-option.lang-selected {
-  background: #0d2040;
-  border-color: #4fc3f7;
-  box-shadow: 3px 3px 0 #000;
+  background: #f0fdfa;
+  border-color: #14b8a6;
+  box-shadow: 3px 3px 0 #14b8a6;
 }
 .lang-option:active {
-  box-shadow: 1px 1px 0 #000;
+  box-shadow: 1px 1px 0 #1e293b;
   transform: translate(2px, 2px);
 }
 .lang-flag { font-size: 40rpx; }
 .lang-name {
   font-size: 22rpx;
-  color: #aaa;
+  color: #475569;
   font-family: 'Courier New', monospace;
 }
-.lang-option.lang-selected .lang-name { color: #4fc3f7; }
+.lang-option.lang-selected .lang-name { color: #14b8a6; font-weight: bold; }
 .lang-check {
   position: absolute;
   top: 8rpx;
   right: 8rpx;
-  background: #4fc3f7;
-  color: #0a0a1a;
+  background: #14b8a6;
+  color: #ffffff;
   font-size: 16rpx;
   font-family: 'Courier New', monospace;
   font-weight: bold;
@@ -99,7 +100,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #000;
+  border: 2px solid #1e293b;
 }
 
 /* 状态统计 */
@@ -110,78 +111,74 @@
   margin-top: 16rpx;
 }
 .stat-box {
-  background: #0a0a1a;
-  border: 2px solid #222;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
   padding: 24rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8rpx;
 }
-.stat-box-danger { border-color: #3d1010; }
+.stat-box-danger { background: #fff1f2; border-color: #fecdd3; }
 .stat-big {
   font-size: 60rpx;
-  color: #4fc3f7;
+  color: #14b8a6;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   line-height: 1;
 }
-.expired-num { color: #ff5252; }
+.expired-num { color: #fb7185; }
 .stat-desc {
   font-size: 20rpx;
-  color: #555;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
 }
 
 /* 操作列表 */
 .action-list { display: flex; flex-direction: column; gap: 12rpx; margin-top: 16rpx; }
 .action-item {
-  background: #0a0a1a;
-  border: 2px solid #222;
-  box-shadow: 3px 3px 0 #000;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  box-shadow: 3px 3px 0 #e2e8f0;
   padding: 20rpx 16rpx;
   display: flex;
   align-items: center;
   gap: 16rpx;
 }
 .action-item:active {
-  box-shadow: 1px 1px 0 #000;
+  box-shadow: 1px 1px 0 #e2e8f0;
   transform: translate(2px, 2px);
 }
-.action-item-danger { border-color: #3d1010; }
+.action-item-danger { background: #fff1f2; border-color: #fecdd3; box-shadow: 3px 3px 0 #fecdd3; }
 .action-icon-wrap {
   width: 56rpx;
   height: 56rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #000;
+  border: 2px solid #1e293b;
   font-size: 28rpx;
 }
-.action-blue  { background: #0d2040; border-color: #4fc3f7; }
-.action-yellow{ background: #2d2000; border-color: #ffd54f; }
-.action-red   { background: #2d0000; border-color: #ff5252; }
+.action-blue   { background: #dbeafe; }
+.action-yellow { background: #fef3c7; }
+.action-red    { background: #ffe4e6; }
 .action-info { flex: 1; }
 .action-title {
   display: block;
   font-size: 26rpx;
-  color: #ccc;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
-.action-title-danger { color: #ff5252; }
+.action-title-danger { color: #fb7185; }
 .action-desc {
   display: block;
   font-size: 20rpx;
-  color: #444;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
   margin-top: 4rpx;
 }
-.action-arrow {
-  font-size: 20rpx;
-  color: #333;
-  font-family: 'Courier New', monospace;
-}
+.action-arrow { font-size: 20rpx; color: #cbd5e1; font-family: 'Courier New', monospace; }
 
 /* 颜色图例 */
 .legend-list { display: flex; flex-direction: column; gap: 16rpx; margin-top: 16rpx; }
@@ -189,20 +186,20 @@
 .legend-dot {
   width: 24rpx;
   height: 24rpx;
-  border: 2px solid #000;
+  border: 2px solid #1e293b;
   flex-shrink: 0;
 }
-.dot-fresh   { background: #69f0ae; }
-.dot-soon    { background: #ffd54f; }
-.dot-expired { background: #ff5252; }
-.dot-unknown { background: #555; }
+.dot-fresh   { background: #10b981; }
+.dot-soon    { background: #f59e0b; }
+.dot-expired { background: #fb7185; }
+.dot-unknown { background: #cbd5e1; }
 .legend-text {
   font-size: 24rpx;
-  color: #888;
+  color: #475569;
   font-family: 'Courier New', monospace;
 }
 
-/* 底部 */
+/* 底部装饰 */
 .footer {
   text-align: center;
   padding: 40rpx 0 20rpx;
@@ -214,20 +211,20 @@
 .footer-pixel {
   display: block;
   font-size: 20rpx;
-  color: #1e1e40;
+  color: #e2e8f0;
   font-family: 'Courier New', monospace;
   letter-spacing: 1rpx;
 }
 .footer-text {
   display: block;
   font-size: 22rpx;
-  color: #333;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
   letter-spacing: 2rpx;
 }
 .footer-sub {
   display: block;
   font-size: 18rpx;
-  color: #222;
+  color: #cbd5e1;
   font-family: 'Courier New', monospace;
 }

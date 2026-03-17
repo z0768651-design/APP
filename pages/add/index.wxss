@@ -1,26 +1,24 @@
-/* ===== 添加食材页 ===== */
+/* ===== 添加食材页 - 清爽可爱 ===== */
 .add-page {
   min-height: 100vh;
-  background: #0a0a1a;
+  background: #f0fdf8;
   padding: 24rpx;
   box-sizing: border-box;
 }
 
-.section-header {
-  margin-bottom: 24rpx;
-}
+/* 页面标题 */
+.section-header { margin-bottom: 24rpx; }
 .section-title {
   display: block;
-  font-size: 30rpx;
-  color: #4fc3f7;
+  font-size: 36rpx;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 2rpx;
 }
 .section-hint {
   display: block;
   font-size: 20rpx;
-  color: #555;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
   margin-top: 6rpx;
 }
@@ -29,9 +27,9 @@
 .search-wrap {
   display: flex;
   align-items: center;
-  background: #111130;
-  border: 2px solid #4fc3f7;
-  box-shadow: 4px 4px 0 #000;
+  background: #ffffff;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #14b8a6;
   padding: 16rpx 20rpx;
   margin-bottom: 24rpx;
   gap: 12rpx;
@@ -40,10 +38,10 @@
 .search-input {
   flex: 1;
   font-size: 26rpx;
-  color: #e0e0e0;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
 }
-.search-placeholder { color: #444; font-family: 'Courier New', monospace; }
+.search-placeholder { color: #cbd5e1; font-family: 'Courier New', monospace; }
 
 /* 食材网格 */
 .ingredient-grid {
@@ -52,31 +50,33 @@
   gap: 14rpx;
 }
 .ingredient-tile {
-  background: #111130;
-  border: 2px solid #2a2a50;
-  box-shadow: 3px 3px 0 #000;
-  padding: 20rpx 10rpx;
+  background: #ffffff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 3px 3px 0 #e2e8f0;
+  padding: 22rpx 10rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6rpx;
+  transition: none;
 }
 .ingredient-tile:active {
-  box-shadow: 1px 1px 0 #000;
+  box-shadow: 1px 1px 0 #1e293b;
   transform: translate(2px, 2px);
-  border-color: #4fc3f7;
+  border-color: #14b8a6;
+  background: #f0fdfa;
 }
-.tile-icon { font-size: 52rpx; }
+.tile-icon { font-size: 54rpx; }
 .tile-name {
   font-size: 22rpx;
-  color: #e0e0e0;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   text-align: center;
 }
 .tile-cat {
   font-size: 18rpx;
-  color: #555;
+  color: #94a3b8;
   font-family: 'Courier New', monospace;
 }
 
@@ -88,113 +88,120 @@
   margin-bottom: 20rpx;
   padding: 10rpx 0;
 }
-.back-arrow { font-size: 24rpx; color: #4fc3f7; }
+.back-arrow { font-size: 22rpx; color: #14b8a6; font-weight: bold; }
 .back-text {
   font-size: 24rpx;
-  color: #4fc3f7;
+  color: #14b8a6;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
 
-/* 选中卡片 */
+/* 已选食材卡片 */
 .selected-card {
-  background: #0d2040;
-  border: 2px solid #4fc3f7;
-  box-shadow: 4px 4px 0 #000;
+  background: #f0fdfa;
+  border: 3px solid #14b8a6;
+  box-shadow: 5px 5px 0 #1e293b;
   padding: 24rpx 20rpx;
   display: flex;
   align-items: center;
   gap: 20rpx;
-  margin-bottom: 20rpx;
+  margin-bottom: 24rpx;
 }
 .selected-emoji { font-size: 70rpx; }
 .selected-info { flex: 1; }
 .selected-name {
   display: block;
-  font-size: 32rpx;
-  color: #e0e0e0;
+  font-size: 34rpx;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
 .selected-cat {
   display: block;
   font-size: 22rpx;
-  color: #4fc3f7;
+  color: #14b8a6;
   font-family: 'Courier New', monospace;
   margin-top: 6rpx;
 }
 .selected-badge {
-  background: #4fc3f7;
-  color: #0a0a1a;
+  background: #14b8a6;
+  color: #ffffff;
   font-size: 18rpx;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  padding: 6rpx 12rpx;
-  border: 2px solid #000;
-  box-shadow: 2px 2px 0 #000;
+  padding: 6rpx 14rpx;
+  border: 2px solid #1e293b;
+  box-shadow: 2px 2px 0 #1e293b;
 }
 
 /* 表单卡片 */
 .form-card {
-  background: #111130;
-  border: 2px solid #333;
-  box-shadow: 4px 4px 0 #000;
-  padding: 10rpx 0;
+  background: #ffffff;
+  border: 3px solid #e2e8f0;
+  box-shadow: 4px 4px 0 #e2e8f0;
+  padding: 0;
   margin-bottom: 24rpx;
 }
 .form-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20rpx 24rpx;
-  border-bottom: 1px solid #1e1e40;
+  padding: 22rpx 24rpx;
+  border-bottom: 2px solid #f8fafc;
 }
 .form-row:last-child { border-bottom: none; }
-.form-row-switch { align-items: flex-start; }
+.form-row-switch { align-items: flex-start; padding-top: 24rpx; }
 .form-row-col {
   flex-direction: column;
   align-items: flex-start;
-  gap: 12rpx;
+  gap: 14rpx;
 }
 .form-label {
   font-size: 26rpx;
-  color: #bbb;
+  color: #475569;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
 .form-label-group { display: flex; flex-direction: column; gap: 4rpx; }
-.form-sublabel { font-size: 18rpx; color: #555; font-family: 'Courier New', monospace; }
+.form-sublabel {
+  font-size: 18rpx;
+  color: #94a3b8;
+  font-family: 'Courier New', monospace;
+}
 
-/* 数量控制 */
+/* 数量控件 */
 .qty-controls {
   display: flex;
   align-items: center;
-  gap: 12rpx;
+  gap: 8rpx;
 }
 .qty-btn {
-  width: 52rpx;
-  height: 52rpx;
-  background: #1a3a5c;
-  border: 2px solid #4fc3f7;
-  box-shadow: 2px 2px 0 #000;
+  width: 54rpx;
+  height: 54rpx;
+  background: #f0fdfa;
+  border: 3px solid #14b8a6;
+  box-shadow: 2px 2px 0 #1e293b;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 28rpx;
-  color: #4fc3f7;
+  font-size: 30rpx;
+  color: #14b8a6;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
 .qty-btn:active {
-  box-shadow: 0 0 0 #000;
+  box-shadow: 0 0 0 #1e293b;
   transform: translate(2px, 2px);
 }
 .qty-input {
   width: 80rpx;
   text-align: center;
-  font-size: 30rpx;
-  color: #e0e0e0;
+  font-size: 32rpx;
+  color: #1e293b;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  background: #0a0a1a;
-  border: 2px solid #333;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
   padding: 8rpx;
 }
 
@@ -203,60 +210,58 @@
   display: flex;
   align-items: center;
   gap: 10rpx;
-  background: #1a1a3a;
-  border: 2px solid #333;
-  padding: 10rpx 16rpx;
-  box-shadow: 2px 2px 0 #000;
+  background: #f0fdfa;
+  border: 2px solid #99f6e4;
+  padding: 10rpx 18rpx;
+  box-shadow: 2px 2px 0 #14b8a6;
 }
 .picker-value {
   font-size: 26rpx;
-  color: #4fc3f7;
+  color: #14b8a6;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
-.picker-arrow {
-  font-size: 18rpx;
-  color: #555;
-}
+.picker-arrow { font-size: 16rpx; color: #94a3b8; }
 
 /* 备注 */
 .note-input {
   width: 100%;
   height: 120rpx;
-  background: #0a0a1a;
-  border: 2px solid #333;
-  padding: 12rpx;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  padding: 14rpx;
   font-size: 24rpx;
-  color: #ccc;
+  color: #475569;
   font-family: 'Courier New', monospace;
   box-sizing: border-box;
 }
-.note-placeholder { color: #333; font-family: 'Courier New', monospace; }
+.note-placeholder { color: #cbd5e1; font-family: 'Courier New', monospace; }
 
 /* 提交按钮 */
 .submit-wrap { padding: 0 0 20rpx; }
 .submit-btn {
-  background: #4fc3f7;
-  border: 2px solid #000;
-  box-shadow: 5px 5px 0 #000;
-  padding: 28rpx;
+  background: #14b8a6;
+  border: 3px solid #1e293b;
+  box-shadow: 5px 5px 0 #1e293b;
+  padding: 30rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12rpx;
+  gap: 14rpx;
 }
 .submit-btn:active {
-  box-shadow: 2px 2px 0 #000;
+  box-shadow: 2px 2px 0 #1e293b;
   transform: translate(3px, 3px);
 }
 .submit-icon {
   font-size: 40rpx;
-  color: #0a0a1a;
+  color: #ffffff;
   font-weight: bold;
   font-family: 'Courier New', monospace;
 }
 .submit-text {
   font-size: 30rpx;
-  color: #0a0a1a;
+  color: #ffffff;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   letter-spacing: 4rpx;

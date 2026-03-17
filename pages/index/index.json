@@ -1,6 +1,6 @@
 {
   "usingComponents": {},
   "navigationBarTitleText": "像素冰箱",
-  "navigationBarBackgroundColor": "#0a0a1a",
-  "navigationBarTextStyle": "white"
+  "navigationBarBackgroundColor": "#f0fdf8",
+  "navigationBarTextStyle": "black"
 }
