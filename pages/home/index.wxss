@@ -1,113 +1,182 @@
-/* ===== 像素之家 - 真实俯视图 ===== */
+/* ===== 像素之家 - 经营游戏样式 ===== */
 .home-wrap {
   min-height: 100vh;
   background: #1e293b;
 }
 
-/* ===== 顶部问候 ===== */
-.home-header {
-  padding: 32rpx 28rpx 24rpx;
+/* ===== 游戏顶部状态栏 ===== */
+.game-header {
+  padding: 28rpx 24rpx 20rpx;
   background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
   border-bottom: 3px solid #14b8a6;
 }
-.home-greeting-row {
+.header-top-row {
   display: flex;
   align-items: center;
-  gap: 16rpx;
-  margin-bottom: 20rpx;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+.greeting-area {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
 }
 .time-icon {
-  font-size: 48rpx;
+  font-size: 44rpx;
   animation: iconBob 3s ease-in-out infinite;
 }
 @keyframes iconBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6rpx); }
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-5rpx); }
 }
-.home-greeting-text { display: flex; flex-direction: column; gap: 2rpx; }
+.greeting-info { display: flex; flex-direction: column; }
 .greeting-main {
-  font-size: 40rpx;
+  font-size: 36rpx;
   color: #f1f5f9;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 2rpx;
 }
-.greeting-sub {
-  font-size: 22rpx;
-  color: #64748b;
+.greeting-clock {
+  font-size: 26rpx;
+  color: #14b8a6;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
-.home-mini-stats {
+.level-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rpx;
+}
+.level-text {
+  font-size: 28rpx;
+  color: #fbbf24;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  background: rgba(251,191,36,0.15);
+  padding: 4rpx 12rpx;
+  border: 2px solid #fbbf24;
+}
+.coins-text {
+  font-size: 24rpx;
+  color: #34d399;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* 属性条 */
+.status-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-bottom: 16rpx;
+}
+.stat-bar-item {
   display: flex;
   align-items: center;
-  gap: 20rpx;
-  background: rgba(255,255,255,0.05);
-  border: 2px solid #334155;
-  padding: 14rpx 20rpx;
+  gap: 10rpx;
 }
-.mini-stat { display: flex; flex-direction: column; align-items: center; gap: 2rpx; }
-.mini-stat-num {
-  font-size: 36rpx;
+.stat-icon { font-size: 22rpx; width: 28rpx; text-align: center; }
+.stat-bar-track {
+  flex: 1;
+  height: 16rpx;
+  background: #334155;
+  border: 1px solid #475569;
+  border-radius: 2rpx;
+  overflow: hidden;
+}
+.stat-bar-fill {
+  height: 100%;
+  border-radius: 2rpx;
+  transition: width 0.5s ease;
+}
+.energy-fill { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.hunger-fill { background: linear-gradient(90deg, #f97316, #fb923c); }
+.hygiene-fill { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+.mood-fill { background: linear-gradient(90deg, #a855f7, #c084fc); }
+.stat-val {
+  font-size: 20rpx;
+  color: #94a3b8;
+  font-family: 'Courier New', monospace;
+  width: 44rpx;
+  text-align: right;
+}
+
+/* 食材统计行 */
+.food-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid #334155;
+  padding: 10rpx 16rpx;
+}
+.food-stat { display: flex; flex-direction: column; align-items: center; gap: 2rpx; }
+.food-stat-num {
+  font-size: 32rpx;
   color: #e2e8f0;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   line-height: 1;
 }
-.mini-stat-lbl {
-  font-size: 18rpx;
+.food-stat-lbl {
+  font-size: 16rpx;
   color: #64748b;
   font-family: 'Courier New', monospace;
 }
-.warn-num { color: #fbbf24; }
-.danger-num { color: #fb7185; }
-.mini-stat-divider {
-  width: 2px;
-  height: 40rpx;
-  background: #334155;
+.warn-c { color: #fbbf24; }
+.danger-c { color: #fb7185; }
+.food-stat-div { width: 1px; height: 36rpx; background: #334155; }
+.food-stat-spacer { flex: 1; }
+.alarm-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  background: rgba(251,191,36,0.15);
+  border: 1px solid #fbbf24;
+  padding: 6rpx 12rpx;
+}
+.alarm-icon { font-size: 22rpx; }
+.alarm-time-txt {
+  font-size: 22rpx;
+  color: #fbbf24;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
 
 /* ===== 房子容器 ===== */
 .house-container {
-  margin: 24rpx 16rpx;
+  margin: 16rpx 12rpx;
   border: 4px solid #475569;
   box-shadow: 0 0 0 4px #1e293b, 0 0 0 8px #334155;
   background: #334155;
 }
-
-/* 屋顶 */
 .house-roof {
   background: #14b8a6;
   border-bottom: 4px solid #1e293b;
-  padding: 12rpx 16rpx;
+  padding: 10rpx 14rpx;
   display: flex;
   align-items: center;
   gap: 8rpx;
 }
-.roof-pixel {
-  width: 18rpx;
-  height: 18rpx;
-  background: #0d9488;
-  border: 2px solid #1e293b;
-}
-.roof-p1, .roof-p4 { background: #f59e0b; }
-.roof-p2, .roof-p3 { background: #34d399; }
+.roof-pixel { width: 16rpx; height: 16rpx; border: 2px solid #1e293b; }
+.roof-p1,.roof-p4 { background: #f59e0b; }
+.roof-p2,.roof-p3 { background: #34d399; }
 .roof-main { flex: 1; text-align: center; }
 .roof-title {
-  font-size: 20rpx;
-  color: #ffffff;
+  font-size: 18rpx;
+  color: #fff;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   letter-spacing: 2rpx;
 }
-
-/* 房子主体 */
 .house-body {
   background: #475569;
   border: 3px solid #64748b;
   position: relative;
 }
 
-/* ===== 小人角色 ===== */
+/* ===== 小人 ===== */
 .character {
   position: absolute;
   z-index: 100;
@@ -116,18 +185,12 @@
   transition: left 0.8s ease-in-out, top 0.8s ease-in-out;
   pointer-events: none;
 }
-.char-body {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
+.char-body { position: relative; width: 100%; height: 100%; }
 .char-head {
   position: absolute;
-  top: 0;
-  left: 50%;
+  top: 0; left: 50%;
   transform: translateX(-50%);
-  width: 20rpx;
-  height: 20rpx;
+  width: 20rpx; height: 20rpx;
   background: #fcd34d;
   border: 2px solid #92400e;
   border-radius: 50%;
@@ -135,130 +198,223 @@
 }
 .char-torso {
   position: absolute;
-  top: 18rpx;
-  left: 50%;
+  top: 18rpx; left: 50%;
   transform: translateX(-50%);
-  width: 16rpx;
-  height: 16rpx;
+  width: 16rpx; height: 16rpx;
   background: #3b82f6;
   border: 2px solid #1e40af;
-  z-index: 1;
 }
 .char-leg {
   position: absolute;
   bottom: 0;
-  width: 8rpx;
-  height: 14rpx;
+  width: 8rpx; height: 14rpx;
   background: #1e293b;
   border: 1px solid #0f172a;
 }
 .char-leg-l { left: 6rpx; }
 .char-leg-r { right: 6rpx; }
-
-/* 走路动画 */
-.char-walking .char-leg-l {
-  animation: legWalkL 0.3s ease-in-out infinite;
-}
-.char-walking .char-leg-r {
-  animation: legWalkR 0.3s ease-in-out infinite;
-}
+.char-walking .char-leg-l { animation: legWalkL 0.3s ease-in-out infinite; }
+.char-walking .char-leg-r { animation: legWalkR 0.3s ease-in-out infinite; }
 @keyframes legWalkL {
-  0%, 100% { transform: translateY(0); }
+  0%,100% { transform: translateY(0); }
   50% { transform: translateY(-4rpx); }
 }
 @keyframes legWalkR {
-  0%, 100% { transform: translateY(-4rpx); }
+  0%,100% { transform: translateY(-4rpx); }
   50% { transform: translateY(0); }
 }
 .char-shadow {
   position: absolute;
-  bottom: -4rpx;
-  left: 50%;
+  bottom: -4rpx; left: 50%;
   transform: translateX(-50%);
-  width: 26rpx;
-  height: 8rpx;
+  width: 26rpx; height: 8rpx;
   background: rgba(0,0,0,0.2);
   border-radius: 50%;
 }
 
-/* 方向 */
-.char-dir-down .char-head { background: #fcd34d; }
-.char-dir-up .char-head::after {
-  content: '';
+/* ===== 小狗 ===== */
+.dog-character {
+  position: absolute;
+  z-index: 90;
+  width: 60rpx;
+  height: 50rpx;
+  transition: left 0.8s ease-in-out, top 0.8s ease-in-out;
+  cursor: pointer;
+}
+.dog-body {
+  position: relative;
+  width: 56rpx;
+  height: 42rpx;
+}
+/* 狗头 */
+.dog-head {
+  position: absolute;
+  top: 0; left: 0;
+  width: 28rpx; height: 24rpx;
+  background: #d97706;
+  border: 2px solid #92400e;
+  border-radius: 40% 40% 30% 30%;
+  z-index: 3;
+}
+/* 狗耳朵 */
+.dog-ear {
   position: absolute;
   top: 2rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12rpx;
-  height: 4rpx;
-  background: #92400e;
-  border-radius: 2rpx;
+  width: 10rpx; height: 14rpx;
+  background: #b45309;
+  border: 1px solid #92400e;
+  border-radius: 50% 50% 30% 30%;
+  z-index: 2;
 }
+.dog-ear-l { left: -4rpx; transform: rotate(-20deg); }
+.dog-ear-r { left: 20rpx; transform: rotate(20deg); }
+/* 狗眼 */
+.dog-eye {
+  position: absolute;
+  top: 6rpx;
+  width: 6rpx; height: 6rpx;
+  background: #1e293b;
+  border-radius: 50%;
+  z-index: 4;
+}
+.dog-eye-l { left: 5rpx; }
+.dog-eye-r { left: 16rpx; }
+/* 狗鼻 */
+.dog-nose {
+  position: absolute;
+  top: 14rpx; left: 10rpx;
+  width: 8rpx; height: 5rpx;
+  background: #1e293b;
+  border-radius: 50%;
+  z-index: 4;
+}
+/* 狗身体 */
+.dog-torso {
+  position: absolute;
+  top: 16rpx; left: 4rpx;
+  width: 44rpx; height: 22rpx;
+  background: #f59e0b;
+  border: 2px solid #d97706;
+  border-radius: 8rpx;
+  z-index: 2;
+}
+/* 狗尾巴 */
+.dog-tail {
+  position: absolute;
+  top: 8rpx; right: -6rpx;
+  width: 8rpx; height: 18rpx;
+  background: #d97706;
+  border: 1px solid #b45309;
+  border-radius: 4rpx;
+  transform-origin: bottom center;
+  z-index: 1;
+}
+/* 狗腿 */
+.dog-leg {
+  position: absolute;
+  bottom: 0;
+  width: 8rpx; height: 14rpx;
+  background: #d97706;
+  border: 1px solid #b45309;
+  border-radius: 0 0 3rpx 3rpx;
+  z-index: 2;
+}
+.dog-leg-fl { left: 8rpx; }
+.dog-leg-fr { left: 18rpx; }
+.dog-leg-bl { right: 16rpx; }
+.dog-leg-br { right: 6rpx; }
+/* 狗影子 */
+.dog-shadow {
+  position: absolute;
+  bottom: -4rpx; left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx; height: 8rpx;
+  background: rgba(0,0,0,0.15);
+  border-radius: 50%;
+}
+/* 狗动画 */
+.dog-walking .dog-leg-fl { animation: dogLegFL 0.3s ease-in-out infinite; }
+.dog-walking .dog-leg-fr { animation: dogLegFR 0.3s ease-in-out infinite; }
+.dog-walking .dog-leg-bl { animation: dogLegFL 0.3s ease-in-out infinite; }
+.dog-walking .dog-leg-br { animation: dogLegFR 0.3s ease-in-out infinite; }
+@keyframes dogLegFL { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4rpx); } }
+@keyframes dogLegFR { 0%,100% { transform: translateY(-4rpx); } 50% { transform: translateY(0); } }
+.dog-state-happy .dog-tail { animation: tailWag 0.3s ease-in-out infinite; }
+.dog-state-playing .dog-tail { animation: tailWag 0.2s ease-in-out infinite; }
+@keyframes tailWag {
+  0%,100% { transform: rotate(-20deg); }
+  50% { transform: rotate(20deg); }
+}
+.dog-state-eating .dog-head { animation: dogEat 0.4s ease-in-out infinite; }
+@keyframes dogEat {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(3rpx); }
+}
+/* 狗气泡 */
+.dog-bubble {
+  position: absolute;
+  top: -34rpx; left: -10rpx;
+  background: #fff;
+  border: 2px solid #d97706;
+  border-radius: 12rpx;
+  padding: 4rpx 10rpx;
+  opacity: 0;
+  transform: scale(0.5) translateY(10rpx);
+  transition: all 0.25s ease;
+  z-index: 200;
+  pointer-events: none;
+  white-space: nowrap;
+}
+.bubble-show {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+.dog-bubble-text { font-size: 22rpx; }
 
 /* 北墙 */
 .wall-north {
-  height: 32rpx;
+  height: 30rpx;
   background: #64748b;
   border-bottom: 3px solid #1e293b;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding: 0 40rpx;
+  padding: 0 36rpx;
 }
-.window-frame {
-  display: flex;
-  gap: 4rpx;
-  background: #1e293b;
-  border: 2px solid #1e293b;
-  padding: 3rpx;
-}
+.window-frame { display: flex; gap: 3rpx; background: #1e293b; border: 2px solid #1e293b; padding: 2rpx; }
 .window-pane {
-  width: 24rpx;
-  height: 16rpx;
+  width: 22rpx; height: 14rpx;
   background: #bae6fd;
   opacity: 0.8;
   animation: windowShine 4s ease-in-out infinite;
 }
 .window-pane:nth-child(2) { animation-delay: 0.5s; }
 @keyframes windowShine {
-  0%, 100% { background: #bae6fd; opacity: 0.8; }
+  0%,100% { background: #bae6fd; opacity: 0.8; }
   50% { background: #e0f2fe; opacity: 1; }
 }
 .wall-gap { flex: 1; }
 
 /* 楼层行 */
-.floor-row {
-  display: flex;
-  min-height: 280rpx;
-}
+.floor-row { display: flex; min-height: 260rpx; }
 
 /* 房间通用 */
-.room {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  border: 2px solid #1e293b;
-}
+.room { flex: 1; display: flex; flex-direction: column; border: 2px solid #1e293b; }
 .room-label {
   display: flex;
   align-items: center;
   gap: 6rpx;
-  padding: 6rpx 12rpx;
+  padding: 5rpx 10rpx;
   border-bottom: 2px solid #1e293b;
 }
+.room-label-icon { font-size: 18rpx; }
 .room-label-text {
-  font-size: 18rpx;
-  color: #ffffff;
+  font-size: 17rpx;
+  color: #fff;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 1rpx;
 }
-.room-floor {
-  flex: 1;
-  position: relative;
-  min-height: 240rpx;
-  padding: 10rpx;
-}
+.room-floor { flex: 1; position: relative; min-height: 220rpx; padding: 8rpx; }
 
 /* 各房间地板 */
 .kitchen-label { background: #065f46; }
@@ -289,7 +445,7 @@
 
 /* 隔墙 */
 .wall-vert {
-  width: 20rpx;
+  width: 18rpx;
   background: #64748b;
   border-left: 2px solid #1e293b;
   border-right: 2px solid #1e293b;
@@ -297,14 +453,9 @@
   align-items: center;
   justify-content: center;
 }
-.door-opening-h {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+.door-opening-h { display: flex; align-items: center; justify-content: center; }
 .door-frame-h {
-  width: 14rpx;
-  height: 40rpx;
+  width: 12rpx; height: 36rpx;
   background: #92400e;
   border: 2px solid #78350f;
   border-radius: 2rpx;
@@ -312,35 +463,23 @@
 
 /* 走廊 */
 .hallway {
-  height: 36rpx;
+  height: 34rpx;
   border-top: 2px solid #1e293b;
   border-bottom: 2px solid #1e293b;
   background: #94a3b8;
   overflow: hidden;
 }
-.hallway-floor {
-  display: flex;
-  height: 100%;
-}
+.hallway-floor { display: flex; height: 100%; }
 .floor-tile {
   flex: 1;
   border-right: 1px solid #64748b;
   background: #94a3b8;
-  animation: tileShimmer 3s ease-in-out infinite;
 }
 .floor-tile:nth-child(odd) { background: #a1afbe; }
-.floor-tile:nth-child(2) { animation-delay: 0.2s; }
-.floor-tile:nth-child(3) { animation-delay: 0.4s; }
-.floor-tile:nth-child(4) { animation-delay: 0.6s; }
-.floor-tile:nth-child(5) { animation-delay: 0.8s; }
-@keyframes tileShimmer {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
-}
 
-/* 南墙 + 大门 */
+/* 南墙 */
 .wall-south {
-  height: 50rpx;
+  height: 46rpx;
   background: #64748b;
   border-top: 3px solid #1e293b;
   display: flex;
@@ -351,754 +490,428 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 4rpx 8rpx;
+  padding: 3rpx 6rpx;
 }
 .door-topdown {
-  width: 50rpx;
-  height: 30rpx;
+  width: 46rpx; height: 28rpx;
   background: #92400e;
   border: 2px solid #78350f;
   position: relative;
   border-radius: 2rpx;
 }
-.door-panel {
-  position: absolute;
-  inset: 3rpx;
-  border: 1px solid #b45309;
-  background: #a16207;
-}
+.door-panel { position: absolute; inset: 3rpx; border: 1px solid #b45309; background: #a16207; }
 .door-knob {
   position: absolute;
-  right: 6rpx;
-  top: 50%;
+  right: 6rpx; top: 50%;
   transform: translateY(-50%);
-  width: 6rpx;
-  height: 6rpx;
+  width: 5rpx; height: 5rpx;
   background: #fbbf24;
   border-radius: 50%;
   border: 1px solid #92400e;
 }
-.main-door-label {
-  font-size: 14rpx;
-  color: #94a3b8;
-  font-family: 'Courier New', monospace;
-}
+.main-door-label { font-size: 13rpx; color: #94a3b8; font-family: 'Courier New', monospace; }
 
-/* ===== 家具定位通用 ===== */
-.furn-pos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4rpx;
-  position: absolute;
-}
-.furn-label {
-  font-size: 16rpx;
-  color: #475569;
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  text-align: center;
-}
-
-/* 家具点击效果 */
-.furn-active {
-  animation: furnitureClick 0.3s ease-out;
-}
+/* ===== 家具定位 ===== */
+.furn-pos { display: flex; flex-direction: column; align-items: center; gap: 3rpx; position: absolute; }
+.furn-label { font-size: 15rpx; color: #475569; font-family: 'Courier New', monospace; font-weight: bold; text-align: center; }
+.furn-active { animation: furnitureClick 0.3s ease-out; }
 @keyframes furnitureClick {
   0% { transform: scale(1); }
-  40% { transform: scale(0.9); }
+  40% { transform: scale(0.88); }
   100% { transform: scale(1); }
 }
 
-/* ===== 冰箱 - 俯视图 ===== */
-.furn-fridge-pos { left: 10rpx; top: 10rpx; }
+/* 冰箱 */
+.furn-fridge-pos { left: 8rpx; top: 8rpx; }
 .topdown-fridge {
-  width: 70rpx;
-  height: 100rpx;
+  width: 64rpx; height: 90rpx;
   background: #e0f2fe;
   border: 3px solid #0891b2;
   position: relative;
   box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
-}
-.fridge-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 45%;
-  background: #bae6fd;
-  border-bottom: 2px solid #0891b2;
-}
-.fridge-bottom {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 53%;
-  background: #e0f2fe;
-}
-.fridge-handle {
-  position: absolute;
-  right: 6rpx;
-  top: 10rpx;
-  width: 4rpx;
-  height: 20rpx;
-  background: #64748b;
-  border-radius: 2rpx;
-}
-.fridge-handle-b {
-  top: auto;
-  bottom: 14rpx;
-}
-.topdown-fridge .furniture-badge {
-  position: absolute;
-  top: -10rpx;
-  right: -10rpx;
-  background: #fb7185;
-  border: 2px solid #1e293b;
-  min-width: 30rpx;
-  height: 30rpx;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 4rpx;
-  border-radius: 4rpx;
-  z-index: 5;
-}
-.badge-num {
-  font-size: 18rpx;
-  color: #fff;
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-}
-/* 冰箱呼吸光 */
-.topdown-fridge {
   animation: fridgeGlow 2.5s ease-in-out infinite;
 }
 @keyframes fridgeGlow {
-  0%, 100% { box-shadow: 2px 2px 0 rgba(0,0,0,0.15); border-color: #0891b2; }
-  50% { box-shadow: 2px 2px 0 #0891b2, 0 0 10rpx rgba(8,145,178,0.4); border-color: #06b6d4; }
+  0%,100% { border-color: #0891b2; }
+  50% { border-color: #06b6d4; box-shadow: 2px 2px 0 #0891b2, 0 0 10rpx rgba(8,145,178,0.35); }
 }
+.fridge-top { position: absolute; top: 0; left: 0; right: 0; height: 45%; background: #bae6fd; border-bottom: 2px solid #0891b2; }
+.fridge-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 53%; background: #e0f2fe; }
+.fridge-handle { position: absolute; right: 5rpx; top: 8rpx; width: 3rpx; height: 18rpx; background: #64748b; border-radius: 2rpx; }
+.fridge-handle-b { top: auto; bottom: 12rpx; }
+.furniture-badge {
+  position: absolute; top: -10rpx; right: -10rpx;
+  background: #fb7185; border: 2px solid #1e293b;
+  min-width: 28rpx; height: 28rpx;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 3rpx; border-radius: 4rpx; z-index: 5;
+}
+.badge-num { font-size: 16rpx; color: #fff; font-family: 'Courier New', monospace; font-weight: bold; }
 
-/* ===== 灶台 - 俯视图：4个圆形炉灶 ===== */
-.furn-stove-pos { left: 120rpx; top: 10rpx; }
+/* 灶台 */
+.furn-stove-pos { left: 110rpx; top: 8rpx; }
 .topdown-stove {
-  width: 80rpx;
-  height: 80rpx;
-  background: #1c1917;
-  border: 2px solid #44403c;
+  width: 76rpx; height: 76rpx;
+  background: #1c1917; border: 2px solid #44403c;
   position: relative;
   box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
 }
 .stove-burner {
   position: absolute;
-  width: 24rpx;
-  height: 24rpx;
+  width: 22rpx; height: 22rpx;
   border-radius: 50%;
   border: 2px solid #57534e;
   background: #292524;
   box-shadow: inset 0 0 4rpx rgba(251,146,60,0.3);
 }
-.stove-b1 { top: 8rpx; left: 8rpx; }
-.stove-b2 { top: 8rpx; right: 8rpx; }
-.stove-b3 { bottom: 18rpx; left: 8rpx; }
-.stove-b4 { bottom: 18rpx; right: 8rpx; }
-.stove-knobs {
-  position: absolute;
-  bottom: 2rpx;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: space-around;
-  padding: 0 8rpx;
-}
-.stove-knob {
-  width: 8rpx;
-  height: 8rpx;
+.stove-b1 { top: 7rpx; left: 7rpx; }
+.stove-b2 { top: 7rpx; right: 7rpx; }
+.stove-b3 { bottom: 16rpx; left: 7rpx; }
+.stove-b4 { bottom: 16rpx; right: 7rpx; }
+.stove-knobs { position: absolute; bottom: 2rpx; left: 0; right: 0; display: flex; justify-content: space-around; padding: 0 6rpx; }
+.stove-knob { width: 7rpx; height: 7rpx; border-radius: 50%; background: #a8a29e; border: 1px solid #78716c; }
+.stove-flame {
+  position: absolute; top: -8rpx; left: 50%; transform: translateX(-50%);
+  width: 20rpx; height: 20rpx;
+  background: radial-gradient(circle, #fbbf24, #f97316);
   border-radius: 50%;
-  background: #a8a29e;
-  border: 1px solid #78716c;
+  animation: flameFlicker 0.4s ease-in-out infinite;
+  z-index: 5;
+}
+@keyframes flameFlicker {
+  0%,100% { transform: translateX(-50%) scale(1); opacity: 1; }
+  50% { transform: translateX(-50%) scale(1.2); opacity: 0.8; }
 }
 
-/* ===== 水槽 - 俯视图 ===== */
-.furn-sink-pos { right: 20rpx; bottom: 30rpx; }
-.topdown-sink {
-  width: 70rpx;
-  height: 50rpx;
-  background: #d1d5db;
-  border: 2px solid #9ca3af;
-  position: relative;
-  border-radius: 4rpx;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-}
-.sink-basin {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 44rpx;
-  height: 30rpx;
-  background: #e5e7eb;
-  border: 2px solid #9ca3af;
-  border-radius: 50%;
-}
-.sink-drain {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8rpx;
-  height: 8rpx;
-  background: #6b7280;
-  border-radius: 50%;
-}
-.sink-faucet {
-  position: absolute;
-  top: -6rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8rpx;
-  height: 14rpx;
-  background: #9ca3af;
-  border: 1px solid #6b7280;
-  border-radius: 2rpx 2rpx 0 0;
-}
+/* 水槽 */
+.furn-sink-pos { right: 16rpx; bottom: 26rpx; }
+.topdown-sink { width: 64rpx; height: 46rpx; background: #d1d5db; border: 2px solid #9ca3af; position: relative; border-radius: 3rpx; }
+.sink-basin { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 40rpx; height: 28rpx; background: #e5e7eb; border: 2px solid #9ca3af; border-radius: 50%; }
+.sink-drain { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 7rpx; height: 7rpx; background: #6b7280; border-radius: 50%; }
+.sink-faucet { position: absolute; top: -5rpx; left: 50%; transform: translateX(-50%); width: 7rpx; height: 12rpx; background: #9ca3af; border: 1px solid #6b7280; border-radius: 2rpx 2rpx 0 0; }
 
-/* ===== 橱柜 - 俯视图 ===== */
-.furn-cabinet-pos { left: 10rpx; bottom: 10rpx; }
-.topdown-cabinet {
-  width: 100rpx;
-  height: 36rpx;
-  background: #d97706;
-  border: 2px solid #92400e;
-  display: flex;
-  position: relative;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
-}
-.cabinet-door {
-  flex: 1;
-  border-right: 1px solid #92400e;
-  background: #b45309;
-}
+/* 橱柜 */
+.furn-cabinet-pos { left: 8rpx; bottom: 8rpx; }
+.topdown-cabinet { width: 90rpx; height: 32rpx; background: #d97706; border: 2px solid #92400e; display: flex; position: relative; }
+.cabinet-door { flex: 1; border-right: 1px solid #92400e; background: #b45309; }
 .cabinet-door:last-of-type { border-right: none; }
-.cabinet-knob {
-  position: absolute;
-  width: 4rpx;
-  height: 4rpx;
-  background: #fbbf24;
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-}
-.c-k1 { left: 14rpx; }
-.c-k2 { left: 48rpx; }
-.c-k3 { right: 14rpx; }
+.cabinet-knob { position: absolute; width: 4rpx; height: 4rpx; background: #fbbf24; border-radius: 50%; top: 50%; transform: translateY(-50%); }
+.c-k1 { left: 12rpx; } .c-k2 { left: 44rpx; } .c-k3 { right: 12rpx; }
 
-/* ===== 电视 - 俯视图 ===== */
-.furn-tv-pos { left: 20rpx; top: 10rpx; }
-.topdown-tv {
-  width: 120rpx;
-  height: 28rpx;
-  position: relative;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+/* 电视 */
+.furn-tv-pos { left: 16rpx; top: 8rpx; }
+.topdown-tv { width: 110rpx; height: 26rpx; position: relative; }
+.tv-screen { width: 100%; height: 18rpx; background: #1e293b; border: 2px solid #334155; position: relative; }
+.tv-screen::after { content: ''; position: absolute; top: 2rpx; left: 2rpx; right: 2rpx; bottom: 2rpx; background: #0f172a; border: 1px solid #475569; }
+.tv-on { animation: tvFlicker 1s ease-in-out infinite; }
+@keyframes tvFlicker {
+  0%,100% { background: #1e3a5f; }
+  25% { background: #1e4a2f; }
+  50% { background: #3a1e5f; }
+  75% { background: #5f1e1e; }
 }
-.tv-screen {
-  width: 100%;
-  height: 20rpx;
-  background: #1e293b;
-  border: 2px solid #334155;
-  position: relative;
-}
-.tv-screen::after {
-  content: '';
-  position: absolute;
-  top: 2rpx;
-  left: 2rpx;
-  right: 2rpx;
-  bottom: 2rpx;
-  background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-  border: 1px solid #475569;
-}
-.tv-stand {
-  width: 80rpx;
-  height: 8rpx;
-  background: #44403c;
-  border: 1px solid #1c1917;
-  margin: 0 auto;
-}
+.tv-stand { width: 70rpx; height: 8rpx; background: #44403c; border: 1px solid #1c1917; margin: 0 auto; }
 
-/* ===== 沙发 - 俯视图 ===== */
-.furn-sofa-pos { left: 10rpx; top: 80rpx; }
-.topdown-sofa {
-  width: 130rpx;
-  height: 70rpx;
-  position: relative;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-}
-.sofa-back {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 18rpx;
-  background: #7c3aed;
-  border: 2px solid #5b21b6;
-  border-radius: 4rpx 4rpx 0 0;
-}
-.sofa-seat {
-  position: absolute;
-  top: 16rpx;
-  left: 14rpx;
-  right: 14rpx;
-  bottom: 0;
-  background: #8b5cf6;
-  border: 2px solid #6d28d9;
-}
-.sofa-arm {
-  position: absolute;
-  top: 16rpx;
-  width: 16rpx;
-  bottom: 0;
-  background: #7c3aed;
-  border: 2px solid #5b21b6;
-}
-.sofa-arm-l { left: 0; border-radius: 0 0 0 4rpx; }
-.sofa-arm-r { right: 0; border-radius: 0 0 4rpx 0; }
-.sofa-cushion {
-  position: absolute;
-  top: 22rpx;
-  width: 28rpx;
-  height: 34rpx;
-  background: #a78bfa;
-  border: 1px solid #7c3aed;
-  border-radius: 2rpx;
-}
-.s-c1 { left: 20rpx; }
-.s-c2 { left: 50rpx; }
-.s-c3 { left: 80rpx; }
+/* 沙发 */
+.furn-sofa-pos { left: 8rpx; top: 72rpx; }
+.topdown-sofa { width: 120rpx; height: 64rpx; position: relative; }
+.sofa-back { position: absolute; top: 0; left: 0; right: 0; height: 16rpx; background: #7c3aed; border: 2px solid #5b21b6; border-radius: 3rpx 3rpx 0 0; }
+.sofa-seat { position: absolute; top: 14rpx; left: 13rpx; right: 13rpx; bottom: 0; background: #8b5cf6; border: 2px solid #6d28d9; }
+.sofa-arm { position: absolute; top: 14rpx; width: 14rpx; bottom: 0; background: #7c3aed; border: 2px solid #5b21b6; }
+.sofa-arm-l { left: 0; border-radius: 0 0 0 3rpx; }
+.sofa-arm-r { right: 0; border-radius: 0 0 3rpx 0; }
+.sofa-cushion { position: absolute; top: 20rpx; width: 26rpx; height: 30rpx; background: #a78bfa; border: 1px solid #7c3aed; border-radius: 2rpx; }
+.s-c1 { left: 18rpx; } .s-c2 { left: 46rpx; } .s-c3 { left: 74rpx; }
 
-/* ===== 茶几 - 俯视图 ===== */
-.furn-table-pos { left: 50rpx; bottom: 30rpx; }
-.topdown-table {
-  width: 60rpx;
-  height: 40rpx;
-  position: relative;
-}
-.table-top {
-  width: 100%;
-  height: 100%;
-  background: #92400e;
-  border: 2px solid #78350f;
-  border-radius: 4rpx;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
-}
+/* 茶几 */
+.furn-table-pos { left: 46rpx; bottom: 28rpx; }
+.topdown-table { width: 54rpx; height: 36rpx; position: relative; }
+.table-top { width: 100%; height: 100%; background: #92400e; border: 2px solid #78350f; border-radius: 3rpx; }
 .table-cup {
-  position: absolute;
-  top: 8rpx;
-  right: 10rpx;
-  width: 12rpx;
-  height: 12rpx;
-  background: #fef3c7;
-  border: 1px solid #d97706;
-  border-radius: 50%;
+  position: absolute; top: 7rpx; right: 8rpx;
+  width: 11rpx; height: 11rpx;
+  background: #fef3c7; border: 1px solid #d97706; border-radius: 50%;
+}
+.cup-has-tea {
+  background: #92400e;
+  box-shadow: 0 0 6rpx rgba(146,64,14,0.8);
+  animation: teaSteam 1.5s ease-in-out infinite;
+}
+@keyframes teaSteam {
+  0%,100% { opacity: 1; } 50% { opacity: 0.7; }
 }
 
-/* ===== 盆栽 - 俯视图 ===== */
-.furn-plant-pos { right: 16rpx; top: 10rpx; }
-.topdown-plant {
-  width: 46rpx;
-  height: 46rpx;
-  position: relative;
-}
-.plant-pot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 18rpx;
-  height: 18rpx;
-  background: #a16207;
-  border: 2px solid #78350f;
-  border-radius: 50%;
-  z-index: 2;
-}
-.plant-leaf {
-  position: absolute;
-  width: 18rpx;
-  height: 18rpx;
-  background: #22c55e;
-  border: 1px solid #16a34a;
-  border-radius: 50%;
-}
+/* 盆栽 */
+.furn-plant-pos { right: 14rpx; top: 8rpx; }
+.topdown-plant { width: 44rpx; height: 44rpx; position: relative; }
+.plant-pot { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 16rpx; height: 16rpx; background: #a16207; border: 2px solid #78350f; border-radius: 50%; z-index: 2; }
+.plant-leaf { position: absolute; width: 16rpx; height: 16rpx; background: #22c55e; border: 1px solid #16a34a; border-radius: 50%; }
+.plant-watered .plant-leaf { background: #4ade80; animation: leafGlow 1s ease-in-out infinite; }
+@keyframes leafGlow { 0%,100% { background: #4ade80; } 50% { background: #86efac; } }
 .plant-l1 { top: 0; left: 50%; transform: translateX(-50%); }
 .plant-l2 { bottom: 0; left: 50%; transform: translateX(-50%); }
 .plant-l3 { left: 0; top: 50%; transform: translateY(-50%); }
 .plant-l4 { right: 0; top: 50%; transform: translateY(-50%); }
 
-/* ===== 床 - 俯视图 ===== */
-.furn-bed-pos { left: 10rpx; top: 10rpx; }
-.topdown-bed {
-  width: 130rpx;
-  height: 90rpx;
-  position: relative;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-}
-.bed-frame {
-  position: absolute;
-  inset: 0;
-  background: #92400e;
-  border: 2px solid #78350f;
-  border-radius: 4rpx;
-}
-.bed-pillow {
-  position: absolute;
-  top: 6rpx;
-  width: 50rpx;
-  height: 20rpx;
-  background: #fef3c7;
-  border: 1px solid #fbbf24;
-  border-radius: 4rpx;
-}
-.bed-p1 { left: 8rpx; }
-.bed-p2 { right: 8rpx; }
-.bed-blanket {
-  position: absolute;
-  bottom: 4rpx;
-  left: 6rpx;
-  right: 6rpx;
-  height: 50rpx;
-  background: #a78bfa;
-  border: 2px solid #7c3aed;
-  border-radius: 0 0 2rpx 2rpx;
-}
+/* 床 */
+.furn-bed-pos { left: 8rpx; top: 8rpx; }
+.topdown-bed { width: 120rpx; height: 84rpx; position: relative; }
+.bed-frame { position: absolute; inset: 0; background: #92400e; border: 2px solid #78350f; border-radius: 3rpx; }
+.bed-pillow { position: absolute; top: 5rpx; width: 46rpx; height: 18rpx; background: #fef3c7; border: 1px solid #fbbf24; border-radius: 3rpx; }
+.bed-p1 { left: 6rpx; } .bed-p2 { right: 6rpx; }
+.bed-blanket { position: absolute; bottom: 3rpx; left: 5rpx; right: 5rpx; height: 46rpx; background: #a78bfa; border: 2px solid #7c3aed; border-radius: 0 0 2rpx 2rpx; }
+.bed-sleeping .bed-blanket { animation: blanketPulse 2s ease-in-out infinite; }
+@keyframes blanketPulse { 0%,100% { background: #a78bfa; } 50% { background: #c4b5fd; } }
+.sleep-zzz { position: absolute; top: -20rpx; right: 4rpx; z-index: 10; }
+.zzz-text { font-size: 22rpx; animation: zzzFloat 1.5s ease-in-out infinite; }
+@keyframes zzzFloat { 0%,100% { transform: translateY(0); opacity: 1; } 50% { transform: translateY(-8rpx); opacity: 0.6; } }
 
-/* ===== 衣柜 - 俯视图 ===== */
-.furn-wardrobe-pos { right: 12rpx; top: 10rpx; }
-.topdown-wardrobe {
-  width: 60rpx;
-  height: 90rpx;
-  background: #b45309;
-  border: 2px solid #92400e;
-  position: relative;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.15);
-}
-.wardrobe-door {
-  position: absolute;
-  top: 3rpx;
-  bottom: 3rpx;
-  width: 45%;
-  border: 1px solid #92400e;
-  background: #a16207;
-}
-.wd-l { left: 3rpx; }
-.wd-r { right: 3rpx; }
-.wardrobe-knob {
-  position: absolute;
-  width: 4rpx;
-  height: 4rpx;
-  background: #fbbf24;
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-}
-.wk-l { left: 24rpx; }
-.wk-r { right: 24rpx; }
-.wardrobe-mirror {
-  position: absolute;
-  top: 15rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20rpx;
-  height: 40rpx;
-  background: #bfdbfe;
-  border: 1px solid #93c5fd;
-  border-radius: 2rpx;
-  opacity: 0.5;
-}
+/* 衣柜 */
+.furn-wardrobe-pos { right: 10rpx; top: 8rpx; }
+.topdown-wardrobe { width: 56rpx; height: 84rpx; background: #b45309; border: 2px solid #92400e; position: relative; }
+.wardrobe-door { position: absolute; top: 3rpx; bottom: 3rpx; width: 45%; border: 1px solid #92400e; background: #a16207; }
+.wd-l { left: 3rpx; } .wd-r { right: 3rpx; }
+.wardrobe-knob { position: absolute; width: 4rpx; height: 4rpx; background: #fbbf24; border-radius: 50%; top: 50%; transform: translateY(-50%); z-index: 2; }
+.wk-l { left: 22rpx; } .wk-r { right: 22rpx; }
+.wardrobe-mirror { position: absolute; top: 14rpx; left: 50%; transform: translateX(-50%); width: 18rpx; height: 36rpx; background: #bfdbfe; border: 1px solid #93c5fd; border-radius: 2rpx; opacity: 0.5; }
 
-/* ===== 书桌 - 俯视图 ===== */
-.furn-desk-pos { left: 10rpx; bottom: 15rpx; }
-.topdown-desk {
-  width: 120rpx;
-  height: 60rpx;
-  position: relative;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-}
-.desk-surface {
-  position: absolute;
-  inset: 0;
-  background: #d97706;
-  border: 2px solid #b45309;
-  border-radius: 2rpx;
-}
-.desk-lamp {
-  position: absolute;
-  top: 6rpx;
-  right: 10rpx;
-  width: 14rpx;
-  height: 14rpx;
-  background: #fbbf24;
-  border: 1px solid #d97706;
-  border-radius: 50%;
-  box-shadow: 0 0 6rpx rgba(251,191,36,0.5);
-}
-.desk-book {
-  position: absolute;
-  top: 8rpx;
-  left: 12rpx;
-  width: 24rpx;
-  height: 16rpx;
-  background: #ef4444;
-  border: 1px solid #dc2626;
-  border-radius: 1rpx;
-}
-.desk-chair {
-  position: absolute;
-  bottom: -16rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30rpx;
-  height: 24rpx;
-  background: #374151;
-  border: 2px solid #1f2937;
-  border-radius: 4rpx;
-}
+/* 书桌 */
+.furn-desk-pos { left: 8rpx; bottom: 12rpx; }
+.topdown-desk { width: 110rpx; height: 54rpx; position: relative; }
+.desk-surface { position: absolute; inset: 0; background: #d97706; border: 2px solid #b45309; border-radius: 2rpx; }
+.desk-lamp { position: absolute; top: 5rpx; right: 9rpx; width: 13rpx; height: 13rpx; background: #fbbf24; border: 1px solid #d97706; border-radius: 50%; }
+.lamp-on { box-shadow: 0 0 12rpx rgba(251,191,36,0.9); animation: lampGlow 0.8s ease-in-out infinite; }
+@keyframes lampGlow { 0%,100% { box-shadow: 0 0 8rpx rgba(251,191,36,0.7); } 50% { box-shadow: 0 0 16rpx rgba(251,191,36,1); } }
+.desk-book { position: absolute; top: 7rpx; left: 10rpx; width: 22rpx; height: 14rpx; background: #ef4444; border: 1px solid #dc2626; border-radius: 1rpx; }
+.desk-chair { position: absolute; bottom: -15rpx; left: 50%; transform: translateX(-50%); width: 28rpx; height: 22rpx; background: #374151; border: 2px solid #1f2937; border-radius: 3rpx; }
 
-/* ===== 淋浴 - 俯视图 ===== */
-.furn-shower-pos { left: 10rpx; top: 10rpx; }
-.topdown-shower {
-  width: 80rpx;
-  height: 80rpx;
-  position: relative;
-}
-.shower-base {
-  position: absolute;
-  inset: 0;
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
-  border-radius: 4rpx;
-}
-.shower-head {
-  position: absolute;
-  top: 8rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20rpx;
-  height: 20rpx;
-  background: #94a3b8;
-  border: 2px solid #64748b;
-  border-radius: 50%;
-}
-.shower-water {
-  position: absolute;
-  width: 4rpx;
-  height: 4rpx;
-  background: #93c5fd;
-  border-radius: 50%;
-  opacity: 0.6;
-}
-.w1 { top: 30rpx; left: 32rpx; }
-.w2 { top: 40rpx; left: 42rpx; }
-.w3 { top: 36rpx; left: 26rpx; }
-.shower-drain {
-  position: absolute;
-  bottom: 10rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 12rpx;
-  height: 12rpx;
-  border: 2px solid #94a3b8;
-  border-radius: 50%;
-  background: #e2e8f0;
-}
+/* 淋浴 */
+.furn-shower-pos { left: 8rpx; top: 8rpx; }
+.topdown-shower { width: 76rpx; height: 76rpx; position: relative; }
+.shower-base { position: absolute; inset: 0; background: #f1f5f9; border: 2px solid #cbd5e1; border-radius: 3rpx; }
+.shower-head { position: absolute; top: 7rpx; left: 50%; transform: translateX(-50%); width: 18rpx; height: 18rpx; background: #94a3b8; border: 2px solid #64748b; border-radius: 50%; }
+.shower-water { position: absolute; width: 4rpx; height: 4rpx; background: #93c5fd; border-radius: 50%; opacity: 0.6; }
+.w1 { top: 28rpx; left: 30rpx; } .w2 { top: 38rpx; left: 40rpx; } .w3 { top: 34rpx; left: 24rpx; }
+.shower-active .shower-water { animation: waterDrop 0.5s ease-in-out infinite; }
+@keyframes waterDrop { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(8rpx); } }
+.shower-drain { position: absolute; bottom: 9rpx; left: 50%; transform: translateX(-50%); width: 11rpx; height: 11rpx; border: 2px solid #94a3b8; border-radius: 50%; background: #e2e8f0; }
 
-/* ===== 马桶 - 俯视图 ===== */
-.furn-toilet-pos { right: 12rpx; top: 10rpx; }
-.topdown-toilet {
-  width: 46rpx;
-  height: 70rpx;
-  position: relative;
-}
-.toilet-tank {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 36rpx;
-  height: 18rpx;
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
-  border-radius: 4rpx 4rpx 0 0;
-}
-.toilet-seat {
-  position: absolute;
-  top: 16rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40rpx;
-  height: 48rpx;
-  background: #f8fafc;
-  border: 3px solid #e2e8f0;
-  border-radius: 50%;
-}
-.toilet-lid {
-  position: absolute;
-  top: 22rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30rpx;
-  height: 36rpx;
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
-  border-radius: 50%;
-}
-.toilet-hole {
-  position: absolute;
-  top: 32rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 14rpx;
-  height: 16rpx;
-  background: #94a3b8;
-  border-radius: 50%;
-}
+/* 马桶 */
+.furn-toilet-pos { right: 10rpx; top: 8rpx; }
+.topdown-toilet { width: 44rpx; height: 66rpx; position: relative; }
+.toilet-tank { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 34rpx; height: 16rpx; background: #f1f5f9; border: 2px solid #cbd5e1; border-radius: 3rpx 3rpx 0 0; }
+.toilet-seat { position: absolute; top: 14rpx; left: 50%; transform: translateX(-50%); width: 38rpx; height: 46rpx; background: #f8fafc; border: 3px solid #e2e8f0; border-radius: 50%; }
+.toilet-lid { position: absolute; top: 20rpx; left: 50%; transform: translateX(-50%); width: 28rpx; height: 34rpx; background: #f1f5f9; border: 2px solid #cbd5e1; border-radius: 50%; }
+.toilet-hole { position: absolute; top: 30rpx; left: 50%; transform: translateX(-50%); width: 13rpx; height: 14rpx; background: #94a3b8; border-radius: 50%; }
 
-/* ===== 洗手台 - 俯视图 ===== */
-.furn-basin-pos { left: 30rpx; bottom: 15rpx; }
-.topdown-basin {
-  width: 80rpx;
-  height: 50rpx;
-  position: relative;
-}
-.basin-counter {
-  position: absolute;
-  inset: 0;
-  background: #d1d5db;
-  border: 2px solid #9ca3af;
-  border-radius: 2rpx;
-}
-.basin-bowl {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 36rpx;
-  height: 28rpx;
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
-  border-radius: 50%;
-}
-.basin-faucet {
-  position: absolute;
-  top: 2rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8rpx;
-  height: 12rpx;
-  background: #94a3b8;
-  border: 1px solid #64748b;
-  border-radius: 2rpx 2rpx 0 0;
-}
-.basin-mirror {
-  position: absolute;
-  top: -8rpx;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 40rpx;
-  height: 6rpx;
-  background: #bfdbfe;
-  border: 1px solid #93c5fd;
-  border-radius: 1rpx;
-}
+/* 洗手台 */
+.furn-basin-pos { left: 28rpx; bottom: 13rpx; }
+.topdown-basin { width: 76rpx; height: 46rpx; position: relative; }
+.basin-counter { position: absolute; inset: 0; background: #d1d5db; border: 2px solid #9ca3af; border-radius: 2rpx; }
+.basin-bowl { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 34rpx; height: 26rpx; background: #f1f5f9; border: 2px solid #cbd5e1; border-radius: 50%; }
+.basin-faucet { position: absolute; top: 2rpx; left: 50%; transform: translateX(-50%); width: 7rpx; height: 11rpx; background: #94a3b8; border: 1px solid #64748b; border-radius: 2rpx 2rpx 0 0; }
+.basin-mirror { position: absolute; top: -7rpx; left: 50%; transform: translateX(-50%); width: 38rpx; height: 5rpx; background: #bfdbfe; border: 1px solid #93c5fd; border-radius: 1rpx; }
 
-/* ===== 互动弹窗 ===== */
-.action-modal {
+/* ===== 功能面板弹窗 ===== */
+.panel-overlay {
   position: fixed;
   inset: 0;
   z-index: 500;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
 }
-.modal-show {
+.panel-show {
   opacity: 1;
   pointer-events: auto;
 }
-.modal-content {
+.panel-box {
   background: #1e293b;
   border: 3px solid #14b8a6;
-  padding: 36rpx 32rpx;
-  width: 520rpx;
-  display: flex;
-  flex-direction: column;
-  gap: 16rpx;
-  box-shadow: 0 0 0 4px #0f172a, 0 0 20rpx rgba(20,184,166,0.3);
+  border-bottom: none;
+  width: 100%;
+  max-width: 750rpx;
+  border-radius: 20rpx 20rpx 0 0;
+  max-height: 75vh;
+  overflow-y: auto;
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.5);
+  padding-bottom: env(safe-area-inset-bottom);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
 }
-.modal-title {
-  font-size: 32rpx;
+.panel-show .panel-box {
+  transform: translateY(0);
+}
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 28rpx 28rpx 20rpx;
+  border-bottom: 2px solid #334155;
+}
+.panel-emoji { font-size: 44rpx; }
+.panel-title {
+  font-size: 34rpx;
   color: #f1f5f9;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  text-align: center;
 }
-.modal-desc {
-  font-size: 24rpx;
-  color: #94a3b8;
-  font-family: 'Courier New', monospace;
-  text-align: center;
-  line-height: 1.5;
-}
-.modal-actions {
+/* 面板头颜色 */
+.fridge-panel-header { background: linear-gradient(135deg, #0c4a6e, #1e293b); }
+.cook-panel-header { background: linear-gradient(135deg, #431407, #1e293b); }
+.sink-panel-header { background: linear-gradient(135deg, #0c4a6e, #1e293b); }
+.cabinet-panel-header { background: linear-gradient(135deg, #451a03, #1e293b); }
+.tv-panel-header { background: linear-gradient(135deg, #0f172a, #1e293b); }
+.sofa-panel-header { background: linear-gradient(135deg, #2e1065, #1e293b); }
+.table-panel-header { background: linear-gradient(135deg, #451a03, #1e293b); }
+.plant-panel-header { background: linear-gradient(135deg, #052e16, #1e293b); }
+.bed-panel-header { background: linear-gradient(135deg, #1e1b4b, #1e293b); }
+.wardrobe-panel-header { background: linear-gradient(135deg, #431407, #1e293b); }
+.desk-panel-header { background: linear-gradient(135deg, #1c1917, #1e293b); }
+.shower-panel-header { background: linear-gradient(135deg, #0c4a6e, #1e293b); }
+.toilet-panel-header { background: linear-gradient(135deg, #0c4a6e, #1e293b); }
+.basin-panel-header { background: linear-gradient(135deg, #0c4a6e, #1e293b); }
+.door-panel-header { background: linear-gradient(135deg, #451a03, #1e293b); }
+.dog-panel-header { background: linear-gradient(135deg, #78350f, #1e293b); }
+
+.panel-body { padding: 20rpx 28rpx; }
+.panel-desc { font-size: 26rpx; color: #94a3b8; font-family: 'Courier New', monospace; line-height: 1.6; margin-bottom: 12rpx; display: block; }
+.panel-info-row { display: flex; justify-content: space-between; align-items: center; padding: 10rpx 0; border-bottom: 1px solid #334155; }
+.panel-info-label { font-size: 24rpx; color: #64748b; font-family: 'Courier New', monospace; }
+.panel-info-val { font-size: 28rpx; color: #e2e8f0; font-family: 'Courier New', monospace; font-weight: bold; }
+.panel-divider { height: 1px; background: #334155; margin: 16rpx 0; }
+
+/* 面板按钮 */
+.panel-actions {
   display: flex;
-  gap: 16rpx;
-  margin-top: 12rpx;
+  flex-wrap: wrap;
+  gap: 14rpx;
+  padding: 16rpx 28rpx 28rpx;
   justify-content: center;
 }
-.modal-btn {
-  padding: 14rpx 28rpx;
+.dog-actions { gap: 10rpx; }
+.panel-btn {
+  padding: 18rpx 28rpx;
   border: 2px solid #475569;
   background: #334155;
-  min-width: 140rpx;
+  min-width: 150rpx;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4rpx;
+  flex-shrink: 0;
 }
-.modal-btn:active { background: #475569; }
-.modal-btn-primary {
-  border-color: #14b8a6;
-  background: #0d9488;
+.panel-btn:active { background: #475569; transform: scale(0.96); }
+.panel-btn-primary { border-color: #14b8a6; background: #0d9488; }
+.panel-btn-primary:active { background: #0f766e; }
+.panel-btn-text { font-size: 24rpx; color: #f1f5f9; font-family: 'Courier New', monospace; font-weight: bold; white-space: nowrap; }
+
+/* 菜谱列表 */
+.recipe-list { display: flex; flex-direction: column; gap: 10rpx; margin-top: 10rpx; }
+.recipe-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx;
+  background: #334155;
+  border: 2px solid #475569;
+  border-radius: 4rpx;
 }
-.modal-btn-primary:active { background: #0f766e; }
-.modal-btn-text {
-  font-size: 24rpx;
-  color: #f1f5f9;
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
+.recipe-item:active { background: #475569; }
+.recipe-emoji { font-size: 36rpx; }
+.recipe-info { flex: 1; display: flex; flex-direction: column; gap: 3rpx; }
+.recipe-name { font-size: 26rpx; color: #f1f5f9; font-family: 'Courier New', monospace; font-weight: bold; }
+.recipe-effect { font-size: 20rpx; color: #64748b; font-family: 'Courier New', monospace; }
+.recipe-cost { font-size: 26rpx; color: #fbbf24; font-family: 'Courier New', monospace; font-weight: bold; }
+
+/* 进度条 */
+.cooking-progress-area { padding: 16rpx 0; display: flex; flex-direction: column; gap: 12rpx; align-items: center; }
+.cooking-name { font-size: 28rpx; color: #f1f5f9; font-family: 'Courier New', monospace; font-weight: bold; }
+.progress-track { width: 100%; height: 24rpx; background: #334155; border: 2px solid #475569; border-radius: 3rpx; overflow: hidden; }
+.progress-fill { height: 100%; transition: width 0.2s linear; border-radius: 2rpx; }
+.cook-progress-fill { background: linear-gradient(90deg, #f59e0b, #f97316); }
+.study-progress-fill { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
+.shower-progress-fill { background: linear-gradient(90deg, #06b6d4, #0ea5e9); }
+.cooking-pct { font-size: 24rpx; color: #94a3b8; font-family: 'Courier New', monospace; }
+
+/* 电视播放 */
+.tv-playing-area { display: flex; flex-direction: column; align-items: center; gap: 16rpx; padding: 16rpx 0; }
+.tv-playing-text { font-size: 26rpx; color: #e2e8f0; font-family: 'Courier New', monospace; }
+.tv-anim { display: flex; gap: 8rpx; align-items: flex-end; height: 50rpx; }
+.tv-bar { width: 12rpx; background: #14b8a6; border-radius: 2rpx; }
+.tv-bar-1 { animation: tvBar 0.8s ease-in-out infinite; }
+.tv-bar-2 { animation: tvBar 0.8s ease-in-out infinite 0.15s; }
+.tv-bar-3 { animation: tvBar 0.8s ease-in-out infinite 0.3s; }
+@keyframes tvBar {
+  0%,100% { height: 16rpx; } 50% { height: 48rpx; }
 }
 
-/* ===== 底部提示 ===== */
+/* 睡觉区域 */
+.sleeping-area { display: flex; flex-direction: column; align-items: center; gap: 12rpx; padding: 20rpx 0; }
+.sleep-emoji { font-size: 60rpx; animation: zzzFloat 1.5s ease-in-out infinite; }
+.sleep-text { font-size: 28rpx; color: #94a3b8; font-family: 'Courier New', monospace; }
+
+/* 闹钟设置 */
+.alarm-section { margin-bottom: 16rpx; }
+.alarm-section-title { font-size: 22rpx; color: #64748b; font-family: 'Courier New', monospace; margin-bottom: 12rpx; display: block; }
+.alarm-picker-row { display: flex; align-items: center; gap: 12rpx; flex-wrap: wrap; }
+.alarm-picker-box {
+  background: #334155;
+  border: 2px solid #475569;
+  padding: 12rpx 20rpx;
+  min-width: 80rpx;
+  display: flex; align-items: center; justify-content: center;
+}
+.alarm-picker-val { font-size: 36rpx; color: #f1f5f9; font-family: 'Courier New', monospace; font-weight: bold; }
+.alarm-colon { font-size: 36rpx; color: #f1f5f9; font-family: 'Courier New', monospace; font-weight: bold; }
+.alarm-set-btn { background: #0d9488; border: 2px solid #14b8a6; padding: 12rpx 20rpx; }
+.alarm-set-text { font-size: 24rpx; color: #fff; font-family: 'Courier New', monospace; font-weight: bold; }
+.alarm-cancel-btn { background: #7f1d1d; border: 2px solid #991b1b; padding: 12rpx 20rpx; }
+.alarm-cancel-text { font-size: 24rpx; color: #fca5a5; font-family: 'Courier New', monospace; font-weight: bold; }
+.alarm-status { font-size: 22rpx; color: #fbbf24; font-family: 'Courier New', monospace; margin-top: 10rpx; display: block; }
+
+/* 小狗属性 */
+.dog-stats { display: flex; flex-direction: column; gap: 10rpx; margin-bottom: 16rpx; }
+
+/* ===== 浮动游戏提示 ===== */
+.game-toast {
+  position: fixed;
+  top: 140rpx;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20rpx);
+  background: rgba(15,23,42,0.95);
+  border: 2px solid #14b8a6;
+  padding: 14rpx 28rpx;
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  z-index: 1000;
+  border-radius: 4rpx;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  max-width: 600rpx;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  white-space: nowrap;
+}
+.toast-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast-icon { font-size: 30rpx; }
+.toast-text { font-size: 24rpx; color: #e2e8f0; font-family: 'Courier New', monospace; font-weight: bold; }
+
+/* ===== 底部 ===== */
 .home-footer {
-  padding: 24rpx 28rpx;
+  padding: 20rpx 24rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8rpx;
+  gap: 6rpx;
 }
-.footer-hint {
-  font-size: 22rpx;
-  color: #475569;
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-  letter-spacing: 1rpx;
-}
-.footer-sub {
-  font-size: 18rpx;
-  color: #334155;
-  font-family: 'Courier New', monospace;
-  text-align: center;
-}
+.footer-hint { font-size: 20rpx; color: #475569; font-family: 'Courier New', monospace; font-weight: bold; }
+.footer-sub { font-size: 17rpx; color: #334155; font-family: 'Courier New', monospace; }

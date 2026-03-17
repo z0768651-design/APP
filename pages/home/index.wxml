@@ -1,29 +1,74 @@
-<!-- 像素之家 - 真实俯视图 -->
+<!-- 像素之家 - 经营模拟游戏 -->
 <scroll-view scroll-y class="home-wrap">
 
-  <!-- ===== 顶部问候 ===== -->
-  <view class="home-header">
-    <view class="home-greeting-row">
-      <text class="time-icon">{{timeIcon}}</text>
-      <view class="home-greeting-text">
-        <text class="greeting-main">{{greeting}}！</text>
-        <text class="greeting-sub">欢迎回家</text>
+  <!-- ===== 顶部状态栏 ===== -->
+  <view class="game-header">
+    <view class="header-top-row">
+      <view class="greeting-area">
+        <text class="time-icon">{{timeIcon}}</text>
+        <view class="greeting-info">
+          <text class="greeting-main">{{greeting}}</text>
+          <text class="greeting-clock">{{currentTime}}</text>
+        </view>
+      </view>
+      <view class="level-badge">
+        <text class="level-text">Lv.{{level}}</text>
+        <text class="coins-text">{{coins}} G</text>
       </view>
     </view>
-    <view class="home-mini-stats">
-      <view class="mini-stat">
-        <text class="mini-stat-num">{{totalCount}}</text>
-        <text class="mini-stat-lbl">食材</text>
+
+    <!-- 四项属性条 -->
+    <view class="status-bars">
+      <view class="stat-bar-item">
+        <text class="stat-icon">⚡</text>
+        <view class="stat-bar-track">
+          <view class="stat-bar-fill energy-fill" style="width:{{energy}}%"></view>
+        </view>
+        <text class="stat-val">{{energy}}</text>
       </view>
-      <view class="mini-stat-divider"></view>
-      <view class="mini-stat">
-        <text class="mini-stat-num warn-num">{{expiringCount}}</text>
-        <text class="mini-stat-lbl">快过期</text>
+      <view class="stat-bar-item">
+        <text class="stat-icon">🍔</text>
+        <view class="stat-bar-track">
+          <view class="stat-bar-fill hunger-fill" style="width:{{hunger}}%"></view>
+        </view>
+        <text class="stat-val">{{hunger}}</text>
       </view>
-      <view wx:if="{{expiredCount > 0}}" class="mini-stat-divider"></view>
-      <view wx:if="{{expiredCount > 0}}" class="mini-stat">
-        <text class="mini-stat-num danger-num">{{expiredCount}}</text>
-        <text class="mini-stat-lbl">已过期</text>
+      <view class="stat-bar-item">
+        <text class="stat-icon">🫧</text>
+        <view class="stat-bar-track">
+          <view class="stat-bar-fill hygiene-fill" style="width:{{hygiene}}%"></view>
+        </view>
+        <text class="stat-val">{{hygiene}}</text>
+      </view>
+      <view class="stat-bar-item">
+        <text class="stat-icon">😊</text>
+        <view class="stat-bar-track">
+          <view class="stat-bar-fill mood-fill" style="width:{{mood}}%"></view>
+        </view>
+        <text class="stat-val">{{mood}}</text>
+      </view>
+    </view>
+
+    <!-- 食材概览 -->
+    <view class="food-stats-row">
+      <view class="food-stat">
+        <text class="food-stat-num">{{totalCount}}</text>
+        <text class="food-stat-lbl">食材</text>
+      </view>
+      <view class="food-stat-div"></view>
+      <view class="food-stat">
+        <text class="food-stat-num warn-c">{{expiringCount}}</text>
+        <text class="food-stat-lbl">快过期</text>
+      </view>
+      <view wx:if="{{expiredCount > 0}}" class="food-stat-div"></view>
+      <view wx:if="{{expiredCount > 0}}" class="food-stat">
+        <text class="food-stat-num danger-c">{{expiredCount}}</text>
+        <text class="food-stat-lbl">已过期</text>
+      </view>
+      <view class="food-stat-spacer"></view>
+      <view class="alarm-indicator" wx:if="{{alarmSet}}">
+        <text class="alarm-icon">⏰</text>
+        <text class="alarm-time-txt">{{alarmTime}}</text>
       </view>
     </view>
   </view>
@@ -31,22 +76,22 @@
   <!-- ===== 房子俯视图 ===== -->
   <view class="house-container">
 
-    <!-- 屋顶装饰 -->
+    <!-- 屋顶 -->
     <view class="house-roof">
       <view class="roof-pixel roof-p1"></view>
       <view class="roof-pixel roof-p2"></view>
       <view class="roof-main">
-        <text class="roof-title">✦ MY PIXEL HOME ✦</text>
+        <text class="roof-title">MY PIXEL HOME</text>
       </view>
       <view class="roof-pixel roof-p3"></view>
       <view class="roof-pixel roof-p4"></view>
     </view>
 
-    <!-- ===== 房间布局（使用绝对定位放置家具） ===== -->
+    <!-- 房间布局 -->
     <view class="house-body">
 
       <!-- 小人 -->
-      <view class="character" style="left:{{charX}}rpx; top:{{charY}}rpx; {{charWalking ? '' : ''}}">
+      <view class="character" style="left:{{charX}}rpx; top:{{charY}}rpx;">
         <view class="char-body {{charWalking ? 'char-walking' : ''}} char-dir-{{charDir}}">
           <view class="char-head"></view>
           <view class="char-torso"></view>
@@ -56,7 +101,31 @@
         <view class="char-shadow"></view>
       </view>
 
-      <!-- 北墙装饰 -->
+      <!-- 小狗 -->
+      <view class="dog-character" style="left:{{dogX}}rpx; top:{{dogY}}rpx;"
+        data-id="dog" data-x="320" data-y="310" bindtap="onFurnitureTap">
+        <view class="dog-body dog-dir-{{dogDir}} {{dogWalking ? 'dog-walking' : ''}} dog-state-{{dogState}}">
+          <view class="dog-ear dog-ear-l"></view>
+          <view class="dog-ear dog-ear-r"></view>
+          <view class="dog-head"></view>
+          <view class="dog-eye dog-eye-l"></view>
+          <view class="dog-eye dog-eye-r"></view>
+          <view class="dog-nose"></view>
+          <view class="dog-torso"></view>
+          <view class="dog-tail"></view>
+          <view class="dog-leg dog-leg-fl"></view>
+          <view class="dog-leg dog-leg-fr"></view>
+          <view class="dog-leg dog-leg-bl"></view>
+          <view class="dog-leg dog-leg-br"></view>
+        </view>
+        <!-- 小狗气泡 -->
+        <view class="dog-bubble {{showDogBubble ? 'bubble-show' : ''}}">
+          <text class="dog-bubble-text">{{dogBubbleText}}</text>
+        </view>
+        <view class="dog-shadow"></view>
+      </view>
+
+      <!-- 北墙 -->
       <view class="wall-north">
         <view class="window-frame">
           <view class="window-pane"></view>
@@ -69,20 +138,17 @@
         </view>
       </view>
 
-      <!-- 上半部分: 厨房 + 客厅 -->
+      <!-- 上半: 厨房 + 客厅 -->
       <view class="floor-row">
 
         <!-- 厨房 -->
         <view class="room kitchen-room">
           <view class="room-label kitchen-label">
+            <text class="room-label-icon">🍳</text>
             <text class="room-label-text">厨房</text>
           </view>
           <view class="room-floor kitchen-floor">
-
-            <!-- 冰箱 - 俯视图：长方形，带把手 -->
-            <view class="furn-pos furn-fridge-pos"
-              data-id="fridge" data-x="30" data-y="100"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-fridge-pos" data-id="fridge" bindtap="onFurnitureTap">
               <view class="topdown-fridge {{activeFurniture === 'fridge' ? 'furn-active' : ''}}">
                 <view class="fridge-top"></view>
                 <view class="fridge-bottom"></view>
@@ -95,10 +161,7 @@
               <text class="furn-label">冰箱</text>
             </view>
 
-            <!-- 灶台 - 俯视图：方形，4个圆形炉灶 -->
-            <view class="furn-pos furn-stove-pos"
-              data-id="stove" data-x="160" data-y="80"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-stove-pos" data-id="stove" bindtap="onFurnitureTap">
               <view class="topdown-stove {{activeFurniture === 'stove' ? 'furn-active' : ''}}">
                 <view class="stove-burner stove-b1"></view>
                 <view class="stove-burner stove-b2"></view>
@@ -110,14 +173,12 @@
                   <view class="stove-knob"></view>
                   <view class="stove-knob"></view>
                 </view>
+                <view class="stove-flame" wx:if="{{isCooking}}"></view>
               </view>
               <text class="furn-label">灶台</text>
             </view>
 
-            <!-- 水槽 - 俯视图：椭圆盆+水龙头 -->
-            <view class="furn-pos furn-sink-pos"
-              data-id="sink" data-x="160" data-y="180"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-sink-pos" data-id="sink" bindtap="onFurnitureTap">
               <view class="topdown-sink {{activeFurniture === 'sink' ? 'furn-active' : ''}}">
                 <view class="sink-basin"></view>
                 <view class="sink-drain"></view>
@@ -126,10 +187,7 @@
               <text class="furn-label">水槽</text>
             </view>
 
-            <!-- 橱柜 - 俯视图：长条矩形，带门缝 -->
-            <view class="furn-pos furn-cabinet-pos"
-              data-id="cabinet" data-x="30" data-y="210"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-cabinet-pos" data-id="cabinet" bindtap="onFurnitureTap">
               <view class="topdown-cabinet {{activeFurniture === 'cabinet' ? 'furn-active' : ''}}">
                 <view class="cabinet-door"></view>
                 <view class="cabinet-door"></view>
@@ -140,39 +198,30 @@
               </view>
               <text class="furn-label">橱柜</text>
             </view>
-
           </view>
         </view>
 
-        <!-- 竖向隔墙 -->
+        <!-- 隔墙 -->
         <view class="wall-vert">
-          <view class="door-opening-h">
-            <view class="door-frame-h"></view>
-          </view>
+          <view class="door-opening-h"><view class="door-frame-h"></view></view>
         </view>
 
         <!-- 客厅 -->
         <view class="room living-room">
           <view class="room-label living-label">
+            <text class="room-label-icon">🛋</text>
             <text class="room-label-text">客厅</text>
           </view>
           <view class="room-floor living-floor">
-
-            <!-- 电视+电视柜 - 俯视图：窄长条靠墙 -->
-            <view class="furn-pos furn-tv-pos"
-              data-id="tv" data-x="380" data-y="75"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-tv-pos" data-id="tv" bindtap="onFurnitureTap">
               <view class="topdown-tv {{activeFurniture === 'tv' ? 'furn-active' : ''}}">
-                <view class="tv-screen"></view>
+                <view class="tv-screen {{tvPlaying ? 'tv-on' : ''}}"></view>
                 <view class="tv-stand"></view>
               </view>
               <text class="furn-label">电视</text>
             </view>
 
-            <!-- 沙发 - 俯视图：U型/L型 -->
-            <view class="furn-pos furn-sofa-pos"
-              data-id="sofa" data-x="370" data-y="170"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-sofa-pos" data-id="sofa" bindtap="onFurnitureTap">
               <view class="topdown-sofa {{activeFurniture === 'sofa' ? 'furn-active' : ''}}">
                 <view class="sofa-back"></view>
                 <view class="sofa-seat"></view>
@@ -185,22 +234,16 @@
               <text class="furn-label">沙发</text>
             </view>
 
-            <!-- 茶几 - 俯视图：小方形 -->
-            <view class="furn-pos furn-table-pos"
-              data-id="table" data-x="430" data-y="165"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-table-pos" data-id="table" bindtap="onFurnitureTap">
               <view class="topdown-table {{activeFurniture === 'table' ? 'furn-active' : ''}}">
                 <view class="table-top"></view>
-                <view class="table-cup"></view>
+                <view class="table-cup {{hasTea ? 'cup-has-tea' : ''}}"></view>
               </view>
               <text class="furn-label">茶几</text>
             </view>
 
-            <!-- 盆栽 - 俯视图：圆形叶片 -->
-            <view class="furn-pos furn-plant-pos"
-              data-id="plant" data-x="520" data-y="90"
-              bindtap="onFurnitureTap">
-              <view class="topdown-plant {{activeFurniture === 'plant' ? 'furn-active' : ''}}">
+            <view class="furn-pos furn-plant-pos" data-id="plant" bindtap="onFurnitureTap">
+              <view class="topdown-plant {{activeFurniture === 'plant' ? 'furn-active' : ''}} {{plantWatered ? 'plant-watered' : ''}}">
                 <view class="plant-leaf plant-l1"></view>
                 <view class="plant-leaf plant-l2"></view>
                 <view class="plant-leaf plant-l3"></view>
@@ -209,10 +252,8 @@
               </view>
               <text class="furn-label">盆栽</text>
             </view>
-
           </view>
         </view>
-
       </view>
 
       <!-- 走廊 -->
@@ -229,33 +270,30 @@
         </view>
       </view>
 
-      <!-- 下半部分: 卧室 + 卫生间 -->
+      <!-- 下半: 卧室 + 卫生间 -->
       <view class="floor-row">
 
         <!-- 卧室 -->
         <view class="room bedroom">
           <view class="room-label bedroom-label">
+            <text class="room-label-icon">🛏</text>
             <text class="room-label-text">卧室</text>
           </view>
           <view class="room-floor bedroom-floor">
-
-            <!-- 床 - 俯视图：长方形+枕头+被子 -->
-            <view class="furn-pos furn-bed-pos"
-              data-id="bed" data-x="40" data-y="395"
-              bindtap="onFurnitureTap">
-              <view class="topdown-bed {{activeFurniture === 'bed' ? 'furn-active' : ''}}">
+            <view class="furn-pos furn-bed-pos" data-id="bed" bindtap="onFurnitureTap">
+              <view class="topdown-bed {{activeFurniture === 'bed' ? 'furn-active' : ''}} {{isSleeping ? 'bed-sleeping' : ''}}">
                 <view class="bed-frame"></view>
                 <view class="bed-pillow bed-p1"></view>
                 <view class="bed-pillow bed-p2"></view>
                 <view class="bed-blanket"></view>
+                <view class="sleep-zzz" wx:if="{{isSleeping}}">
+                  <text class="zzz-text">💤</text>
+                </view>
               </view>
               <text class="furn-label">床</text>
             </view>
 
-            <!-- 衣柜 - 俯视图：双开门矩形 -->
-            <view class="furn-pos furn-wardrobe-pos"
-              data-id="wardrobe" data-x="185" data-y="380"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-wardrobe-pos" data-id="wardrobe" bindtap="onFurnitureTap">
               <view class="topdown-wardrobe {{activeFurniture === 'wardrobe' ? 'furn-active' : ''}}">
                 <view class="wardrobe-door wd-l"></view>
                 <view class="wardrobe-door wd-r"></view>
@@ -266,41 +304,32 @@
               <text class="furn-label">衣柜</text>
             </view>
 
-            <!-- 书桌 - 俯视图：桌面+台灯+书本 -->
-            <view class="furn-pos furn-desk-pos"
-              data-id="desk" data-x="40" data-y="500"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-desk-pos" data-id="desk" bindtap="onFurnitureTap">
               <view class="topdown-desk {{activeFurniture === 'desk' ? 'furn-active' : ''}}">
                 <view class="desk-surface"></view>
-                <view class="desk-lamp"></view>
+                <view class="desk-lamp {{isStudying ? 'lamp-on' : ''}}"></view>
                 <view class="desk-book"></view>
                 <view class="desk-chair"></view>
               </view>
               <text class="furn-label">书桌</text>
             </view>
-
           </view>
         </view>
 
-        <!-- 竖向隔墙 -->
+        <!-- 隔墙 -->
         <view class="wall-vert">
-          <view class="door-opening-h">
-            <view class="door-frame-h"></view>
-          </view>
+          <view class="door-opening-h"><view class="door-frame-h"></view></view>
         </view>
 
         <!-- 卫生间 -->
         <view class="room bathroom">
           <view class="room-label bathroom-label">
+            <text class="room-label-icon">🚿</text>
             <text class="room-label-text">卫生间</text>
           </view>
           <view class="room-floor bathroom-floor">
-
-            <!-- 淋浴 - 俯视图：方形+花洒圆 -->
-            <view class="furn-pos furn-shower-pos"
-              data-id="shower" data-x="370" data-y="395"
-              bindtap="onFurnitureTap">
-              <view class="topdown-shower {{activeFurniture === 'shower' ? 'furn-active' : ''}}">
+            <view class="furn-pos furn-shower-pos" data-id="shower" bindtap="onFurnitureTap">
+              <view class="topdown-shower {{activeFurniture === 'shower' ? 'furn-active' : ''}} {{isShowering ? 'shower-active' : ''}}">
                 <view class="shower-base"></view>
                 <view class="shower-head"></view>
                 <view class="shower-water w1"></view>
@@ -311,10 +340,7 @@
               <text class="furn-label">淋浴</text>
             </view>
 
-            <!-- 马桶 - 俯视图：椭圆坐圈+水箱 -->
-            <view class="furn-pos furn-toilet-pos"
-              data-id="toilet" data-x="490" data-y="390"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-toilet-pos" data-id="toilet" bindtap="onFurnitureTap">
               <view class="topdown-toilet {{activeFurniture === 'toilet' ? 'furn-active' : ''}}">
                 <view class="toilet-tank"></view>
                 <view class="toilet-seat"></view>
@@ -324,10 +350,7 @@
               <text class="furn-label">马桶</text>
             </view>
 
-            <!-- 洗手台 - 俯视图：半圆盆+镜子 -->
-            <view class="furn-pos furn-basin-pos"
-              data-id="basin" data-x="420" data-y="500"
-              bindtap="onFurnitureTap">
+            <view class="furn-pos furn-basin-pos" data-id="basin" bindtap="onFurnitureTap">
               <view class="topdown-basin {{activeFurniture === 'basin' ? 'furn-active' : ''}}">
                 <view class="basin-counter"></view>
                 <view class="basin-bowl"></view>
@@ -336,16 +359,14 @@
               </view>
               <text class="furn-label">洗手台</text>
             </view>
-
           </view>
         </view>
-
       </view>
 
       <!-- 南墙 + 大门 -->
       <view class="wall-south">
         <view class="wall-gap"></view>
-        <view class="main-door-frame" data-id="door" data-x="280" data-y="590" bindtap="onFurnitureTap">
+        <view class="main-door-frame" data-id="door" bindtap="onFurnitureTap">
           <view class="door-topdown">
             <view class="door-panel"></view>
             <view class="door-knob"></view>
@@ -354,30 +375,484 @@
         </view>
         <view class="wall-gap"></view>
       </view>
-
     </view>
   </view>
 
-  <!-- 互动弹窗 -->
-  <view class="action-modal {{showModal ? 'modal-show' : ''}}" bindtap="onCloseModal">
-    <view class="modal-content" catchtap="">
-      <text class="modal-title">{{modalTitle}}</text>
-      <text class="modal-desc">{{modalDesc}}</text>
-      <view class="modal-actions">
-        <view class="modal-btn modal-btn-primary" wx:if="{{modalAction}}" bindtap="onModalAction">
-          <text class="modal-btn-text">{{modalBtnText}}</text>
+  <!-- ===== 功能面板弹窗 ===== -->
+  <view class="panel-overlay {{showPanel ? 'panel-show' : ''}}" bindtap="onClosePanel">
+    <view class="panel-box" catchtap="">
+
+      <!-- 冰箱面板 -->
+      <block wx:if="{{panelType === 'fridge'}}">
+        <view class="panel-header fridge-panel-header">
+          <text class="panel-emoji">🧊</text>
+          <text class="panel-title">冰箱</text>
         </view>
-        <view class="modal-btn" bindtap="onCloseModal">
-          <text class="modal-btn-text">关闭</text>
+        <view class="panel-body">
+          <view class="panel-info-row">
+            <text class="panel-info-label">存放食材</text>
+            <text class="panel-info-val">{{totalCount}} 件</text>
+          </view>
+          <view class="panel-info-row" wx:if="{{expiringCount > 0}}">
+            <text class="panel-info-label">即将过期</text>
+            <text class="panel-info-val warn-c">{{expiringCount}} 件</text>
+          </view>
+          <view class="panel-info-row" wx:if="{{expiredCount > 0}}">
+            <text class="panel-info-label">已过期</text>
+            <text class="panel-info-val danger-c">{{expiredCount}} 件</text>
+          </view>
+          <view class="panel-desc">打开冰箱查看并管理你的食材</view>
         </view>
-      </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onGoFridge">
+            <text class="panel-btn-text">打开冰箱</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 灶台/做饭面板 -->
+      <block wx:elif="{{panelType === 'cook'}}">
+        <view class="panel-header cook-panel-header">
+          <text class="panel-emoji">🍳</text>
+          <text class="panel-title">灶台 - 做饭</text>
+        </view>
+        <view class="panel-body">
+          <block wx:if="{{isCooking}}">
+            <view class="cooking-progress-area">
+              <text class="cooking-name">正在做：{{cookingRecipe.emoji}} {{cookingRecipe.name}}</text>
+              <view class="progress-track">
+                <view class="progress-fill cook-progress-fill" style="width:{{cookingProgress}}%"></view>
+              </view>
+              <text class="cooking-pct">{{cookingProgress}}%</text>
+            </view>
+          </block>
+          <block wx:else>
+            <text class="panel-desc">选择菜谱开始做饭（消耗金币）</text>
+            <view class="recipe-list">
+              <view class="recipe-item" wx:for="{{recipes}}" wx:key="name"
+                data-idx="{{index}}" bindtap="onSelectRecipe">
+                <text class="recipe-emoji">{{item.emoji}}</text>
+                <view class="recipe-info">
+                  <text class="recipe-name">{{item.name}}</text>
+                  <text class="recipe-effect">饱腹+{{item.hunger}} 心情+{{item.mood}}</text>
+                </view>
+                <text class="recipe-cost">{{item.cost}}G</text>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 水槽面板 -->
+      <block wx:elif="{{panelType === 'sink'}}">
+        <view class="panel-header sink-panel-header">
+          <text class="panel-emoji">💧</text>
+          <text class="panel-title">水槽</text>
+        </view>
+        <view class="panel-body">
+          <text class="panel-desc">清洗碗碟，保持厨房整洁</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onWashDishes">
+            <text class="panel-btn-text">洗碗 (清洁+5)</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 橱柜面板 -->
+      <block wx:elif="{{panelType === 'cabinet'}}">
+        <view class="panel-header cabinet-panel-header">
+          <text class="panel-emoji">🗄</text>
+          <text class="panel-title">橱柜</text>
+        </view>
+        <view class="panel-body">
+          <text class="panel-desc">整理调味料和厨具可以获得金币</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onOrganizeCabinet">
+            <text class="panel-btn-text">整理橱柜 (+3G)</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 电视面板 -->
+      <block wx:elif="{{panelType === 'tv'}}">
+        <view class="panel-header tv-panel-header">
+          <text class="panel-emoji">📺</text>
+          <text class="panel-title">电视</text>
+        </view>
+        <view class="panel-body">
+          <block wx:if="{{tvPlaying}}">
+            <view class="tv-playing-area">
+              <text class="tv-playing-text">{{tvCurrent.emoji}} 正在播放：{{tvCurrent.name}}</text>
+              <view class="tv-anim">
+                <view class="tv-bar tv-bar-1"></view>
+                <view class="tv-bar tv-bar-2"></view>
+                <view class="tv-bar tv-bar-3"></view>
+              </view>
+            </view>
+          </block>
+          <block wx:else>
+            <text class="panel-desc">选择节目观看（消耗精力）</text>
+            <view class="recipe-list">
+              <view class="recipe-item" wx:for="{{tvShows}}" wx:key="name"
+                data-idx="{{index}}" bindtap="onSelectShow">
+                <text class="recipe-emoji">{{item.emoji}}</text>
+                <view class="recipe-info">
+                  <text class="recipe-name">{{item.name}}</text>
+                  <text class="recipe-effect">心情+{{item.mood}} 精力-5</text>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 沙发面板 -->
+      <block wx:elif="{{panelType === 'sofa'}}">
+        <view class="panel-header sofa-panel-header">
+          <text class="panel-emoji">🛋</text>
+          <text class="panel-title">沙发</text>
+        </view>
+        <view class="panel-body">
+          <text class="panel-desc">坐下来休息一会儿恢复精力</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onSitSofa">
+            <text class="panel-btn-text">休息 (精力+10)</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 茶几面板 -->
+      <block wx:elif="{{panelType === 'table'}}">
+        <view class="panel-header table-panel-header">
+          <text class="panel-emoji">☕</text>
+          <text class="panel-title">茶几</text>
+        </view>
+        <view class="panel-body">
+          <text class="panel-desc" wx:if="{{!hasTea}}">泡一杯茶放松心情（2G）</text>
+          <text class="panel-desc" wx:else>桌上有一杯热茶</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" wx:if="{{!hasTea}}" bindtap="onMakeTea">
+            <text class="panel-btn-text">泡茶 (2G)</text>
+          </view>
+          <view class="panel-btn panel-btn-primary" wx:if="{{hasTea}}" bindtap="onDrinkTea">
+            <text class="panel-btn-text">喝茶</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 盆栽面板 -->
+      <block wx:elif="{{panelType === 'plant'}}">
+        <view class="panel-header plant-panel-header">
+          <text class="panel-emoji">🌱</text>
+          <text class="panel-title">盆栽</text>
+        </view>
+        <view class="panel-body">
+          <view class="panel-info-row">
+            <text class="panel-info-label">成长次数</text>
+            <text class="panel-info-val">{{plantGrowth}} 次</text>
+          </view>
+          <text class="panel-desc">每天浇水让植物成长，获得金币和好心情</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onWaterPlant">
+            <text class="panel-btn-text">{{plantWatered ? '已浇水' : '浇水'}}</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 床/闹钟面板 -->
+      <block wx:elif="{{panelType === 'bed'}}">
+        <view class="panel-header bed-panel-header">
+          <text class="panel-emoji">🛏</text>
+          <text class="panel-title">床 / 闹钟</text>
+        </view>
+        <view class="panel-body">
+          <block wx:if="{{isSleeping}}">
+            <view class="sleeping-area">
+              <text class="sleep-emoji">💤</text>
+              <text class="sleep-text">正在睡觉...{{sleepCountdown}}</text>
+            </view>
+          </block>
+          <block wx:else>
+            <!-- 闹钟设置 -->
+            <view class="alarm-section">
+              <text class="alarm-section-title">设置闹钟</text>
+              <view class="alarm-picker-row">
+                <picker mode="selector" range="{{['00','01','02','03','04','05','06','07','08','09','10','11','12','13','14','15','16','17','18','19','20','21','22','23']}}" value="{{alarmHour}}" bindchange="onAlarmHourChange">
+                  <view class="alarm-picker-box">
+                    <text class="alarm-picker-val">{{alarmHour}}</text>
+                  </view>
+                </picker>
+                <text class="alarm-colon">:</text>
+                <picker mode="selector" range="{{['00','05','10','15','20','25','30','35','40','45','50','55']}}" value="{{alarmMinute}}" bindchange="onAlarmMinuteChange">
+                  <view class="alarm-picker-box">
+                    <text class="alarm-picker-val">{{alarmMinute}}</text>
+                  </view>
+                </picker>
+                <view class="alarm-set-btn" bindtap="onSetAlarm">
+                  <text class="alarm-set-text">设定</text>
+                </view>
+                <view class="alarm-cancel-btn" wx:if="{{alarmSet}}" bindtap="onCancelAlarm">
+                  <text class="alarm-cancel-text">取消</text>
+                </view>
+              </view>
+              <text class="alarm-status" wx:if="{{alarmSet}}">闹钟：{{alarmTime}} 已设定</text>
+            </view>
+            <view class="panel-divider"></view>
+            <text class="panel-desc">睡觉恢复精力（精力+50）</text>
+          </block>
+        </view>
+        <view class="panel-actions" wx:if="{{!isSleeping}}">
+          <view class="panel-btn panel-btn-primary" bindtap="onSleep">
+            <text class="panel-btn-text">睡觉 (精力+50)</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 衣柜面板 -->
+      <block wx:elif="{{panelType === 'wardrobe'}}">
+        <view class="panel-header wardrobe-panel-header">
+          <text class="panel-emoji">👔</text>
+          <text class="panel-title">衣柜</text>
+        </view>
+        <view class="panel-body">
+          <text class="panel-desc">换件衣服，焕然一新</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onChangeClothes">
+            <text class="panel-btn-text">换衣服 (心情+10)</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 书桌面板 -->
+      <block wx:elif="{{panelType === 'desk'}}">
+        <view class="panel-header desk-panel-header">
+          <text class="panel-emoji">📚</text>
+          <text class="panel-title">书桌 - 学习</text>
+        </view>
+        <view class="panel-body">
+          <block wx:if="{{isStudying}}">
+            <view class="cooking-progress-area">
+              <text class="cooking-name">专注学习中...</text>
+              <view class="progress-track">
+                <view class="progress-fill study-progress-fill" style="width:{{studyProgress}}%"></view>
+              </view>
+              <text class="cooking-pct">{{studyProgress}}%</text>
+            </view>
+          </block>
+          <block wx:else>
+            <text class="panel-desc">学习获得经验和金币（消耗精力15）</text>
+          </block>
+        </view>
+        <view class="panel-actions" wx:if="{{!isStudying}}">
+          <view class="panel-btn panel-btn-primary" bindtap="onStudy">
+            <text class="panel-btn-text">学习 (+20EXP +10G)</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 淋浴面板 -->
+      <block wx:elif="{{panelType === 'shower'}}">
+        <view class="panel-header shower-panel-header">
+          <text class="panel-emoji">🚿</text>
+          <text class="panel-title">淋浴</text>
+        </view>
+        <view class="panel-body">
+          <block wx:if="{{isShowering}}">
+            <view class="cooking-progress-area">
+              <text class="cooking-name">洗澡中...</text>
+              <view class="progress-track">
+                <view class="progress-fill shower-progress-fill" style="width:{{showerProgress}}%"></view>
+              </view>
+              <text class="cooking-pct">{{showerProgress}}%</text>
+            </view>
+          </block>
+          <block wx:else>
+            <text class="panel-desc">洗个热水澡大幅恢复清洁度</text>
+          </block>
+        </view>
+        <view class="panel-actions" wx:if="{{!isShowering}}">
+          <view class="panel-btn panel-btn-primary" bindtap="onShower">
+            <text class="panel-btn-text">洗澡 (清洁+40)</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 马桶面板 -->
+      <block wx:elif="{{panelType === 'toilet'}}">
+        <view class="panel-header toilet-panel-header">
+          <text class="panel-emoji">🚽</text>
+          <text class="panel-title">马桶</text>
+        </view>
+        <view class="panel-body">
+          <text class="panel-desc">...有些事不用多说</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onUseToilet">
+            <text class="panel-btn-text">使用</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 洗手台面板 -->
+      <block wx:elif="{{panelType === 'basin'}}">
+        <view class="panel-header basin-panel-header">
+          <text class="panel-emoji">🪥</text>
+          <text class="panel-title">洗手台</text>
+        </view>
+        <view class="panel-body">
+          <text class="panel-desc">保持卫生好习惯</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onWashHands">
+            <text class="panel-btn-text">洗手 (清洁+10)</text>
+          </view>
+          <view class="panel-btn panel-btn-primary" bindtap="onBrushTeeth">
+            <text class="panel-btn-text">刷牙 (清洁+15)</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 大门面板 -->
+      <block wx:elif="{{panelType === 'door'}}">
+        <view class="panel-header door-panel-header">
+          <text class="panel-emoji">🚪</text>
+          <text class="panel-title">大门</text>
+        </view>
+        <view class="panel-body">
+          <text class="panel-desc">出门逛逛赚金币（需要精力20）</text>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onGoOut">
+            <text class="panel-btn-text">出门 (+15G +10心情)</text>
+          </view>
+          <view class="panel-btn" bindtap="onGoFridge">
+            <text class="panel-btn-text">检查冰箱</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
+      <!-- 小狗互动面板 -->
+      <block wx:elif="{{panelType === 'dog'}}">
+        <view class="panel-header dog-panel-header">
+          <text class="panel-emoji">🐕</text>
+          <text class="panel-title">{{dogName}}</text>
+        </view>
+        <view class="panel-body">
+          <!-- 小狗状态 -->
+          <view class="dog-stats">
+            <view class="stat-bar-item">
+              <text class="stat-icon">🍖</text>
+              <view class="stat-bar-track">
+                <view class="stat-bar-fill hunger-fill" style="width:{{dogHunger}}%"></view>
+              </view>
+              <text class="stat-val">{{dogHunger}}</text>
+            </view>
+            <view class="stat-bar-item">
+              <text class="stat-icon">❤️</text>
+              <view class="stat-bar-track">
+                <view class="stat-bar-fill mood-fill" style="width:{{dogMood}}%"></view>
+              </view>
+              <text class="stat-val">{{dogMood}}</text>
+            </view>
+            <view class="stat-bar-item">
+              <text class="stat-icon">🫧</text>
+              <view class="stat-bar-track">
+                <view class="stat-bar-fill hygiene-fill" style="width:{{dogClean}}%"></view>
+              </view>
+              <text class="stat-val">{{dogClean}}</text>
+            </view>
+          </view>
+          <view class="panel-info-row">
+            <text class="panel-info-label">互动次数</text>
+            <text class="panel-info-val">{{dogTricks}} 次</text>
+          </view>
+        </view>
+        <view class="panel-actions dog-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onFeedDog">
+            <text class="panel-btn-text">喂食(5G)</text>
+          </view>
+          <view class="panel-btn panel-btn-primary" bindtap="onPetDog">
+            <text class="panel-btn-text">抚摸</text>
+          </view>
+          <view class="panel-btn panel-btn-primary" bindtap="onPlayDog">
+            <text class="panel-btn-text">玩耍</text>
+          </view>
+          <view class="panel-btn panel-btn-primary" bindtap="onWashDog">
+            <text class="panel-btn-text">洗澡</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
     </view>
   </view>
 
-  <!-- ===== 底部提示 ===== -->
+  <!-- ===== 浮动提示 ===== -->
+  <view class="game-toast {{showToast ? 'toast-show' : ''}}">
+    <text class="toast-icon">{{toastIcon}}</text>
+    <text class="toast-text">{{toastText}}</text>
+  </view>
+
+  <!-- 底部 -->
   <view class="home-footer">
-    <text class="footer-hint">✦ 点击家具，小人会走过去 ✦</text>
-    <text class="footer-sub">试试和每个家具互动吧</text>
+    <text class="footer-hint">点击家具互动 | 点击小狗玩耍</text>
+    <text class="footer-sub">经营你的像素之家</text>
   </view>
 
   <view style="height: 60rpx;"></view>
