@@ -1,4 +1,4 @@
-<!-- 像素之家 - 俯视图 -->
+<!-- 像素之家 - 真实俯视图 -->
 <scroll-view scroll-y class="home-wrap">
 
   <!-- ===== 顶部问候 ===== -->
@@ -10,7 +10,6 @@
         <text class="greeting-sub">欢迎回家</text>
       </view>
     </view>
-    <!-- 快速统计 -->
     <view class="home-mini-stats">
       <view class="mini-stat">
         <text class="mini-stat-num">{{totalCount}}</text>
@@ -43,8 +42,19 @@
       <view class="roof-pixel roof-p4"></view>
     </view>
 
-    <!-- ===== 房间布局 ===== -->
+    <!-- ===== 房间布局（使用绝对定位放置家具） ===== -->
     <view class="house-body">
+
+      <!-- 小人 -->
+      <view class="character" style="left:{{charX}}rpx; top:{{charY}}rpx; {{charWalking ? '' : ''}}">
+        <view class="char-body {{charWalking ? 'char-walking' : ''}} char-dir-{{charDir}}">
+          <view class="char-head"></view>
+          <view class="char-torso"></view>
+          <view class="char-leg char-leg-l"></view>
+          <view class="char-leg char-leg-r"></view>
+        </view>
+        <view class="char-shadow"></view>
+      </view>
 
       <!-- 北墙装饰 -->
       <view class="wall-north">
@@ -65,110 +75,145 @@
         <!-- 厨房 -->
         <view class="room kitchen-room">
           <view class="room-label kitchen-label">
-            <text class="room-label-icon">🍳</text>
             <text class="room-label-text">厨房</text>
           </view>
           <view class="room-floor kitchen-floor">
-            <!-- 冰箱（有功能，高亮） -->
-            <view
-              class="furniture-item furniture-fridge {{activeFurniture === 'fridge' ? 'furniture-active' : ''}}"
-              bindtap="onFridgeTap"
-            >
-              <view class="furniture-glow"></view>
-              <text class="furniture-emoji">🧊</text>
-              <text class="furniture-name">冰箱</text>
-              <view class="furniture-badge">
-                <text class="badge-num">{{totalCount}}</text>
+
+            <!-- 冰箱 - 俯视图：长方形，带把手 -->
+            <view class="furn-pos furn-fridge-pos"
+              data-id="fridge" data-x="30" data-y="100"
+              bindtap="onFurnitureTap">
+              <view class="topdown-fridge {{activeFurniture === 'fridge' ? 'furn-active' : ''}}">
+                <view class="fridge-top"></view>
+                <view class="fridge-bottom"></view>
+                <view class="fridge-handle"></view>
+                <view class="fridge-handle fridge-handle-b"></view>
+                <view class="furniture-badge" wx:if="{{totalCount > 0}}">
+                  <text class="badge-num">{{totalCount}}</text>
+                </view>
               </view>
+              <text class="furn-label">冰箱</text>
             </view>
 
-            <!-- 灶台（待开放） -->
-            <view
-              class="furniture-item furniture-coming"
-              data-id="stove"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🍳</text>
-              <text class="furniture-name">灶台</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 灶台 - 俯视图：方形，4个圆形炉灶 -->
+            <view class="furn-pos furn-stove-pos"
+              data-id="stove" data-x="160" data-y="80"
+              bindtap="onFurnitureTap">
+              <view class="topdown-stove {{activeFurniture === 'stove' ? 'furn-active' : ''}}">
+                <view class="stove-burner stove-b1"></view>
+                <view class="stove-burner stove-b2"></view>
+                <view class="stove-burner stove-b3"></view>
+                <view class="stove-burner stove-b4"></view>
+                <view class="stove-knobs">
+                  <view class="stove-knob"></view>
+                  <view class="stove-knob"></view>
+                  <view class="stove-knob"></view>
+                  <view class="stove-knob"></view>
+                </view>
+              </view>
+              <text class="furn-label">灶台</text>
             </view>
 
-            <!-- 水槽 -->
-            <view
-              class="furniture-item furniture-coming"
-              data-id="sink"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🚿</text>
-              <text class="furniture-name">水槽</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 水槽 - 俯视图：椭圆盆+水龙头 -->
+            <view class="furn-pos furn-sink-pos"
+              data-id="sink" data-x="160" data-y="180"
+              bindtap="onFurnitureTap">
+              <view class="topdown-sink {{activeFurniture === 'sink' ? 'furn-active' : ''}}">
+                <view class="sink-basin"></view>
+                <view class="sink-drain"></view>
+                <view class="sink-faucet"></view>
+              </view>
+              <text class="furn-label">水槽</text>
             </view>
 
-            <!-- 橱柜 -->
-            <view
-              class="furniture-item furniture-coming"
-              data-id="cabinet"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🗄️</text>
-              <text class="furniture-name">橱柜</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 橱柜 - 俯视图：长条矩形，带门缝 -->
+            <view class="furn-pos furn-cabinet-pos"
+              data-id="cabinet" data-x="30" data-y="210"
+              bindtap="onFurnitureTap">
+              <view class="topdown-cabinet {{activeFurniture === 'cabinet' ? 'furn-active' : ''}}">
+                <view class="cabinet-door"></view>
+                <view class="cabinet-door"></view>
+                <view class="cabinet-door"></view>
+                <view class="cabinet-knob c-k1"></view>
+                <view class="cabinet-knob c-k2"></view>
+                <view class="cabinet-knob c-k3"></view>
+              </view>
+              <text class="furn-label">橱柜</text>
             </view>
+
           </view>
         </view>
 
         <!-- 竖向隔墙 -->
         <view class="wall-vert">
           <view class="door-opening-h">
-            <view class="door-frame-h">
-              <text class="door-emoji-h">🚪</text>
-            </view>
+            <view class="door-frame-h"></view>
           </view>
         </view>
 
         <!-- 客厅 -->
         <view class="room living-room">
           <view class="room-label living-label">
-            <text class="room-label-icon">🛋️</text>
             <text class="room-label-text">客厅</text>
           </view>
           <view class="room-floor living-floor">
-            <!-- 电视 -->
-            <view
-              class="furniture-item furniture-coming furniture-wide"
-              data-id="tv"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">📺</text>
-              <text class="furniture-name">电视</text>
-              <text class="coming-soon-tag">Soon</text>
+
+            <!-- 电视+电视柜 - 俯视图：窄长条靠墙 -->
+            <view class="furn-pos furn-tv-pos"
+              data-id="tv" data-x="380" data-y="75"
+              bindtap="onFurnitureTap">
+              <view class="topdown-tv {{activeFurniture === 'tv' ? 'furn-active' : ''}}">
+                <view class="tv-screen"></view>
+                <view class="tv-stand"></view>
+              </view>
+              <text class="furn-label">电视</text>
             </view>
 
-            <!-- 沙发 -->
-            <view
-              class="furniture-item furniture-coming furniture-wide"
-              data-id="sofa"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🛋️</text>
-              <text class="furniture-name">沙发</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 沙发 - 俯视图：U型/L型 -->
+            <view class="furn-pos furn-sofa-pos"
+              data-id="sofa" data-x="370" data-y="170"
+              bindtap="onFurnitureTap">
+              <view class="topdown-sofa {{activeFurniture === 'sofa' ? 'furn-active' : ''}}">
+                <view class="sofa-back"></view>
+                <view class="sofa-seat"></view>
+                <view class="sofa-arm sofa-arm-l"></view>
+                <view class="sofa-arm sofa-arm-r"></view>
+                <view class="sofa-cushion s-c1"></view>
+                <view class="sofa-cushion s-c2"></view>
+                <view class="sofa-cushion s-c3"></view>
+              </view>
+              <text class="furn-label">沙发</text>
             </view>
 
-            <!-- 盆栽 -->
-            <view
-              class="furniture-item furniture-coming"
-              data-id="plant"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🪴</text>
-              <text class="furniture-name">盆栽</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 茶几 - 俯视图：小方形 -->
+            <view class="furn-pos furn-table-pos"
+              data-id="table" data-x="430" data-y="165"
+              bindtap="onFurnitureTap">
+              <view class="topdown-table {{activeFurniture === 'table' ? 'furn-active' : ''}}">
+                <view class="table-top"></view>
+                <view class="table-cup"></view>
+              </view>
+              <text class="furn-label">茶几</text>
             </view>
+
+            <!-- 盆栽 - 俯视图：圆形叶片 -->
+            <view class="furn-pos furn-plant-pos"
+              data-id="plant" data-x="520" data-y="90"
+              bindtap="onFurnitureTap">
+              <view class="topdown-plant {{activeFurniture === 'plant' ? 'furn-active' : ''}}">
+                <view class="plant-leaf plant-l1"></view>
+                <view class="plant-leaf plant-l2"></view>
+                <view class="plant-leaf plant-l3"></view>
+                <view class="plant-leaf plant-l4"></view>
+                <view class="plant-pot"></view>
+              </view>
+              <text class="furn-label">盆栽</text>
+            </view>
+
           </view>
         </view>
 
-      </view><!-- end floor-row -->
+      </view>
 
       <!-- 走廊 -->
       <view class="hallway">
@@ -190,115 +235,149 @@
         <!-- 卧室 -->
         <view class="room bedroom">
           <view class="room-label bedroom-label">
-            <text class="room-label-icon">🛏️</text>
             <text class="room-label-text">卧室</text>
           </view>
           <view class="room-floor bedroom-floor">
-            <!-- 床 -->
-            <view
-              class="furniture-item furniture-coming furniture-wide"
-              data-id="bed"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🛏️</text>
-              <text class="furniture-name">床</text>
-              <text class="coming-soon-tag">Soon</text>
+
+            <!-- 床 - 俯视图：长方形+枕头+被子 -->
+            <view class="furn-pos furn-bed-pos"
+              data-id="bed" data-x="40" data-y="395"
+              bindtap="onFurnitureTap">
+              <view class="topdown-bed {{activeFurniture === 'bed' ? 'furn-active' : ''}}">
+                <view class="bed-frame"></view>
+                <view class="bed-pillow bed-p1"></view>
+                <view class="bed-pillow bed-p2"></view>
+                <view class="bed-blanket"></view>
+              </view>
+              <text class="furn-label">床</text>
             </view>
 
-            <!-- 衣柜 -->
-            <view
-              class="furniture-item furniture-coming"
-              data-id="wardrobe"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">👔</text>
-              <text class="furniture-name">衣柜</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 衣柜 - 俯视图：双开门矩形 -->
+            <view class="furn-pos furn-wardrobe-pos"
+              data-id="wardrobe" data-x="185" data-y="380"
+              bindtap="onFurnitureTap">
+              <view class="topdown-wardrobe {{activeFurniture === 'wardrobe' ? 'furn-active' : ''}}">
+                <view class="wardrobe-door wd-l"></view>
+                <view class="wardrobe-door wd-r"></view>
+                <view class="wardrobe-knob wk-l"></view>
+                <view class="wardrobe-knob wk-r"></view>
+                <view class="wardrobe-mirror"></view>
+              </view>
+              <text class="furn-label">衣柜</text>
             </view>
 
-            <!-- 书桌 -->
-            <view
-              class="furniture-item furniture-coming furniture-wide"
-              data-id="desk"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">💻</text>
-              <text class="furniture-name">书桌</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 书桌 - 俯视图：桌面+台灯+书本 -->
+            <view class="furn-pos furn-desk-pos"
+              data-id="desk" data-x="40" data-y="500"
+              bindtap="onFurnitureTap">
+              <view class="topdown-desk {{activeFurniture === 'desk' ? 'furn-active' : ''}}">
+                <view class="desk-surface"></view>
+                <view class="desk-lamp"></view>
+                <view class="desk-book"></view>
+                <view class="desk-chair"></view>
+              </view>
+              <text class="furn-label">书桌</text>
             </view>
+
           </view>
         </view>
 
         <!-- 竖向隔墙 -->
         <view class="wall-vert">
           <view class="door-opening-h">
-            <view class="door-frame-h">
-              <text class="door-emoji-h">🚪</text>
-            </view>
+            <view class="door-frame-h"></view>
           </view>
         </view>
 
         <!-- 卫生间 -->
         <view class="room bathroom">
           <view class="room-label bathroom-label">
-            <text class="room-label-icon">🚿</text>
             <text class="room-label-text">卫生间</text>
           </view>
           <view class="room-floor bathroom-floor">
-            <!-- 淋浴 -->
-            <view
-              class="furniture-item furniture-coming"
-              data-id="shower"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🚿</text>
-              <text class="furniture-name">淋浴</text>
-              <text class="coming-soon-tag">Soon</text>
+
+            <!-- 淋浴 - 俯视图：方形+花洒圆 -->
+            <view class="furn-pos furn-shower-pos"
+              data-id="shower" data-x="370" data-y="395"
+              bindtap="onFurnitureTap">
+              <view class="topdown-shower {{activeFurniture === 'shower' ? 'furn-active' : ''}}">
+                <view class="shower-base"></view>
+                <view class="shower-head"></view>
+                <view class="shower-water w1"></view>
+                <view class="shower-water w2"></view>
+                <view class="shower-water w3"></view>
+                <view class="shower-drain"></view>
+              </view>
+              <text class="furn-label">淋浴</text>
             </view>
 
-            <!-- 马桶 -->
-            <view
-              class="furniture-item furniture-coming"
-              data-id="toilet"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🚽</text>
-              <text class="furniture-name">马桶</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 马桶 - 俯视图：椭圆坐圈+水箱 -->
+            <view class="furn-pos furn-toilet-pos"
+              data-id="toilet" data-x="490" data-y="390"
+              bindtap="onFurnitureTap">
+              <view class="topdown-toilet {{activeFurniture === 'toilet' ? 'furn-active' : ''}}">
+                <view class="toilet-tank"></view>
+                <view class="toilet-seat"></view>
+                <view class="toilet-lid"></view>
+                <view class="toilet-hole"></view>
+              </view>
+              <text class="furn-label">马桶</text>
             </view>
 
-            <!-- 镜子 -->
-            <view
-              class="furniture-item furniture-coming"
-              data-id="mirror"
-              bindtap="onFurnitureTap"
-            >
-              <text class="furniture-emoji">🪞</text>
-              <text class="furniture-name">镜子</text>
-              <text class="coming-soon-tag">Soon</text>
+            <!-- 洗手台 - 俯视图：半圆盆+镜子 -->
+            <view class="furn-pos furn-basin-pos"
+              data-id="basin" data-x="420" data-y="500"
+              bindtap="onFurnitureTap">
+              <view class="topdown-basin {{activeFurniture === 'basin' ? 'furn-active' : ''}}">
+                <view class="basin-counter"></view>
+                <view class="basin-bowl"></view>
+                <view class="basin-faucet"></view>
+                <view class="basin-mirror"></view>
+              </view>
+              <text class="furn-label">洗手台</text>
             </view>
+
           </view>
         </view>
 
-      </view><!-- end floor-row -->
+      </view>
 
       <!-- 南墙 + 大门 -->
       <view class="wall-south">
         <view class="wall-gap"></view>
-        <view class="main-door-frame" data-id="door" bindtap="onFurnitureTap">
-          <text class="main-door-emoji">🚪</text>
+        <view class="main-door-frame" data-id="door" data-x="280" data-y="590" bindtap="onFurnitureTap">
+          <view class="door-topdown">
+            <view class="door-panel"></view>
+            <view class="door-knob"></view>
+          </view>
           <text class="main-door-label">大门</text>
         </view>
         <view class="wall-gap"></view>
       </view>
 
-    </view><!-- end house-body -->
-  </view><!-- end house-container -->
+    </view>
+  </view>
+
+  <!-- 互动弹窗 -->
+  <view class="action-modal {{showModal ? 'modal-show' : ''}}" bindtap="onCloseModal">
+    <view class="modal-content" catchtap="">
+      <text class="modal-title">{{modalTitle}}</text>
+      <text class="modal-desc">{{modalDesc}}</text>
+      <view class="modal-actions">
+        <view class="modal-btn modal-btn-primary" wx:if="{{modalAction}}" bindtap="onModalAction">
+          <text class="modal-btn-text">{{modalBtnText}}</text>
+        </view>
+        <view class="modal-btn" bindtap="onCloseModal">
+          <text class="modal-btn-text">关闭</text>
+        </view>
+      </view>
+    </view>
+  </view>
 
   <!-- ===== 底部提示 ===== -->
   <view class="home-footer">
-    <text class="footer-hint">✦ 点击家具开始管理 ✦</text>
-    <text class="footer-sub">冰箱管理已上线，更多功能即将推出</text>
+    <text class="footer-hint">✦ 点击家具，小人会走过去 ✦</text>
+    <text class="footer-sub">试试和每个家具互动吧</text>
   </view>
 
   <view style="height: 60rpx;"></view>
