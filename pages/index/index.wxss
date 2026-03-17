@@ -1,4 +1,4 @@
-/* ===== 主页 - 清爽像素风 ===== */
+/* ===== 主页 - 清爽像素风 + 丰富动效 ===== */
 .page-wrap {
   min-height: 100vh;
   background: #f0fdf8;
@@ -33,6 +33,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: headerPulse 3s ease-in-out infinite;
+}
+@keyframes headerPulse {
+  0%, 100% { box-shadow: 4px 4px 0 #14b8a6; }
+  50% { box-shadow: 6px 6px 0 #0d9488; }
 }
 .header-fridge-icon { font-size: 50rpx; }
 
@@ -54,6 +59,26 @@
   box-shadow: 6px 6px 0 #1e293b;
   position: relative;
   flex-shrink: 0;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  animation: fridgeIdle 4s ease-in-out infinite;
+}
+@keyframes fridgeIdle {
+  0%, 100% { box-shadow: 6px 6px 0 #1e293b; }
+  50% { box-shadow: 8px 8px 0 #14b8a6; }
+}
+.fridge-body:active {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 #1e293b;
+}
+.fridge-body.door-opening {
+  animation: doorOpenShake 0.3s ease-out forwards;
+}
+@keyframes doorOpenShake {
+  0%   { transform: translateX(0) rotate(0deg); }
+  25%  { transform: translateX(-6rpx) rotate(-0.5deg); }
+  50%  { transform: translateX(4rpx) rotate(0.5deg); }
+  75%  { transform: translateX(-3rpx) rotate(-0.3deg); }
+  100% { transform: translateX(0) rotate(0deg); }
 }
 
 /* 顶部品牌栏 */
@@ -156,13 +181,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  animation: freezePulse 2s ease-in-out infinite;
+}
+@keyframes freezePulse {
+  0%, 100% { background: #dbeafe; }
+  50% { background: #bfdbfe; }
 }
 .freeze-emoji { font-size: 32rpx; }
 
 /* 空状态 */
-.zone-empty {
-  padding: 10rpx 0;
-}
+.zone-empty { padding: 10rpx 0; }
 .zone-empty-text {
   font-size: 20rpx;
   color: #94a3b8;
@@ -213,7 +241,9 @@
   align-items: center;
   justify-content: center;
   position: relative;
+  transition: transform 0.1s ease;
 }
+.preview-cell:active { transform: scale(0.9); }
 .preview-emoji { font-size: 40rpx; }
 .freshness-dot {
   position: absolute;
@@ -264,6 +294,26 @@
   box-shadow: 2px 2px 0 #1e293b;
 }
 
+/* 点击打开提示 */
+.fridge-tap-hint {
+  background: #14b8a6;
+  border-top: 2px solid #1e293b;
+  padding: 8rpx 0;
+  text-align: center;
+}
+.tap-hint-text {
+  font-size: 18rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 1rpx;
+  animation: hintBlink 2s ease-in-out infinite;
+}
+@keyframes hintBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
 /* 冰箱旁装饰 */
 .fridge-deco {
   display: flex;
@@ -272,7 +322,17 @@
   gap: 16rpx;
   padding-top: 30rpx;
 }
-.deco-sticker { font-size: 30rpx; opacity: 0.7; }
+.deco-sticker {
+  font-size: 30rpx;
+  opacity: 0.7;
+  animation: decoFloat 3s ease-in-out infinite;
+}
+.deco-sticker:nth-child(2) { animation-delay: 1s; }
+.deco-sticker:nth-child(3) { animation-delay: 2s; }
+@keyframes decoFloat {
+  0%, 100% { transform: translateY(0); opacity: 0.7; }
+  50% { transform: translateY(-6rpx); opacity: 1; }
+}
 
 /* 保鲜点颜色 */
 .dot-fresh   { background: #10b981; border: 2px solid #065f46; }
@@ -296,6 +356,11 @@
   flex-direction: column;
   align-items: center;
   gap: 4rpx;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.stat-card:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #1e293b;
 }
 .stat-total { box-shadow: 4px 4px 0 #14b8a6; }
 .stat-soon  { box-shadow: 4px 4px 0 #f59e0b; }
@@ -338,11 +403,22 @@
   box-shadow: 3px 3px 0 #e2e8f0;
   white-space: nowrap;
   min-width: 78rpx;
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+.cat-chip:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 #e2e8f0;
 }
 .cat-chip.cat-chip-active {
   background: #14b8a6;
   border-color: #1e293b;
   box-shadow: 3px 3px 0 #1e293b;
+  animation: chipPop 0.25s ease-out;
+}
+@keyframes chipPop {
+  0% { transform: scale(0.9); }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); }
 }
 .cat-chip-icon { font-size: 28rpx; }
 .cat-chip-name {
@@ -364,7 +440,14 @@
   padding: 80rpx 0;
   gap: 12rpx;
 }
-.empty-illus { font-size: 80rpx; }
+.empty-illus {
+  font-size: 80rpx;
+  animation: emptyBob 2s ease-in-out infinite;
+}
+@keyframes emptyBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10rpx); }
+}
 .empty-msg {
   font-size: 28rpx;
   color: #475569;
@@ -382,6 +465,7 @@
   border: 3px solid #1e293b;
   box-shadow: 4px 4px 0 #1e293b;
   padding: 18rpx 48rpx;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 .add-first-btn:active {
   box-shadow: 1px 1px 0 #1e293b;
@@ -410,6 +494,7 @@
   position: relative;
   overflow: hidden;
   padding-bottom: 20rpx;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .item-card:active {
   box-shadow: 2px 2px 0 #1e293b;
@@ -444,7 +529,9 @@
 .card-icon {
   font-size: 76rpx;
   margin-bottom: 10rpx;
+  transition: transform 0.2s ease;
 }
+.item-card:active .card-icon { transform: scale(0.9); }
 .card-name {
   font-size: 26rpx;
   color: #1e293b;
@@ -492,5 +579,415 @@
   color: #fb7185;
   font-family: 'Courier New', monospace;
   font-weight: bold;
+  transition: transform 0.1s ease, background 0.1s ease;
 }
-.card-del-btn:active { background: #ffe4e6; }
+.card-del-btn:active {
+  background: #ffe4e6;
+  transform: scale(0.9);
+}
+
+
+/* ============================================================
+   大冰箱内部模态框
+   ============================================================ */
+.fridge-modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(15, 23, 42, 0.75);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.fridge-modal.fridge-modal-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.fridge-interior {
+  width: 100%;
+  background: linear-gradient(180deg, #e0f7f4 0%, #ccfbf1 40%, #d1fae5 100%);
+  border-top: 4px solid #1e293b;
+  border-left: 4px solid #1e293b;
+  border-right: 4px solid #1e293b;
+  box-shadow: 0 -6px 0 #0d9488;
+  max-height: 88vh;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 0;
+}
+.fridge-modal.fridge-modal-open .fridge-interior {
+  transform: translateY(0);
+}
+
+/* 冰箱内部顶部 */
+.fridge-int-header {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 24rpx 16rpx;
+  background: #0d9488;
+  border-bottom: 3px solid #1e293b;
+  gap: 16rpx;
+}
+.fridge-int-light {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+}
+.bulb-glow {
+  width: 20rpx;
+  height: 20rpx;
+  background: #fef08a;
+  border: 2px solid #eab308;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #fef08a;
+  animation: bulbFlicker 1.5s ease-in-out infinite;
+}
+@keyframes bulbFlicker {
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px #fef08a; }
+  50% { opacity: 0.85; box-shadow: 0 0 14px #fef08a; }
+}
+.bulb-label { font-size: 22rpx; }
+.fridge-int-title-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.fridge-int-brand {
+  font-size: 20rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+.fridge-int-temp {
+  font-size: 16rpx;
+  color: #ccfbf1;
+  font-family: 'Courier New', monospace;
+  margin-top: 2rpx;
+}
+.fridge-int-close {
+  width: 56rpx;
+  height: 56rpx;
+  background: rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease;
+}
+.fridge-int-close:active { background: rgba(255,255,255,0.4); }
+.close-icon {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* 温度条 */
+.temp-bar {
+  height: 8rpx;
+  background: #99f6e4;
+  position: relative;
+  overflow: hidden;
+}
+.temp-indicator {
+  height: 100%;
+  width: 40%;
+  background: linear-gradient(90deg, #14b8a6, transparent);
+  animation: tempScan 3s linear infinite;
+}
+@keyframes tempScan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}
+
+/* 冷冻/冷藏区 */
+.fridge-int-zone {
+  padding: 20rpx 20rpx 16rpx;
+}
+.freezer-zone {
+  background: linear-gradient(180deg, #dbeafe 0%, #eff6ff 100%);
+  border-bottom: 3px solid #93c5fd;
+}
+.main-zone {
+  background: linear-gradient(180deg, #d1fae5 0%, #ecfdf5 100%);
+}
+
+.zone-label-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  margin-bottom: 16rpx;
+}
+.zone-label-icon { font-size: 24rpx; }
+.zone-label-text {
+  flex: 1;
+  font-size: 22rpx;
+  color: #1e293b;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 1rpx;
+}
+.zone-item-count {
+  font-size: 18rpx;
+  color: #64748b;
+  font-family: 'Courier New', monospace;
+  background: rgba(255,255,255,0.7);
+  padding: 3rpx 10rpx;
+  border: 1px solid #e2e8f0;
+}
+
+/* 冰箱内物品格子 */
+.fridge-int-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+.int-item-cell {
+  width: 120rpx;
+  background: rgba(255,255,255,0.85);
+  border: 2px solid #1e293b;
+  box-shadow: 3px 3px 0 rgba(30,41,59,0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14rpx 8rpx 10rpx;
+  position: relative;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  gap: 4rpx;
+}
+.int-item-cell:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(30,41,59,0.4);
+}
+.int-item-frozen { border-color: #93c5fd; box-shadow: 3px 3px 0 #60a5fa; }
+.int-item-fresh  { border-color: #6ee7b7; box-shadow: 3px 3px 0 #34d399; }
+.int-item-emoji { font-size: 52rpx; line-height: 1.1; }
+.int-item-name {
+  font-size: 18rpx;
+  color: #1e293b;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+  font-weight: bold;
+  line-height: 1.2;
+}
+.int-item-dot {
+  width: 14rpx;
+  height: 14rpx;
+  border-radius: 0;
+  margin-top: 2rpx;
+}
+
+.int-empty {
+  width: 100%;
+  padding: 20rpx 0;
+  text-align: center;
+  font-size: 22rpx;
+  color: #94a3b8;
+  font-family: 'Courier New', monospace;
+}
+
+/* 冰箱内隔板 */
+.fridge-shelf-bar {
+  height: 20rpx;
+  background: #0d9488;
+  border-top: 3px solid #1e293b;
+  border-bottom: 3px solid #1e293b;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 40rpx;
+}
+.shelf-support {
+  width: 10rpx;
+  height: 10rpx;
+  background: #134e4a;
+  border: 1px solid #0f766e;
+}
+
+/* 冰箱底部按钮 */
+.fridge-int-footer {
+  padding: 20rpx 20rpx 32rpx;
+  background: #f0fdf4;
+  border-top: 3px solid #6ee7b7;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.int-add-btn {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  background: #14b8a6;
+  border: 3px solid #1e293b;
+  box-shadow: 4px 4px 0 #1e293b;
+  padding: 18rpx 36rpx;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+.int-add-btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 1px 1px 0 #1e293b;
+}
+.int-add-icon {
+  font-size: 30rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.int-add-text {
+  font-size: 26rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.fridge-int-drain {
+  display: flex;
+  gap: 8rpx;
+}
+.drain-hole {
+  width: 14rpx;
+  height: 14rpx;
+  background: #d1fae5;
+  border: 2px solid #6ee7b7;
+  border-radius: 50%;
+}
+
+
+/* ============================================================
+   蜘蛛吃食物动画
+   ============================================================ */
+.spider-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(10, 10, 20, 0.92);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.spider-overlay.spider-overlay-show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.spider-stage {
+  width: 400rpx;
+  height: 460rpx;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 背景蜘蛛网线 */
+.web-line {
+  position: absolute;
+  top: 0; left: 50%;
+  width: 2rpx;
+  background: linear-gradient(180deg, rgba(148,163,184,0.6) 0%, transparent 80%);
+  transform-origin: top center;
+}
+.web-line-1 { height: 180rpx; transform: rotate(-30deg); }
+.web-line-2 { height: 220rpx; transform: rotate(0deg); }
+.web-line-3 { height: 180rpx; transform: rotate(30deg); }
+
+/* 食物 */
+.spider-food-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14rpx;
+  transition: transform 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97), opacity 0.4s ease;
+  z-index: 2;
+}
+.spider-food-wrap.food-eating {
+  transform: scale(0.05) rotate(15deg);
+  opacity: 0;
+}
+.spider-food-emoji { font-size: 110rpx; }
+.spider-food-label {
+  color: #e2e8f0;
+  font-size: 28rpx;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+}
+
+/* 蜘蛛 */
+.spider-creature {
+  position: absolute;
+  font-size: 72rpx;
+  line-height: 1;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+}
+.spider-state-crawl {
+  animation: crawlFromCorner 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+.spider-state-eat {
+  transform: translate(-50%, -50%);
+  animation: spiderMunch 0.14s ease-in-out infinite alternate;
+}
+.spider-state-done {
+  transform: translate(-50%, -50%);
+  animation: spiderHappy 0.35s ease-in-out infinite alternate;
+}
+
+@keyframes crawlFromCorner {
+  0% {
+    transform: translate(170rpx, -200rpx) scale(0.25) rotate(40deg);
+    opacity: 0.4;
+    filter: blur(2px);
+  }
+  30% { opacity: 1; filter: blur(0); }
+  70% { transform: translate(10rpx, -60rpx) scale(0.85) rotate(5deg); }
+  100% {
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+@keyframes spiderMunch {
+  0%   { transform: translate(-50%, -50%) scale(1.0) rotate(-10deg); }
+  100% { transform: translate(-50%, -50%) scale(1.3) rotate(10deg); }
+}
+@keyframes spiderHappy {
+  0%   { transform: translate(-50%, -50%) scale(1.15) rotate(-5deg); }
+  100% { transform: translate(-50%, -50%) scale(0.95) rotate(5deg); }
+}
+
+/* 蜘蛛丝 */
+.spider-thread {
+  position: absolute;
+  top: -120rpx;
+  left: 50%;
+  width: 3rpx;
+  height: 120rpx;
+  background: linear-gradient(180deg, rgba(148,163,184,0.3) 0%, rgba(148,163,184,0.8) 100%);
+  transform: translateX(-50%);
+}
+
+/* 提示文字 */
+.spider-msg {
+  position: absolute;
+  bottom: 20rpx;
+  left: 0; right: 0;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 24rpx;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1rpx;
+  animation: msgFade 0.4s ease;
+}
+@keyframes msgFade {
+  from { opacity: 0; transform: translateY(6rpx); }
+  to { opacity: 1; transform: translateY(0); }
+}

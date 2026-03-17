@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/home/index",
     "pages/index/index",
     "pages/add/index",
     "pages/detail/index",
@@ -7,19 +8,19 @@
   ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#f0fdf8",
-    "navigationBarTitleText": "像素冰箱",
-    "navigationBarTextStyle": "black"
+    "navigationBarBackgroundColor": "#1e293b",
+    "navigationBarTitleText": "像素之家",
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
     "color": "#94a3b8",
     "selectedColor": "#14b8a6",
-    "backgroundColor": "#ffffff",
-    "borderStyle": "white",
+    "backgroundColor": "#1e293b",
+    "borderStyle": "black",
     "list": [
-      { "pagePath": "pages/index/index", "text": "冰箱" },
-      { "pagePath": "pages/add/index", "text": "添加" },
-      { "pagePath": "pages/settings/index", "text": "设置" }
+      { "pagePath": "pages/home/index", "text": "🏠 主页" },
+      { "pagePath": "pages/add/index", "text": "➕ 添加" },
+      { "pagePath": "pages/settings/index", "text": "⚙️ 设置" }
     ]
   },
   "style": "v2",

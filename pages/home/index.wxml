@@ -1,0 +1,305 @@
+<!-- 像素之家 - 俯视图 -->
+<scroll-view scroll-y class="home-wrap">
+
+  <!-- ===== 顶部问候 ===== -->
+  <view class="home-header">
+    <view class="home-greeting-row">
+      <text class="time-icon">{{timeIcon}}</text>
+      <view class="home-greeting-text">
+        <text class="greeting-main">{{greeting}}！</text>
+        <text class="greeting-sub">欢迎回家</text>
+      </view>
+    </view>
+    <!-- 快速统计 -->
+    <view class="home-mini-stats">
+      <view class="mini-stat">
+        <text class="mini-stat-num">{{totalCount}}</text>
+        <text class="mini-stat-lbl">食材</text>
+      </view>
+      <view class="mini-stat-divider"></view>
+      <view class="mini-stat">
+        <text class="mini-stat-num warn-num">{{expiringCount}}</text>
+        <text class="mini-stat-lbl">快过期</text>
+      </view>
+      <view wx:if="{{expiredCount > 0}}" class="mini-stat-divider"></view>
+      <view wx:if="{{expiredCount > 0}}" class="mini-stat">
+        <text class="mini-stat-num danger-num">{{expiredCount}}</text>
+        <text class="mini-stat-lbl">已过期</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- ===== 房子俯视图 ===== -->
+  <view class="house-container">
+
+    <!-- 屋顶装饰 -->
+    <view class="house-roof">
+      <view class="roof-pixel roof-p1"></view>
+      <view class="roof-pixel roof-p2"></view>
+      <view class="roof-main">
+        <text class="roof-title">✦ MY PIXEL HOME ✦</text>
+      </view>
+      <view class="roof-pixel roof-p3"></view>
+      <view class="roof-pixel roof-p4"></view>
+    </view>
+
+    <!-- ===== 房间布局 ===== -->
+    <view class="house-body">
+
+      <!-- 北墙装饰 -->
+      <view class="wall-north">
+        <view class="window-frame">
+          <view class="window-pane"></view>
+          <view class="window-pane"></view>
+        </view>
+        <view class="wall-gap"></view>
+        <view class="window-frame">
+          <view class="window-pane"></view>
+          <view class="window-pane"></view>
+        </view>
+      </view>
+
+      <!-- 上半部分: 厨房 + 客厅 -->
+      <view class="floor-row">
+
+        <!-- 厨房 -->
+        <view class="room kitchen-room">
+          <view class="room-label kitchen-label">
+            <text class="room-label-icon">🍳</text>
+            <text class="room-label-text">厨房</text>
+          </view>
+          <view class="room-floor kitchen-floor">
+            <!-- 冰箱（有功能，高亮） -->
+            <view
+              class="furniture-item furniture-fridge {{activeFurniture === 'fridge' ? 'furniture-active' : ''}}"
+              bindtap="onFridgeTap"
+            >
+              <view class="furniture-glow"></view>
+              <text class="furniture-emoji">🧊</text>
+              <text class="furniture-name">冰箱</text>
+              <view class="furniture-badge">
+                <text class="badge-num">{{totalCount}}</text>
+              </view>
+            </view>
+
+            <!-- 灶台（待开放） -->
+            <view
+              class="furniture-item furniture-coming"
+              data-id="stove"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🍳</text>
+              <text class="furniture-name">灶台</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+
+            <!-- 水槽 -->
+            <view
+              class="furniture-item furniture-coming"
+              data-id="sink"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🚿</text>
+              <text class="furniture-name">水槽</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+
+            <!-- 橱柜 -->
+            <view
+              class="furniture-item furniture-coming"
+              data-id="cabinet"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🗄️</text>
+              <text class="furniture-name">橱柜</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 竖向隔墙 -->
+        <view class="wall-vert">
+          <view class="door-opening-h">
+            <view class="door-frame-h">
+              <text class="door-emoji-h">🚪</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 客厅 -->
+        <view class="room living-room">
+          <view class="room-label living-label">
+            <text class="room-label-icon">🛋️</text>
+            <text class="room-label-text">客厅</text>
+          </view>
+          <view class="room-floor living-floor">
+            <!-- 电视 -->
+            <view
+              class="furniture-item furniture-coming furniture-wide"
+              data-id="tv"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">📺</text>
+              <text class="furniture-name">电视</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+
+            <!-- 沙发 -->
+            <view
+              class="furniture-item furniture-coming furniture-wide"
+              data-id="sofa"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🛋️</text>
+              <text class="furniture-name">沙发</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+
+            <!-- 盆栽 -->
+            <view
+              class="furniture-item furniture-coming"
+              data-id="plant"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🪴</text>
+              <text class="furniture-name">盆栽</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+          </view>
+        </view>
+
+      </view><!-- end floor-row -->
+
+      <!-- 走廊 -->
+      <view class="hallway">
+        <view class="hallway-floor">
+          <view class="floor-tile"></view>
+          <view class="floor-tile"></view>
+          <view class="floor-tile"></view>
+          <view class="floor-tile"></view>
+          <view class="floor-tile"></view>
+          <view class="floor-tile"></view>
+          <view class="floor-tile"></view>
+          <view class="floor-tile"></view>
+        </view>
+      </view>
+
+      <!-- 下半部分: 卧室 + 卫生间 -->
+      <view class="floor-row">
+
+        <!-- 卧室 -->
+        <view class="room bedroom">
+          <view class="room-label bedroom-label">
+            <text class="room-label-icon">🛏️</text>
+            <text class="room-label-text">卧室</text>
+          </view>
+          <view class="room-floor bedroom-floor">
+            <!-- 床 -->
+            <view
+              class="furniture-item furniture-coming furniture-wide"
+              data-id="bed"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🛏️</text>
+              <text class="furniture-name">床</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+
+            <!-- 衣柜 -->
+            <view
+              class="furniture-item furniture-coming"
+              data-id="wardrobe"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">👔</text>
+              <text class="furniture-name">衣柜</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+
+            <!-- 书桌 -->
+            <view
+              class="furniture-item furniture-coming furniture-wide"
+              data-id="desk"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">💻</text>
+              <text class="furniture-name">书桌</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 竖向隔墙 -->
+        <view class="wall-vert">
+          <view class="door-opening-h">
+            <view class="door-frame-h">
+              <text class="door-emoji-h">🚪</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- 卫生间 -->
+        <view class="room bathroom">
+          <view class="room-label bathroom-label">
+            <text class="room-label-icon">🚿</text>
+            <text class="room-label-text">卫生间</text>
+          </view>
+          <view class="room-floor bathroom-floor">
+            <!-- 淋浴 -->
+            <view
+              class="furniture-item furniture-coming"
+              data-id="shower"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🚿</text>
+              <text class="furniture-name">淋浴</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+
+            <!-- 马桶 -->
+            <view
+              class="furniture-item furniture-coming"
+              data-id="toilet"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🚽</text>
+              <text class="furniture-name">马桶</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+
+            <!-- 镜子 -->
+            <view
+              class="furniture-item furniture-coming"
+              data-id="mirror"
+              bindtap="onFurnitureTap"
+            >
+              <text class="furniture-emoji">🪞</text>
+              <text class="furniture-name">镜子</text>
+              <text class="coming-soon-tag">Soon</text>
+            </view>
+          </view>
+        </view>
+
+      </view><!-- end floor-row -->
+
+      <!-- 南墙 + 大门 -->
+      <view class="wall-south">
+        <view class="wall-gap"></view>
+        <view class="main-door-frame" data-id="door" bindtap="onFurnitureTap">
+          <text class="main-door-emoji">🚪</text>
+          <text class="main-door-label">大门</text>
+        </view>
+        <view class="wall-gap"></view>
+      </view>
+
+    </view><!-- end house-body -->
+  </view><!-- end house-container -->
+
+  <!-- ===== 底部提示 ===== -->
+  <view class="home-footer">
+    <text class="footer-hint">✦ 点击家具开始管理 ✦</text>
+    <text class="footer-sub">冰箱管理已上线，更多功能即将推出</text>
+  </view>
+
+  <view style="height: 60rpx;"></view>
+</scroll-view>

@@ -15,8 +15,8 @@
   <!-- ===== 像素艺术冰箱 ===== -->
   <view class="fridge-scene">
 
-    <!-- 冰箱主体 -->
-    <view class="fridge-body" bindtap="toggleFridge">
+    <!-- 冰箱主体（可点击打开） -->
+    <view class="fridge-body {{fridgeDoorOpening ? 'door-opening' : ''}}" bindtap="onFridgeTap">
 
       <!-- 品牌顶栏 -->
       <view class="fridge-top-bar">
@@ -99,6 +99,11 @@
       <view class="fridge-base">
         <view class="fridge-foot"></view>
         <view class="fridge-foot"></view>
+      </view>
+
+      <!-- 点击提示 -->
+      <view class="fridge-tap-hint">
+        <text class="tap-hint-text">点击打开冰箱 →</text>
       </view>
     </view>
 
@@ -190,6 +195,7 @@
           class="card-del-btn"
           data-id="{{item.id}}"
           data-name="{{item.name}}"
+          data-icon="{{item.icon}}"
           catchtap="onDeleteItem"
         >✕</view>
       </view>
@@ -198,3 +204,128 @@
 
   <view style="height: 50rpx;"></view>
 </scroll-view>
+
+<!-- ===== 大冰箱内部模态框 ===== -->
+<view class="fridge-modal {{fridgeModalOpen ? 'fridge-modal-open' : ''}}" bindtap="onCloseFridgeModal">
+  <view class="fridge-interior" catchtap="noop">
+
+    <!-- 顶部把手区 -->
+    <view class="fridge-int-header">
+      <view class="fridge-int-light">
+        <view class="bulb-glow"></view>
+        <text class="bulb-label">💡</text>
+      </view>
+      <view class="fridge-int-title-wrap">
+        <text class="fridge-int-brand">✦ PIXEL-COOL ✦</text>
+        <text class="fridge-int-temp">冷藏 4°C</text>
+      </view>
+      <view class="fridge-int-close" bindtap="onCloseFridgeModal">
+        <text class="close-icon">✕</text>
+      </view>
+    </view>
+
+    <!-- 温度条装饰 -->
+    <view class="temp-bar">
+      <view class="temp-indicator"></view>
+    </view>
+
+    <!-- ===== 冷冻层 ===== -->
+    <view class="fridge-int-zone freezer-zone">
+      <view class="zone-label-row">
+        <text class="zone-label-icon">❄</text>
+        <text class="zone-label-text">冷冻层  −18°C</text>
+        <text class="zone-item-count">{{frozenItems.length}} 件</text>
+      </view>
+      <view class="fridge-int-grid">
+        <view
+          wx:for="{{frozenItems}}"
+          wx:key="id"
+          class="int-item-cell int-item-frozen"
+          data-id="{{item.id}}"
+          bindtap="onFridgeItemTap"
+        >
+          <text class="int-item-emoji">{{item.icon}}</text>
+          <text class="int-item-name">{{item.name}}</text>
+          <view class="int-item-dot dot-{{item.status}}"></view>
+        </view>
+        <view wx:if="{{frozenItems.length === 0}}" class="int-empty">
+          <text>❄ 冷冻层是空的</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 冰箱隔板 -->
+    <view class="fridge-shelf-bar">
+      <view class="shelf-support"></view>
+      <view class="shelf-support"></view>
+      <view class="shelf-support"></view>
+    </view>
+
+    <!-- ===== 冷藏层 ===== -->
+    <view class="fridge-int-zone main-zone">
+      <view class="zone-label-row">
+        <text class="zone-label-icon">🌿</text>
+        <text class="zone-label-text">冷藏层  4°C</text>
+        <text class="zone-item-count">{{mainFridgeItems.length}} 件</text>
+      </view>
+      <view class="fridge-int-grid">
+        <view
+          wx:for="{{mainFridgeItems}}"
+          wx:key="id"
+          class="int-item-cell int-item-fresh"
+          data-id="{{item.id}}"
+          bindtap="onFridgeItemTap"
+        >
+          <text class="int-item-emoji">{{item.icon}}</text>
+          <text class="int-item-name">{{item.name}}</text>
+          <view class="int-item-dot dot-{{item.status}}"></view>
+        </view>
+        <view wx:if="{{mainFridgeItems.length === 0}}" class="int-empty">
+          <text>🍽 冷藏层是空的</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部加号按钮 -->
+    <view class="fridge-int-footer">
+      <view class="int-add-btn" bindtap="onAddFromModal">
+        <text class="int-add-icon">＋</text>
+        <text class="int-add-text">添加食材</text>
+      </view>
+      <view class="fridge-int-drain">
+        <view class="drain-hole"></view>
+        <view class="drain-hole"></view>
+        <view class="drain-hole"></view>
+      </view>
+    </view>
+
+  </view>
+</view>
+
+<!-- ===== 蜘蛛吃食物动画 ===== -->
+<view class="spider-overlay {{spiderActive ? 'spider-overlay-show' : ''}}">
+  <view class="spider-stage">
+    <!-- 背景网 -->
+    <view class="web-line web-line-1"></view>
+    <view class="web-line web-line-2"></view>
+    <view class="web-line web-line-3"></view>
+
+    <!-- 食物（中间） -->
+    <view wx:if="{{spiderItem}}" class="spider-food-wrap {{spiderState === 'eat' || spiderState === 'done' ? 'food-eating' : ''}}">
+      <text class="spider-food-emoji">{{spiderItem.icon}}</text>
+      <text class="spider-food-label">{{spiderItem.name}}</text>
+    </view>
+
+    <!-- 蜘蛛 -->
+    <view wx:if="{{spiderItem}}" class="spider-creature spider-state-{{spiderState}}">
+      <text class="spider-emoji">🕷</text>
+      <!-- 蜘蛛丝 -->
+      <view wx:if="{{spiderState === 'crawl'}}" class="spider-thread"></view>
+    </view>
+
+    <!-- 提示文字 -->
+    <text class="spider-msg">
+      {{spiderState === 'crawl' ? '😱  蜘蛛来了...' : spiderState === 'eat' ? '😋  大快朵颐！' : '✓  已被消灭'}}
+    </text>
+  </view>
+</view>

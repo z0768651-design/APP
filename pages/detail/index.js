@@ -76,62 +76,56 @@ Page({
     })
   },
 
-  onSpeak() {
-    const { translation, currentLangInfo, item } = this.data
-    if (!translation && !item) return
-
-    const textToSpeak = translation ? translation.name : item.name
-    const lang = currentLangInfo ? currentLangInfo.ttsLang : 'zh_CN'
-
+  _playTTS(text, lang) {
     this.setData({ speaking: true })
-
+    // 设置音频不受静音开关影响，确保声音能播出
+    wx.setInnerAudioOption({ obeyMuteSwitch: false })
     wx.textToSpeech({
       lang,
       volume: 1,
       rate: 0.8,
-      text: textToSpeak,
+      text,
       success: (res) => {
         const audioCtx = wx.createInnerAudioContext()
+        audioCtx.obeyMuteSwitch = false
         audioCtx.src = res.filename
         audioCtx.play()
+        audioCtx.onPlay(() => {
+          // 正在播放
+        })
         audioCtx.onEnded(() => {
           this.setData({ speaking: false })
           audioCtx.destroy()
         })
-        audioCtx.onError(() => {
+        audioCtx.onError((err) => {
+          console.error('audio error', err)
           this.setData({ speaking: false })
           audioCtx.destroy()
+          wx.showToast({ title: '播放失败，请重试', icon: 'none' })
         })
       },
-      fail: () => {
+      fail: (err) => {
+        console.error('tts fail', err)
         this.setData({ speaking: false })
         wx.showToast({ title: '语音功能暂不可用', icon: 'none' })
       }
     })
   },
 
+  onSpeak() {
+    const { translation, currentLangInfo, item } = this.data
+    if (!translation && !item) return
+    if (this.data.speaking) return
+    const textToSpeak = translation ? translation.name : item.name
+    const lang = currentLangInfo ? currentLangInfo.ttsLang : 'zh_CN'
+    this._playTTS(textToSpeak, lang)
+  },
+
   onSpeakChinese() {
     const { item } = this.data
-    this.setData({ speaking: true })
-    wx.textToSpeech({
-      lang: 'zh_CN',
-      volume: 1,
-      rate: 0.8,
-      text: item.name,
-      success: (res) => {
-        const audioCtx = wx.createInnerAudioContext()
-        audioCtx.src = res.filename
-        audioCtx.play()
-        audioCtx.onEnded(() => {
-          this.setData({ speaking: false })
-          audioCtx.destroy()
-        })
-      },
-      fail: () => {
-        this.setData({ speaking: false })
-        wx.showToast({ title: '语音不可用', icon: 'none' })
-      }
-    })
+    if (!item) return
+    if (this.data.speaking) return
+    this._playTTS(item.name, 'zh_CN')
   },
 
   toggleEdit() {

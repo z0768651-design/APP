@@ -1,0 +1,429 @@
+/* ===== 像素之家 - 俯视图 ===== */
+.home-wrap {
+  min-height: 100vh;
+  background: #1e293b;
+}
+
+/* ===== 顶部问候 ===== */
+.home-header {
+  padding: 32rpx 28rpx 24rpx;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  border-bottom: 3px solid #14b8a6;
+}
+.home-greeting-row {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+.time-icon {
+  font-size: 48rpx;
+  animation: iconBob 3s ease-in-out infinite;
+}
+@keyframes iconBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6rpx); }
+}
+.home-greeting-text { display: flex; flex-direction: column; gap: 2rpx; }
+.greeting-main {
+  font-size: 40rpx;
+  color: #f1f5f9;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+.greeting-sub {
+  font-size: 22rpx;
+  color: #64748b;
+  font-family: 'Courier New', monospace;
+}
+/* 小统计行 */
+.home-mini-stats {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  background: rgba(255,255,255,0.05);
+  border: 2px solid #334155;
+  padding: 14rpx 20rpx;
+}
+.mini-stat { display: flex; flex-direction: column; align-items: center; gap: 2rpx; }
+.mini-stat-num {
+  font-size: 36rpx;
+  color: #e2e8f0;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  line-height: 1;
+}
+.mini-stat-lbl {
+  font-size: 18rpx;
+  color: #64748b;
+  font-family: 'Courier New', monospace;
+}
+.warn-num { color: #fbbf24; }
+.danger-num { color: #fb7185; }
+.mini-stat-divider {
+  width: 2px;
+  height: 40rpx;
+  background: #334155;
+}
+
+/* ===== 房子容器 ===== */
+.house-container {
+  margin: 24rpx 16rpx;
+  border: 4px solid #475569;
+  box-shadow: 0 0 0 4px #1e293b, 0 0 0 8px #334155;
+  background: #334155;
+}
+
+/* 屋顶装饰 */
+.house-roof {
+  background: #14b8a6;
+  border-bottom: 4px solid #1e293b;
+  padding: 12rpx 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+}
+.roof-pixel {
+  width: 18rpx;
+  height: 18rpx;
+  background: #0d9488;
+  border: 2px solid #1e293b;
+}
+.roof-p1, .roof-p4 { background: #f59e0b; }
+.roof-p2, .roof-p3 { background: #34d399; }
+.roof-main { flex: 1; text-align: center; }
+.roof-title {
+  font-size: 20rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 2rpx;
+}
+
+/* 房子主体 */
+.house-body {
+  background: #475569;
+  border: 3px solid #64748b;
+}
+
+/* 北墙（顶部）有窗户 */
+.wall-north {
+  height: 32rpx;
+  background: #64748b;
+  border-bottom: 3px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 0 40rpx;
+}
+.window-frame {
+  display: flex;
+  gap: 4rpx;
+  background: #1e293b;
+  border: 2px solid #1e293b;
+  padding: 3rpx;
+}
+.window-pane {
+  width: 24rpx;
+  height: 16rpx;
+  background: #bae6fd;
+  opacity: 0.8;
+  animation: windowShine 4s ease-in-out infinite;
+}
+.window-pane:nth-child(2) { animation-delay: 0.5s; }
+@keyframes windowShine {
+  0%, 100% { background: #bae6fd; opacity: 0.8; }
+  50% { background: #e0f2fe; opacity: 1; }
+}
+.wall-gap { flex: 1; }
+
+/* 楼层行 */
+.floor-row {
+  display: flex;
+  min-height: 280rpx;
+}
+
+/* 房间通用 */
+.room {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #1e293b;
+}
+.room-label {
+  display: flex;
+  align-items: center;
+  gap: 6rpx;
+  padding: 6rpx 12rpx;
+  border-bottom: 2px solid #1e293b;
+}
+.room-label-icon { font-size: 20rpx; }
+.room-label-text {
+  font-size: 18rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 1rpx;
+}
+.room-floor {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 10rpx;
+  padding: 14rpx;
+}
+
+/* 厨房 */
+.kitchen-room { }
+.kitchen-label { background: #065f46; }
+.kitchen-floor {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
+    #d1fae5;
+}
+
+/* 客厅 */
+.living-room { }
+.living-label { background: #78350f; }
+.living-floor {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
+    #fef9c3;
+}
+
+/* 卧室 */
+.bedroom { }
+.bedroom-label { background: #4c1d95; }
+.bedroom-floor {
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
+    #ede9fe;
+}
+
+/* 卫生间 */
+.bathroom { }
+.bathroom-label { background: #1e40af; }
+.bathroom-floor {
+  background:
+    repeating-conic-gradient(#dbeafe 0% 25%, #bfdbfe 0% 50%) 0 0 / 24rpx 24rpx;
+}
+
+/* 竖向隔墙 */
+.wall-vert {
+  width: 24rpx;
+  background: #64748b;
+  border-left: 2px solid #1e293b;
+  border-right: 2px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.door-opening-h {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.door-frame-h {
+  background: #334155;
+  border: 1px solid #94a3b8;
+  padding: 4rpx 2rpx;
+}
+.door-emoji-h { font-size: 20rpx; }
+
+/* 走廊 */
+.hallway {
+  height: 36rpx;
+  border-top: 2px solid #1e293b;
+  border-bottom: 2px solid #1e293b;
+  background: #94a3b8;
+  overflow: hidden;
+}
+.hallway-floor {
+  display: flex;
+  height: 100%;
+}
+.floor-tile {
+  flex: 1;
+  border-right: 1px solid #64748b;
+  background: #94a3b8;
+  animation: tileShimmer 3s ease-in-out infinite;
+}
+.floor-tile:nth-child(odd) { background: #a1afbe; }
+.floor-tile:nth-child(2) { animation-delay: 0.2s; }
+.floor-tile:nth-child(3) { animation-delay: 0.4s; }
+.floor-tile:nth-child(4) { animation-delay: 0.6s; }
+.floor-tile:nth-child(5) { animation-delay: 0.8s; }
+@keyframes tileShimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}
+
+/* 南墙（底部）大门 */
+.wall-south {
+  height: 50rpx;
+  background: #64748b;
+  border-top: 3px solid #1e293b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.main-door-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #334155;
+  border: 2px solid #1e293b;
+  border-bottom: none;
+  padding: 4rpx 16rpx 0;
+  transition: background 0.15s ease;
+}
+.main-door-frame:active { background: #475569; }
+.main-door-emoji { font-size: 26rpx; }
+.main-door-label {
+  font-size: 14rpx;
+  color: #94a3b8;
+  font-family: 'Courier New', monospace;
+}
+
+/* ===== 家具通用样式 ===== */
+.furniture-item {
+  width: 110rpx;
+  min-height: 110rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 6rpx;
+  position: relative;
+  gap: 4rpx;
+  border: 2px solid #1e293b;
+  box-shadow: 3px 3px 0 rgba(30,41,59,0.5);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+  background: rgba(255,255,255,0.85);
+}
+.furniture-item:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 rgba(30,41,59,0.5);
+}
+.furniture-wide {
+  width: 100%;
+  min-height: 80rpx;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 10rpx 14rpx;
+  gap: 10rpx;
+}
+
+.furniture-emoji { font-size: 48rpx; line-height: 1; }
+.furniture-wide .furniture-emoji { font-size: 40rpx; }
+.furniture-name {
+  font-size: 18rpx;
+  color: #1e293b;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-align: center;
+}
+.furniture-wide .furniture-name { font-size: 20rpx; }
+
+/* 冰箱专属样式（有功能高亮） */
+.furniture-fridge {
+  background: #e0f2fe;
+  border-color: #14b8a6;
+  box-shadow: 3px 3px 0 #14b8a6;
+  animation: fridgeGlow 2.5s ease-in-out infinite;
+}
+@keyframes fridgeGlow {
+  0%, 100% { box-shadow: 3px 3px 0 #14b8a6; border-color: #14b8a6; }
+  50% { box-shadow: 4px 4px 0 #0d9488, 0 0 12px rgba(20,184,166,0.3); border-color: #0d9488; }
+}
+.furniture-fridge .furniture-name { color: #0d9488; }
+.furniture-active {
+  animation: furnitureClick 0.3s ease-out forwards !important;
+}
+@keyframes furnitureClick {
+  0%  { transform: scale(1); }
+  40% { transform: scale(0.88) translate(1px, 1px); }
+  100% { transform: scale(1); }
+}
+
+/* 冰箱光晕 */
+.furniture-glow {
+  position: absolute;
+  inset: -4rpx;
+  border: 2px solid rgba(20,184,166,0.5);
+  pointer-events: none;
+  animation: glowPulse 2s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* 冰箱数字角标 */
+.furniture-badge {
+  position: absolute;
+  top: -8rpx;
+  right: -8rpx;
+  background: #fb7185;
+  border: 2px solid #1e293b;
+  min-width: 32rpx;
+  height: 32rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6rpx;
+}
+.badge-num {
+  font-size: 18rpx;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* 待开放家具 */
+.furniture-coming {
+  background: rgba(255,255,255,0.6);
+  border-color: #cbd5e1;
+  box-shadow: 3px 3px 0 #cbd5e1;
+  opacity: 0.85;
+}
+.coming-soon-tag {
+  position: absolute;
+  bottom: 4rpx;
+  right: 4rpx;
+  font-size: 14rpx;
+  color: #94a3b8;
+  font-family: 'Courier New', monospace;
+  background: rgba(255,255,255,0.8);
+  padding: 1rpx 5rpx;
+  border: 1px solid #e2e8f0;
+}
+
+/* ===== 底部提示 ===== */
+.home-footer {
+  padding: 24rpx 28rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+.footer-hint {
+  font-size: 22rpx;
+  color: #475569;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  letter-spacing: 1rpx;
+}
+.footer-sub {
+  font-size: 18rpx;
+  color: #334155;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
