@@ -30,7 +30,7 @@ const deleteItem = (id) => {
 }
 
 const getSettings = () => {
-  return wx.getStorageSync(SETTINGS_KEY) || { language: 'en', multiLang: false, extraLang: 'ja' }
+  return wx.getStorageSync(SETTINGS_KEY) || { language: 'en', multiLang: false, extraLang: 'ja', city: '北京' }
 }
 
 const saveSettings = (settings) => {

@@ -53,6 +53,30 @@
   margin-bottom: 20rpx;
 }
 
+/* 城市输入框 */
+.city-input {
+  width: 100%;
+  padding: 12rpx 16rpx;
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 6rpx;
+  font-size: 18rpx;
+  color: #1e293b;
+  margin-bottom: 10rpx;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+}
+.city-input:focus {
+  border-color: #14b8a6;
+  background: #f0fdfa;
+}
+.input-hint {
+  display: block;
+  font-size: 14rpx;
+  color: #94a3b8;
+  margin-top: 8rpx;
+}
+
 /* 语言选项网格 */
 .lang-grid {
   display: grid;

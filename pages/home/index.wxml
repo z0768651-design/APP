@@ -1,7 +1,7 @@
-<!-- 像素之家 - 经营模拟游戏 -->
-<scroll-view scroll-y class="home-wrap">
+<!-- 像素之家 - 模拟经营游戏 -->
+<scroll-view scroll-y class="home-wrap light-bg">
 
-  <!-- ===== 顶部状态栏 ===== -->
+  <!-- 顶部状态栏 (仅体力+心情) -->
   <view class="game-header">
     <view class="header-top-row">
       <view class="greeting-area">
@@ -17,7 +17,7 @@
       </view>
     </view>
 
-    <!-- 四项属性条 -->
+    <!-- 两项属性条 (体力+心情) -->
     <view class="status-bars">
       <view class="stat-bar-item">
         <text class="stat-icon">⚡</text>
@@ -25,20 +25,6 @@
           <view class="stat-bar-fill energy-fill" style="width:{{energy}}%"></view>
         </view>
         <text class="stat-val">{{energy}}</text>
-      </view>
-      <view class="stat-bar-item">
-        <text class="stat-icon">🍔</text>
-        <view class="stat-bar-track">
-          <view class="stat-bar-fill hunger-fill" style="width:{{hunger}}%"></view>
-        </view>
-        <text class="stat-val">{{hunger}}</text>
-      </view>
-      <view class="stat-bar-item">
-        <text class="stat-icon">🫧</text>
-        <view class="stat-bar-track">
-          <view class="stat-bar-fill hygiene-fill" style="width:{{hygiene}}%"></view>
-        </view>
-        <text class="stat-val">{{hygiene}}</text>
       </view>
       <view class="stat-bar-item">
         <text class="stat-icon">😊</text>
@@ -73,7 +59,7 @@
     </view>
   </view>
 
-  <!-- ===== 房子俯视图 ===== -->
+  <!-- 房子俯视图 -->
   <view class="house-container">
 
     <!-- 屋顶 -->
@@ -103,7 +89,7 @@
 
       <!-- 小狗 -->
       <view class="dog-character" style="left:{{dogX}}rpx; top:{{dogY}}rpx;"
-        data-id="dog" data-x="320" data-y="310" bindtap="onFurnitureTap">
+        data-id="dog" bindtap="onFurnitureTap">
         <view class="dog-body dog-dir-{{dogDir}} {{dogWalking ? 'dog-walking' : ''}} dog-state-{{dogState}}">
           <view class="dog-ear dog-ear-l"></view>
           <view class="dog-ear dog-ear-r"></view>
@@ -118,7 +104,6 @@
           <view class="dog-leg dog-leg-bl"></view>
           <view class="dog-leg dog-leg-br"></view>
         </view>
-        <!-- 小狗气泡 -->
         <view class="dog-bubble {{showDogBubble ? 'bubble-show' : ''}}">
           <text class="dog-bubble-text">{{dogBubbleText}}</text>
         </view>
@@ -138,10 +123,10 @@
         </view>
       </view>
 
-      <!-- 上半: 厨房 + 客厅 -->
+      <!-- 上半: 厨房 + 客厅 (厨房小,客厅大) -->
       <view class="floor-row">
 
-        <!-- 厨房 -->
+        <!-- 厨房 (39%) -->
         <view class="room kitchen-room">
           <view class="room-label kitchen-label">
             <text class="room-label-icon">🍳</text>
@@ -206,7 +191,7 @@
           <view class="door-opening-h"><view class="door-frame-h"></view></view>
         </view>
 
-        <!-- 客厅 -->
+        <!-- 客厅 (61%) -->
         <view class="room living-room">
           <view class="room-label living-label">
             <text class="room-label-icon">🛋</text>
@@ -270,10 +255,10 @@
         </view>
       </view>
 
-      <!-- 下半: 卧室 + 卫生间 -->
+      <!-- 下半: 卧室 + 卫生间 (卧室大,卫生间小) -->
       <view class="floor-row">
 
-        <!-- 卧室 -->
+        <!-- 卧室 (60%) -->
         <view class="room bedroom">
           <view class="room-label bedroom-label">
             <text class="room-label-icon">🛏</text>
@@ -313,6 +298,22 @@
               </view>
               <text class="furn-label">书桌</text>
             </view>
+
+            <view class="furn-pos furn-gf-pos" data-id="girlfriend" bindtap="onFurnitureTap">
+              <view class="topdown-gf-sofa {{activeFurniture === 'girlfriend' ? 'furn-active' : ''}}">
+                <view class="gf-sofa-back"></view>
+                <view class="gf-sofa-seat"></view>
+              </view>
+              <view class="gf-char {{showGFBubble ? 'gf-active' : ''}}">
+                <view class="gf-hair"></view>
+                <view class="gf-head"></view>
+                <view class="gf-body"></view>
+              </view>
+              <view class="gf-bubble {{showGFBubble ? 'bubble-show' : ''}}">
+                <text>{{gfBubbleText}}</text>
+              </view>
+              <text class="furn-label">女友</text>
+            </view>
           </view>
         </view>
 
@@ -321,7 +322,7 @@
           <view class="door-opening-h"><view class="door-frame-h"></view></view>
         </view>
 
-        <!-- 卫生间 -->
+        <!-- 卫生间 (40%) -->
         <view class="room bathroom">
           <view class="room-label bathroom-label">
             <text class="room-label-icon">🚿</text>
@@ -378,7 +379,32 @@
     </view>
   </view>
 
-  <!-- ===== 功能面板弹窗 ===== -->
+  <!-- 天气卡片 (出门后显示) -->
+  <view class="weather-card {{showWeather ? 'weather-show' : ''}}" wx:if="{{weather}}">
+    <view class="weather-close" bindtap="onCloseWeather">✕</view>
+    <view class="weather-content">
+      <view class="weather-header">
+        <text class="weather-icon">{{weather.icon}}</text>
+        <view class="weather-info">
+          <text class="weather-city">{{weather.city}}</text>
+          <text class="weather-time">{{weather.timeLabel}}</text>
+        </view>
+      </view>
+      <view class="weather-details">
+        <view class="weather-temp">
+          <text class="temp-val">{{weather.temp}}°</text>
+          <text class="temp-range">{{weather.tempLow}}° - {{weather.temp}}°</text>
+        </view>
+        <view class="weather-condition">
+          <text class="condition-label">{{weather.condition}}</text>
+          <text class="humidity">湿度 {{weather.humidity}}%</text>
+        </view>
+      </view>
+      <view class="weather-advice">{{weather.advice}}</view>
+    </view>
+  </view>
+
+  <!-- 功能面板弹窗 -->
   <view class="panel-overlay {{showPanel ? 'panel-show' : ''}}" bindtap="onClosePanel">
     <view class="panel-box" catchtap="">
 
@@ -413,11 +439,11 @@
         </view>
       </block>
 
-      <!-- 灶台/做饭面板 -->
+      <!-- 灶台/智能菜谱面板 -->
       <block wx:elif="{{panelType === 'cook'}}">
         <view class="panel-header cook-panel-header">
           <text class="panel-emoji">🍳</text>
-          <text class="panel-title">灶台 - 做饭</text>
+          <text class="panel-title">灶台 - 智能菜谱</text>
         </view>
         <view class="panel-body">
           <block wx:if="{{isCooking}}">
@@ -429,15 +455,33 @@
               <text class="cooking-pct">{{cookingProgress}}%</text>
             </view>
           </block>
+          <block wx:elif="{{showRecipeSteps}}">
+            <view class="recipe-steps-view">
+              <view class="recipe-header">
+                <text class="recipe-title">{{cookingRecipe.emoji}} {{cookingRecipe.name}}</text>
+                <text class="recipe-diff">{{cookingRecipe.diff}}</text>
+              </view>
+              <view class="recipe-steps-list">
+                <view class="step-item" wx:for="{{currentRecipeSteps}}" wx:key="index">
+                  <text class="step-num">{{index + 1}}</text>
+                  <text class="step-text">{{item}}</text>
+                </view>
+              </view>
+              <view class="recipe-info">
+                <text>耗时：{{cookingRecipe.time}}分钟 | 消耗：{{cookingRecipe.cost}}G</text>
+              </view>
+            </view>
+          </block>
           <block wx:else>
-            <text class="panel-desc">选择菜谱开始做饭（消耗金币）</text>
+            <text class="panel-desc">根据冰箱食材的智能菜谱推荐</text>
             <view class="recipe-list">
-              <view class="recipe-item" wx:for="{{recipes}}" wx:key="name"
-                data-idx="{{index}}" bindtap="onSelectRecipe">
+              <view class="recipe-item" wx:for="{{smartRecipes}}" wx:key="name"
+                data-idx="{{index}}" bindtap="onSelectSmartRecipe">
+                <view class="recipe-badge" wx:if="{{item.canMake}}">可做</view>
                 <text class="recipe-emoji">{{item.emoji}}</text>
                 <view class="recipe-info">
                   <text class="recipe-name">{{item.name}}</text>
-                  <text class="recipe-effect">饱腹+{{item.hunger}} 心情+{{item.mood}}</text>
+                  <text class="recipe-effect">体力+{{item.energy}} 心情+{{item.mood}}</text>
                 </view>
                 <text class="recipe-cost">{{item.cost}}G</text>
               </view>
@@ -445,9 +489,19 @@
           </block>
         </view>
         <view class="panel-actions">
-          <view class="panel-btn" bindtap="onClosePanel">
-            <text class="panel-btn-text">关闭</text>
-          </view>
+          <block wx:if="{{showRecipeSteps}}">
+            <view class="panel-btn panel-btn-primary" bindtap="onStartCooking">
+              <text class="panel-btn-text">开始烹饪</text>
+            </view>
+            <view class="panel-btn" bindtap="onBackToRecipeList">
+              <text class="panel-btn-text">返回</text>
+            </view>
+          </block>
+          <block wx:else>
+            <view class="panel-btn" bindtap="onClosePanel">
+              <text class="panel-btn-text">关闭</text>
+            </view>
+          </block>
         </view>
       </block>
 
@@ -462,7 +516,7 @@
         </view>
         <view class="panel-actions">
           <view class="panel-btn panel-btn-primary" bindtap="onWashDishes">
-            <text class="panel-btn-text">洗碗 (清洁+5)</text>
+            <text class="panel-btn-text">洗碗 (心情+5)</text>
           </view>
           <view class="panel-btn" bindtap="onClosePanel">
             <text class="panel-btn-text">关闭</text>
@@ -489,38 +543,38 @@
         </view>
       </block>
 
-      <!-- 电视面板 -->
+      <!-- 电视面板 (新闻) -->
       <block wx:elif="{{panelType === 'tv'}}">
         <view class="panel-header tv-panel-header">
           <text class="panel-emoji">📺</text>
           <text class="panel-title">电视</text>
         </view>
         <view class="panel-body">
-          <block wx:if="{{tvPlaying}}">
-            <view class="tv-playing-area">
-              <text class="tv-playing-text">{{tvCurrent.emoji}} 正在播放：{{tvCurrent.name}}</text>
-              <view class="tv-anim">
-                <view class="tv-bar tv-bar-1"></view>
-                <view class="tv-bar tv-bar-2"></view>
-                <view class="tv-bar tv-bar-3"></view>
-              </view>
+          <block wx:if="{{tvLoadingNews}}">
+            <view class="loading-area">
+              <view class="loading-spinner"></view>
+              <text class="loading-text">正在获取新闻...</text>
             </view>
           </block>
-          <block wx:else>
-            <text class="panel-desc">选择节目观看（消耗精力）</text>
-            <view class="recipe-list">
-              <view class="recipe-item" wx:for="{{tvShows}}" wx:key="name"
-                data-idx="{{index}}" bindtap="onSelectShow">
-                <text class="recipe-emoji">{{item.emoji}}</text>
-                <view class="recipe-info">
-                  <text class="recipe-name">{{item.name}}</text>
-                  <text class="recipe-effect">心情+{{item.mood}} 精力-5</text>
+          <block wx:elif="{{showTvNews}}">
+            <view class="news-list">
+              <view class="news-item" wx:for="{{tvNews}}" wx:key="id">
+                <view class="news-num">{{item.id}}</view>
+                <view class="news-content">
+                  <text class="news-title">{{item.title}}</text>
+                  <text class="news-meta">{{item.source}} · {{item.time}}</text>
                 </view>
               </view>
             </view>
           </block>
+          <block wx:else>
+            <text class="panel-desc">打开电视获取最新新闻（心情+15）</text>
+          </block>
         </view>
         <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" wx:if="{{!showTvNews && !tvLoadingNews}}" bindtap="onWatchTV">
+            <text class="panel-btn-text">打开电视</text>
+          </view>
           <view class="panel-btn" bindtap="onClosePanel">
             <text class="panel-btn-text">关闭</text>
           </view>
@@ -538,7 +592,7 @@
         </view>
         <view class="panel-actions">
           <view class="panel-btn panel-btn-primary" bindtap="onSitSofa">
-            <text class="panel-btn-text">休息 (精力+10)</text>
+            <text class="panel-btn-text">休息 (体力+10)</text>
           </view>
           <view class="panel-btn" bindtap="onClosePanel">
             <text class="panel-btn-text">关闭</text>
@@ -606,7 +660,6 @@
             </view>
           </block>
           <block wx:else>
-            <!-- 闹钟设置 -->
             <view class="alarm-section">
               <text class="alarm-section-title">设置闹钟</text>
               <view class="alarm-picker-row">
@@ -631,12 +684,12 @@
               <text class="alarm-status" wx:if="{{alarmSet}}">闹钟：{{alarmTime}} 已设定</text>
             </view>
             <view class="panel-divider"></view>
-            <text class="panel-desc">睡觉恢复精力（精力+50）</text>
+            <text class="panel-desc">睡觉恢复精力（体力+50）</text>
           </block>
         </view>
         <view class="panel-actions" wx:if="{{!isSleeping}}">
           <view class="panel-btn panel-btn-primary" bindtap="onSleep">
-            <text class="panel-btn-text">睡觉 (精力+50)</text>
+            <text class="panel-btn-text">睡觉 (体力+50)</text>
           </view>
           <view class="panel-btn" bindtap="onClosePanel">
             <text class="panel-btn-text">关闭</text>
@@ -663,30 +716,72 @@
         </view>
       </block>
 
-      <!-- 书桌面板 -->
+      <!-- 书桌面板 (学习 + 外语学习) -->
       <block wx:elif="{{panelType === 'desk'}}">
         <view class="panel-header desk-panel-header">
           <text class="panel-emoji">📚</text>
-          <text class="panel-title">书桌 - 学习</text>
+          <text class="panel-title">书桌</text>
+        </view>
+        <view class="panel-tabs">
+          <view class="tab-item {{studySubMode === 'study' ? 'tab-active' : ''}}" data-mode="study" bindtap="onSwitchStudyMode">
+            <text>📚学习</text>
+          </view>
+          <view class="tab-item {{studySubMode === 'language' ? 'tab-active' : ''}}" data-mode="language" bindtap="onSwitchStudyMode">
+            <text>🌍{{langName}}</text>
+          </view>
         </view>
         <view class="panel-body">
-          <block wx:if="{{isStudying}}">
-            <view class="cooking-progress-area">
-              <text class="cooking-name">专注学习中...</text>
-              <view class="progress-track">
-                <view class="progress-fill study-progress-fill" style="width:{{studyProgress}}%"></view>
+          <block wx:if="{{studySubMode === 'study'}}">
+            <block wx:if="{{isStudying}}">
+              <view class="cooking-progress-area">
+                <text class="cooking-name">专注学习中...</text>
+                <view class="progress-track">
+                  <view class="progress-fill study-progress-fill" style="width:{{studyProgress}}%"></view>
+                </view>
+                <text class="cooking-pct">{{studyProgress}}%</text>
               </view>
-              <text class="cooking-pct">{{studyProgress}}%</text>
-            </view>
+            </block>
+            <block wx:else>
+              <text class="panel-desc">学习获得经验和金币（消耗体力15）</text>
+            </block>
           </block>
-          <block wx:else>
-            <text class="panel-desc">学习获得经验和金币（消耗精力15）</text>
+          <block wx:elif="{{studySubMode === 'language'}}">
+            <block wx:if="{{langCards.length > 0}}">
+              <view class="lang-card-container">
+                <view class="lang-card {{cardFlipped ? 'flipped' : ''}}" bindtap="onFlipCard">
+                  <view class="lang-card-front">
+                    <text class="card-icon">{{langCards[currentCardIdx].icon}}</text>
+                    <text class="card-zh">{{langCards[currentCardIdx].chName}}</text>
+                  </view>
+                  <view class="lang-card-back">
+                    <text class="card-en">{{langCards[currentCardIdx].translation}}</text>
+                    <text class="card-phonetic">{{langCards[currentCardIdx].phonetic}}</text>
+                  </view>
+                </view>
+                <view class="lang-card-nav">
+                  <view class="nav-btn" bindtap="onPrevCard">←</view>
+                  <text class="card-counter">{{currentCardIdx + 1}} / {{langCards.length}}</text>
+                  <view class="nav-btn" bindtap="onNextCard">→</view>
+                </view>
+              </view>
+            </block>
+            <block wx:else>
+              <view class="empty-state">
+                <text class="empty-icon">📭</text>
+                <text class="empty-text">冰箱还没有食材~去添加后再来学习！</text>
+              </view>
+            </block>
           </block>
         </view>
-        <view class="panel-actions" wx:if="{{!isStudying}}">
+        <view class="panel-actions" wx:if="{{studySubMode === 'study' && !isStudying}}">
           <view class="panel-btn panel-btn-primary" bindtap="onStudy">
             <text class="panel-btn-text">学习 (+20EXP +10G)</text>
           </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+        <view class="panel-actions" wx:if="{{studySubMode === 'language'}}">
           <view class="panel-btn" bindtap="onClosePanel">
             <text class="panel-btn-text">关闭</text>
           </view>
@@ -710,12 +805,12 @@
             </view>
           </block>
           <block wx:else>
-            <text class="panel-desc">洗个热水澡大幅恢复清洁度</text>
+            <text class="panel-desc">洗个热水澡大幅恢复心情</text>
           </block>
         </view>
         <view class="panel-actions" wx:if="{{!isShowering}}">
           <view class="panel-btn panel-btn-primary" bindtap="onShower">
-            <text class="panel-btn-text">洗澡 (清洁+40)</text>
+            <text class="panel-btn-text">洗澡 (心情+15)</text>
           </view>
           <view class="panel-btn" bindtap="onClosePanel">
             <text class="panel-btn-text">关闭</text>
@@ -753,10 +848,10 @@
         </view>
         <view class="panel-actions">
           <view class="panel-btn panel-btn-primary" bindtap="onWashHands">
-            <text class="panel-btn-text">洗手 (清洁+10)</text>
+            <text class="panel-btn-text">洗手 (心情+5)</text>
           </view>
           <view class="panel-btn panel-btn-primary" bindtap="onBrushTeeth">
-            <text class="panel-btn-text">刷牙 (清洁+15)</text>
+            <text class="panel-btn-text">刷牙 (心情+5)</text>
           </view>
           <view class="panel-btn" bindtap="onClosePanel">
             <text class="panel-btn-text">关闭</text>
@@ -771,14 +866,14 @@
           <text class="panel-title">大门</text>
         </view>
         <view class="panel-body">
-          <text class="panel-desc">出门逛逛赚金币（需要精力20）</text>
+          <text class="panel-desc">出门逛逛赚金币（需要体力20）</text>
         </view>
         <view class="panel-actions">
           <view class="panel-btn panel-btn-primary" bindtap="onGoOut">
             <text class="panel-btn-text">出门 (+15G +10心情)</text>
           </view>
           <view class="panel-btn" bindtap="onGoFridge">
-            <text class="panel-btn-text">检查冰箱</text>
+            <text class="panel-btn-text">去冰箱</text>
           </view>
           <view class="panel-btn" bindtap="onClosePanel">
             <text class="panel-btn-text">关闭</text>
@@ -793,7 +888,6 @@
           <text class="panel-title">{{dogName}}</text>
         </view>
         <view class="panel-body">
-          <!-- 小狗状态 -->
           <view class="dog-stats">
             <view class="stat-bar-item">
               <text class="stat-icon">🍖</text>
@@ -840,10 +934,56 @@
           </view>
         </view>
       </block>
+
+      <!-- 女朋友面板 -->
+      <block wx:elif="{{panelType === 'girlfriend'}}">
+        <view class="panel-header gf-panel-header">
+          <text class="panel-emoji">💕</text>
+          <text class="panel-title">女友 Lv.{{gfLevel}}</text>
+        </view>
+        <view class="panel-body">
+          <view class="gf-mood-bar">
+            <text class="gf-mood-label">亲密度</text>
+            <view class="stat-bar-track">
+              <view class="stat-bar-fill mood-fill" style="width:{{gfMood}}%"></view>
+            </view>
+            <text class="gf-mood-val">{{gfMood}}</text>
+          </view>
+          <view class="gf-tone-select">
+            <view class="tone-label">选择语气</view>
+            <view class="tone-buttons">
+              <view class="tone-btn {{gfTone === 'sweet' ? 'tone-active' : ''}}" data-tone="sweet" bindtap="onSelectGFTone">
+                <text>💕 甜蜜</text>
+              </view>
+              <view class="tone-btn {{gfTone === 'playful' ? 'tone-active' : ''}}" data-tone="playful" bindtap="onSelectGFTone">
+                <text>😄 俏皮</text>
+              </view>
+              <view class="tone-btn {{gfTone === 'caring' ? 'tone-active' : ''}}" data-tone="caring" bindtap="onSelectGFTone">
+                <text>🤗 关心</text>
+              </view>
+            </view>
+          </view>
+          <view class="gf-response-box">
+            <text class="gf-response-text">{{gfResponse}}</text>
+          </view>
+          <view class="gf-stats">
+            <text>互动次数：{{gfInteractCount}}</text>
+          </view>
+        </view>
+        <view class="panel-actions">
+          <view class="panel-btn panel-btn-primary" bindtap="onChatGF">
+            <text class="panel-btn-text">💬 和她聊天</text>
+          </view>
+          <view class="panel-btn" bindtap="onClosePanel">
+            <text class="panel-btn-text">关闭</text>
+          </view>
+        </view>
+      </block>
+
     </view>
   </view>
 
-  <!-- ===== 浮动提示 ===== -->
+  <!-- 浮动提示 -->
   <view class="game-toast {{showToast ? 'toast-show' : ''}}">
     <text class="toast-icon">{{toastIcon}}</text>
     <text class="toast-text">{{toastText}}</text>
@@ -851,7 +991,7 @@
 
   <!-- 底部 -->
   <view class="home-footer">
-    <text class="footer-hint">点击家具互动 | 点击小狗玩耍</text>
+    <text class="footer-hint">点击家具互动 | 管理冰箱食材</text>
     <text class="footer-sub">经营你的像素之家</text>
   </view>
 
