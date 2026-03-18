@@ -8,19 +8,20 @@
   ],
   "window": {
     "backgroundTextStyle": "dark",
-    "navigationBarBackgroundColor": "#1e293b",
+    "navigationBarBackgroundColor": "#5D4037",
     "navigationBarTitleText": "像素之家",
-    "navigationBarTextStyle": "white"
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#FFF8E7"
   },
   "tabBar": {
-    "color": "#94a3b8",
-    "selectedColor": "#14b8a6",
-    "backgroundColor": "#1e293b",
+    "color": "#8D6E63",
+    "selectedColor": "#FFB300",
+    "backgroundColor": "#3E2723",
     "borderStyle": "black",
     "list": [
-      { "pagePath": "pages/home/index", "text": "🏠 主页" },
-      { "pagePath": "pages/add/index", "text": "➕ 添加" },
-      { "pagePath": "pages/settings/index", "text": "⚙️ 设置" }
+      { "pagePath": "pages/home/index", "text": "我的家" },
+      { "pagePath": "pages/add/index", "text": "添加" },
+      { "pagePath": "pages/settings/index", "text": "设置" }
     ]
   },
   "style": "v2",
