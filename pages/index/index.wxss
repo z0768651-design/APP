@@ -1,7 +1,15 @@
-/* ===== 主页 - 清爽像素风 + 丰富动效 ===== */
+/* =============================================================
+   Fridge Manager — Warm Pixel-Art Game UI
+   Palette: Stardew Valley / Kairosoft inspired
+   ============================================================= */
+
+/* ===== Page Background ===== */
 .page-wrap {
   min-height: 100vh;
-  background: #f0fdf8;
+  background: #FFF8E7;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255,179,0,0.06) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(76,175,80,0.05) 0%, transparent 50%);
 }
 
 /* ===== Header ===== */
@@ -10,65 +18,75 @@
   align-items: center;
   justify-content: space-between;
   padding: 36rpx 32rpx 20rpx;
+  background: linear-gradient(180deg, #FFD54F 0%, #FFF8E7 100%);
+  border-bottom: 3px solid #5D4037;
 }
-.header-left { display: flex; flex-direction: column; gap: 4rpx; }
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
 .header-greeting {
   font-size: 24rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
+  letter-spacing: 1rpx;
 }
 .header-title {
   font-size: 44rpx;
-  color: #1e293b;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   letter-spacing: 2rpx;
+  text-shadow: 2px 2px 0 #FFD54F;
 }
 .header-icon-wrap {
   width: 90rpx;
   height: 90rpx;
-  background: #ffffff;
-  border: 3px solid #1e293b;
-  box-shadow: 4px 4px 0 #14b8a6;
+  background: #FFF8E7;
+  border: 3px solid #5D4037;
+  box-shadow: 4px 4px 0 #8D6E63;
   display: flex;
   align-items: center;
   justify-content: center;
   animation: headerPulse 3s ease-in-out infinite;
 }
 @keyframes headerPulse {
-  0%, 100% { box-shadow: 4px 4px 0 #14b8a6; }
-  50% { box-shadow: 6px 6px 0 #0d9488; }
+  0%, 100% { box-shadow: 4px 4px 0 #8D6E63; }
+  50% { box-shadow: 6px 6px 0 #FFB300; }
 }
-.header-fridge-icon { font-size: 50rpx; }
+.header-fridge-icon {
+  font-size: 50rpx;
+}
 
-/* ===== 冰箱场景 ===== */
+/* ===== Fridge Scene ===== */
 .fridge-scene {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;
-  padding: 0 24rpx 16rpx;
+  padding: 16rpx 24rpx 16rpx;
   gap: 12rpx;
 }
 
-/* 冰箱主体 */
+/* Fridge Body — warm wood-framed appliance */
 .fridge-body {
   width: 520rpx;
-  background: #ffffff;
-  border: 4px solid #1e293b;
-  box-shadow: 6px 6px 0 #1e293b;
+  background: #FFFDF5;
+  border: 4px solid #5D4037;
+  box-shadow: 6px 6px 0 #5D4037;
   position: relative;
   flex-shrink: 0;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
   animation: fridgeIdle 4s ease-in-out infinite;
 }
 @keyframes fridgeIdle {
-  0%, 100% { box-shadow: 6px 6px 0 #1e293b; }
-  50% { box-shadow: 8px 8px 0 #14b8a6; }
+  0%, 100% { box-shadow: 6px 6px 0 #5D4037; }
+  50% { box-shadow: 8px 8px 0 #FFB300; }
 }
 .fridge-body:active {
   transform: translate(3px, 3px);
-  box-shadow: 2px 2px 0 #1e293b;
+  box-shadow: 2px 2px 0 #5D4037;
 }
 .fridge-body.door-opening {
   animation: doorOpenShake 0.3s ease-out forwards;
@@ -81,32 +99,39 @@
   100% { transform: translateX(0) rotate(0deg); }
 }
 
-/* 顶部品牌栏 */
+/* Top brand bar — warm wood header */
 .fridge-top-bar {
-  background: #f1f5f9;
-  border-bottom: 3px solid #1e293b;
+  background: linear-gradient(180deg, #8D6E63, #795548);
+  border-bottom: 3px solid #5D4037;
   padding: 14rpx 16rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.vent-group { display: flex; flex-direction: column; gap: 5rpx; }
+.vent-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5rpx;
+}
 .vent-line {
   width: 36rpx;
   height: 5rpx;
-  background: #cbd5e1;
-  border-radius: 0;
+  background: #A1887F;
 }
-.brand-center { flex: 1; text-align: center; }
+.brand-center {
+  flex: 1;
+  text-align: center;
+}
 .fridge-brand {
   font-size: 18rpx;
-  color: #64748b;
+  color: #FFD54F;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 2rpx;
+  letter-spacing: 3rpx;
+  text-shadow: 1px 1px 0 #3E2723;
 }
 
-/* 门体通用 */
+/* Door generic */
 .fridge-door {
   display: flex;
   align-items: stretch;
@@ -117,7 +142,7 @@
   padding: 16rpx 16rpx 20rpx;
 }
 
-/* 标签 */
+/* Door labels — game item tags */
 .door-label {
   display: flex;
   align-items: center;
@@ -129,43 +154,59 @@
   align-items: center;
   gap: 6rpx;
   padding: 5rpx 12rpx;
-  border: 2px solid #1e293b;
+  border: 2px solid #5D4037;
+  image-rendering: pixelated;
 }
-.freezer-tag { background: #dbeafe; }
-.main-tag    { background: #d1fae5; }
-.tag-icon  { font-size: 20rpx; }
-.tag-text  { font-size: 18rpx; color: #1e293b; font-family: 'Courier New', monospace; font-weight: bold; }
+.freezer-tag {
+  background: linear-gradient(135deg, #90CAF9, #64B5F6);
+}
+.main-tag {
+  background: linear-gradient(135deg, #FFD54F, #FFC107);
+}
+.tag-icon {
+  font-size: 20rpx;
+}
+.tag-text {
+  font-size: 18rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
 .door-count-pill {
-  background: #14b8a6;
-  color: #ffffff;
+  background: #FFB300;
+  color: #3E2723;
   font-size: 18rpx;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   padding: 4rpx 14rpx;
-  border: 2px solid #1e293b;
-  box-shadow: 2px 2px 0 #1e293b;
+  border: 2px solid #5D4037;
+  box-shadow: 2px 2px 0 #5D4037;
 }
 
-/* 把手 */
+/* Door handle — wooden handle */
 .door-handle-col {
-  width: 22rpx;
-  background: #f8fafc;
-  border-left: 2px solid #e2e8f0;
+  width: 26rpx;
+  background: linear-gradient(180deg, #A1887F, #8D6E63);
+  border-left: 2px solid #5D4037;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .door-handle-bar {
-  width: 8rpx;
-  height: 56rpx;
-  background: #1e293b;
-  border-radius: 0;
-  box-shadow: 1px 0 0 #475569;
+  width: 10rpx;
+  height: 60rpx;
+  background: #FFB300;
+  border: 2px solid #5D4037;
+  box-shadow: 1px 0 0 #8D6E63;
 }
 
-/* 冷冻层 */
-.freezer-door { min-height: 110rpx; }
-.freezer-inner { background: #eff6ff; }
+/* Freezer door */
+.freezer-door {
+  min-height: 110rpx;
+}
+.freezer-inner {
+  background: linear-gradient(180deg, #E3F2FD, #BBDEFB);
+}
 .freezer-grid {
   display: flex;
   flex-direction: row;
@@ -175,34 +216,38 @@
 .freezer-item {
   width: 58rpx;
   height: 58rpx;
-  background: #dbeafe;
-  border: 2px solid #93c5fd;
-  box-shadow: 2px 2px 0 #1e293b;
+  background: #E3F2FD;
+  border: 2px solid #64B5F6;
+  box-shadow: 2px 2px 0 #5D4037;
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: freezePulse 2s ease-in-out infinite;
+  animation: freezePulse 2.5s ease-in-out infinite;
 }
 @keyframes freezePulse {
-  0%, 100% { background: #dbeafe; }
-  50% { background: #bfdbfe; }
+  0%, 100% { background: #E3F2FD; }
+  50% { background: #90CAF9; }
 }
-.freeze-emoji { font-size: 32rpx; }
+.freeze-emoji {
+  font-size: 32rpx;
+}
 
-/* 空状态 */
-.zone-empty { padding: 10rpx 0; }
+/* Zone empty */
+.zone-empty {
+  padding: 10rpx 0;
+}
 .zone-empty-text {
   font-size: 20rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
 }
 
-/* 隔板 */
+/* Shelf divider — wooden shelf */
 .shelf-divider {
-  height: 14rpx;
-  background: #e2e8f0;
-  border-top: 2px solid #1e293b;
-  border-bottom: 2px solid #1e293b;
+  height: 16rpx;
+  background: linear-gradient(180deg, #A1887F, #8D6E63);
+  border-top: 2px solid #5D4037;
+  border-bottom: 2px solid #5D4037;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -211,20 +256,25 @@
 .shelf-screw {
   width: 12rpx;
   height: 12rpx;
-  background: #94a3b8;
-  border: 1px solid #64748b;
+  background: #FFB300;
+  border: 1px solid #5D4037;
   border-radius: 50%;
 }
 .shelf-line {
   flex: 1;
   height: 2px;
-  background: repeating-linear-gradient(90deg, #cbd5e1 0, #cbd5e1 6px, transparent 6px, transparent 12px);
+  background: repeating-linear-gradient(90deg, #795548 0, #795548 6px, transparent 6px, transparent 12px);
   margin: 0 8rpx;
 }
 
-/* 冷藏层 */
-.main-door { min-height: 220rpx; border-top: none; }
-.main-inner { background: #f0fdf4; }
+/* Main door (fridge compartment) */
+.main-door {
+  min-height: 220rpx;
+  border-top: none;
+}
+.main-inner {
+  background: linear-gradient(180deg, #FFF8E7, #FFF3E0);
+}
 .main-preview-grid {
   display: flex;
   flex-wrap: wrap;
@@ -233,9 +283,9 @@
 .preview-cell {
   width: 72rpx;
   height: 72rpx;
-  background: #ffffff;
-  border: 2px solid #bbf7d0;
-  box-shadow: 2px 2px 0 #1e293b;
+  background: #FFFDF5;
+  border: 2px solid #FFB300;
+  box-shadow: 2px 2px 0 #5D4037;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -243,29 +293,32 @@
   position: relative;
   transition: transform 0.1s ease;
 }
-.preview-cell:active { transform: scale(0.9); }
-.preview-emoji { font-size: 40rpx; }
+.preview-cell:active {
+  transform: scale(0.9);
+}
+.preview-emoji {
+  font-size: 40rpx;
+}
 .freshness-dot {
   position: absolute;
   bottom: 4rpx;
   right: 4rpx;
   width: 12rpx;
   height: 12rpx;
-  border-radius: 0;
 }
 .preview-more-cell {
   width: 72rpx;
   height: 72rpx;
-  background: #f1f5f9;
-  border: 2px solid #cbd5e1;
-  box-shadow: 2px 2px 0 #1e293b;
+  background: #FFF8E7;
+  border: 2px dashed #8D6E63;
+  box-shadow: 2px 2px 0 #5D4037;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .more-num {
   font-size: 22rpx;
-  color: #14b8a6;
+  color: #FFB300;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
@@ -276,12 +329,20 @@
   padding: 20rpx;
   gap: 8rpx;
 }
-.zone-empty-emoji { font-size: 44rpx; }
+.zone-empty-emoji {
+  font-size: 44rpx;
+}
 
-/* 冰箱底座 */
+/* Freshness dots — pixel squares */
+.dot-fresh   { background: #4CAF50; border: 2px solid #2E7D32; }
+.dot-soon    { background: #FFB300; border: 2px solid #E65100; }
+.dot-expired { background: #EF5350; border: 2px solid #B71C1C; }
+.dot-unknown { background: #BCAAA4; border: 2px solid #5D4037; }
+
+/* Fridge base — wooden legs */
 .fridge-base {
-  background: #f1f5f9;
-  border-top: 3px solid #1e293b;
+  background: linear-gradient(180deg, #8D6E63, #795548);
+  border-top: 3px solid #5D4037;
   display: flex;
   justify-content: space-around;
   padding: 8rpx 40rpx;
@@ -289,21 +350,21 @@
 .fridge-foot {
   width: 56rpx;
   height: 16rpx;
-  background: #94a3b8;
-  border: 2px solid #1e293b;
-  box-shadow: 2px 2px 0 #1e293b;
+  background: #5D4037;
+  border: 2px solid #3E2723;
+  box-shadow: 2px 2px 0 #3E2723;
 }
 
-/* 点击打开提示 */
+/* Tap hint — golden banner */
 .fridge-tap-hint {
-  background: #14b8a6;
-  border-top: 2px solid #1e293b;
+  background: linear-gradient(90deg, #FFB300, #FFC107, #FFB300);
+  border-top: 2px solid #5D4037;
   padding: 8rpx 0;
   text-align: center;
 }
 .tap-hint-text {
   font-size: 18rpx;
-  color: #ffffff;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   letter-spacing: 1rpx;
@@ -311,10 +372,10 @@
 }
 @keyframes hintBlink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.4; }
 }
 
-/* 冰箱旁装饰 */
+/* Fridge side decorations */
 .fridge-deco {
   display: flex;
   flex-direction: column;
@@ -324,64 +385,82 @@
 }
 .deco-sticker {
   font-size: 30rpx;
-  opacity: 0.7;
+  opacity: 0.8;
   animation: decoFloat 3s ease-in-out infinite;
+  filter: drop-shadow(1px 1px 0 #8D6E63);
 }
 .deco-sticker:nth-child(2) { animation-delay: 1s; }
 .deco-sticker:nth-child(3) { animation-delay: 2s; }
 @keyframes decoFloat {
-  0%, 100% { transform: translateY(0); opacity: 0.7; }
-  50% { transform: translateY(-6rpx); opacity: 1; }
+  0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+  50% { transform: translateY(-8rpx) rotate(5deg); opacity: 1; }
 }
 
-/* 保鲜点颜色 */
-.dot-fresh   { background: #10b981; border: 2px solid #065f46; }
-.dot-soon    { background: #f59e0b; border: 2px solid #92400e; }
-.dot-expired { background: #fb7185; border: 2px solid #9f1239; }
-.dot-unknown { background: #cbd5e1; border: 2px solid #64748b; }
-
-/* ===== 统计行 ===== */
+/* ===== Stats Row — Game HUD Cards ===== */
 .stats-row {
   display: flex;
   gap: 16rpx;
-  padding: 0 24rpx 24rpx;
+  padding: 16rpx 24rpx 24rpx;
 }
 .stat-card {
   flex: 1;
-  background: #ffffff;
-  border: 3px solid #1e293b;
-  box-shadow: 4px 4px 0 #1e293b;
+  background: #FFFDF5;
+  border: 3px solid #5D4037;
+  box-shadow: 4px 4px 0 #5D4037;
   padding: 20rpx 12rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 4rpx;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
+  position: relative;
+}
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6rpx;
+  background: #FFD54F;
 }
 .stat-card:active {
   transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0 #1e293b;
+  box-shadow: 2px 2px 0 #5D4037;
 }
-.stat-total { box-shadow: 4px 4px 0 #14b8a6; }
-.stat-soon  { box-shadow: 4px 4px 0 #f59e0b; }
-.stat-expired { box-shadow: 4px 4px 0 #fb7185; }
-.stat-emoji { font-size: 30rpx; }
+.stat-total {
+  box-shadow: 4px 4px 0 #FFB300;
+}
+.stat-total::before { background: #FFB300; }
+.stat-soon {
+  box-shadow: 4px 4px 0 #FFB300;
+}
+.stat-soon::before { background: #FFC107; }
+.stat-expired {
+  box-shadow: 4px 4px 0 #EF5350;
+}
+.stat-expired::before { background: #EF5350; }
+.stat-emoji {
+  font-size: 30rpx;
+}
 .stat-num {
   font-size: 44rpx;
-  color: #1e293b;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   line-height: 1.1;
 }
-.soon-num    { color: #f59e0b; }
-.expired-num { color: #fb7185; }
+.soon-num {
+  color: #E65100;
+}
+.expired-num {
+  color: #EF5350;
+}
 .stat-lbl {
   font-size: 18rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
 }
 
-/* ===== 分类标签 ===== */
+/* ===== Category Chips — Game Item Tabs ===== */
 .category-scroll {
   width: 100%;
   margin-bottom: 20rpx;
@@ -398,21 +477,21 @@
   flex-direction: column;
   align-items: center;
   padding: 12rpx 16rpx;
-  background: #ffffff;
-  border: 2px solid #e2e8f0;
-  box-shadow: 3px 3px 0 #e2e8f0;
+  background: #FFFDF5;
+  border: 2px solid #8D6E63;
+  box-shadow: 3px 3px 0 #8D6E63;
   white-space: nowrap;
   min-width: 78rpx;
   transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
 }
 .cat-chip:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 #e2e8f0;
+  box-shadow: 1px 1px 0 #8D6E63;
 }
 .cat-chip.cat-chip-active {
-  background: #14b8a6;
-  border-color: #1e293b;
-  box-shadow: 3px 3px 0 #1e293b;
+  background: linear-gradient(135deg, #FFB300, #FFC107);
+  border-color: #5D4037;
+  box-shadow: 3px 3px 0 #5D4037;
   animation: chipPop 0.25s ease-out;
 }
 @keyframes chipPop {
@@ -420,74 +499,86 @@
   60% { transform: scale(1.08); }
   100% { transform: scale(1); }
 }
-.cat-chip-icon { font-size: 28rpx; }
+.cat-chip-icon {
+  font-size: 28rpx;
+}
 .cat-chip-name {
   font-size: 18rpx;
-  color: #64748b;
+  color: #5D4037;
   font-family: 'Courier New', monospace;
   margin-top: 4rpx;
 }
-.cat-chip.cat-chip-active .cat-chip-name { color: #ffffff; font-weight: bold; }
+.cat-chip.cat-chip-active .cat-chip-name {
+  color: #3E2723;
+  font-weight: bold;
+}
 
-/* ===== 食材列表 ===== */
-.items-section { padding: 0 24rpx; }
+/* ===== Items Section ===== */
+.items-section {
+  padding: 0 24rpx;
+}
 
-/* 空状态 */
+/* Empty state — quest board style */
 .empty-state {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 80rpx 0;
   gap: 12rpx;
+  background: #FFFDF5;
+  border: 3px dashed #8D6E63;
+  margin: 16rpx 0;
 }
 .empty-illus {
   font-size: 80rpx;
   animation: emptyBob 2s ease-in-out infinite;
 }
 @keyframes emptyBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10rpx); }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-10rpx) rotate(-3deg); }
 }
 .empty-msg {
   font-size: 28rpx;
-  color: #475569;
+  color: #5D4037;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
 .empty-hint {
   font-size: 22rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
 }
 .add-first-btn {
-  margin-top: 12rpx;
-  background: #14b8a6;
-  border: 3px solid #1e293b;
-  box-shadow: 4px 4px 0 #1e293b;
+  margin-top: 16rpx;
+  background: linear-gradient(180deg, #FFB300, #FF8F00);
+  border: 3px solid #5D4037;
+  box-shadow: 4px 4px 0 #5D4037;
   padding: 18rpx 48rpx;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 .add-first-btn:active {
-  box-shadow: 1px 1px 0 #1e293b;
+  box-shadow: 1px 1px 0 #5D4037;
   transform: translate(3px, 3px);
 }
 .add-first-text {
   font-size: 28rpx;
-  color: #ffffff;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   font-weight: bold;
+  text-shadow: 1px 1px 0 #FFD54F;
 }
 
-/* 食材卡片网格 */
+/* Items grid — food cards with warm backgrounds */
 .items-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16rpx;
+  padding-bottom: 24rpx;
 }
 .item-card {
-  background: #ffffff;
-  border: 3px solid #1e293b;
-  box-shadow: 4px 4px 0 #1e293b;
+  background: #FFFDF5;
+  border: 3px solid #5D4037;
+  box-shadow: 4px 4px 0 #8D6E63;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -497,11 +588,11 @@
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .item-card:active {
-  box-shadow: 2px 2px 0 #1e293b;
+  box-shadow: 2px 2px 0 #8D6E63;
   transform: translate(2px, 2px);
 }
 
-/* 顶色条 */
+/* Card top stripe — warm tones */
 .card-top-stripe {
   width: 100%;
   height: 18rpx;
@@ -511,30 +602,31 @@
   gap: 6rpx;
   margin-bottom: 14rpx;
 }
-.stripe-fresh   { background: #d1fae5; }
-.stripe-soon    { background: #fef3c7; }
-.stripe-expired { background: #ffe4e6; }
-.stripe-unknown { background: #f1f5f9; }
+.stripe-fresh   { background: linear-gradient(90deg, #66BB6A, #4CAF50); }
+.stripe-soon    { background: linear-gradient(90deg, #FFD54F, #FFC107); }
+.stripe-expired { background: linear-gradient(90deg, #FF8A80, #EF5350); }
+.stripe-unknown { background: linear-gradient(90deg, #D7CCC8, #BCAAA4); }
 .card-status-dot {
   width: 10rpx;
   height: 10rpx;
-  border-radius: 0;
 }
 .card-freeze-badge {
   font-size: 18rpx;
-  color: #60a5fa;
+  color: #42A5F5;
   margin-left: auto;
 }
-
 .card-icon {
   font-size: 76rpx;
   margin-bottom: 10rpx;
   transition: transform 0.2s ease;
+  filter: drop-shadow(2px 2px 0 rgba(93,64,55,0.15));
 }
-.item-card:active .card-icon { transform: scale(0.9); }
+.item-card:active .card-icon {
+  transform: scale(0.9) rotate(-5deg);
+}
 .card-name {
   font-size: 26rpx;
-  color: #1e293b;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   text-align: center;
@@ -542,7 +634,7 @@
 }
 .card-qty {
   font-size: 20rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
   margin-top: 4rpx;
 }
@@ -558,42 +650,45 @@
   font-size: 18rpx;
   font-family: 'Courier New', monospace;
   text-align: center;
+  padding: 2rpx 8rpx;
 }
-.expiry-fresh   { color: #10b981; }
-.expiry-soon    { color: #f59e0b; }
-.expiry-expired { color: #fb7185; }
-.expiry-unknown { color: #94a3b8; }
+.expiry-fresh   { color: #2E7D32; background: rgba(76,175,80,0.1); }
+.expiry-soon    { color: #E65100; background: rgba(255,179,0,0.1); }
+.expiry-expired { color: #C62828; background: rgba(239,83,80,0.1); }
+.expiry-unknown { color: #8D6E63; background: rgba(141,110,99,0.1); }
 
+/* Delete button — pixel X */
 .card-del-btn {
   position: absolute;
   top: 24rpx;
   right: 10rpx;
   width: 36rpx;
   height: 36rpx;
-  background: #fff1f2;
-  border: 2px solid #fecdd3;
+  background: #FFF8E7;
+  border: 2px solid #EF5350;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18rpx;
-  color: #fb7185;
+  color: #EF5350;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   transition: transform 0.1s ease, background 0.1s ease;
 }
 .card-del-btn:active {
-  background: #ffe4e6;
+  background: #FF8A80;
+  color: #FFFDF5;
   transform: scale(0.9);
 }
 
 
-/* ============================================================
-   大冰箱内部模态框
-   ============================================================ */
+/* =============================================================
+   Fridge Interior Modal — Treasure Chest Style
+   ============================================================= */
 .fridge-modal {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(62, 39, 35, 0.8);
   z-index: 100;
   display: flex;
   align-items: flex-end;
@@ -608,28 +703,27 @@
 
 .fridge-interior {
   width: 100%;
-  background: linear-gradient(180deg, #e0f7f4 0%, #ccfbf1 40%, #d1fae5 100%);
-  border-top: 4px solid #1e293b;
-  border-left: 4px solid #1e293b;
-  border-right: 4px solid #1e293b;
-  box-shadow: 0 -6px 0 #0d9488;
+  background: linear-gradient(180deg, #FFF3E0 0%, #FFF8E7 30%, #FFFDE7 100%);
+  border-top: 5px solid #5D4037;
+  border-left: 4px solid #5D4037;
+  border-right: 4px solid #5D4037;
+  box-shadow: 0 -6px 0 #FFB300, inset 0 2px 12px rgba(255,179,0,0.15);
   max-height: 88vh;
   overflow-y: auto;
   transform: translateY(100%);
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border-radius: 0;
 }
 .fridge-modal.fridge-modal-open .fridge-interior {
   transform: translateY(0);
 }
 
-/* 冰箱内部顶部 */
+/* Interior header — warm wood bar */
 .fridge-int-header {
   display: flex;
   align-items: center;
   padding: 20rpx 24rpx 16rpx;
-  background: #0d9488;
-  border-bottom: 3px solid #1e293b;
+  background: linear-gradient(180deg, #795548, #5D4037);
+  border-bottom: 3px solid #3E2723;
   gap: 16rpx;
 }
 .fridge-int-light {
@@ -640,17 +734,19 @@
 .bulb-glow {
   width: 20rpx;
   height: 20rpx;
-  background: #fef08a;
-  border: 2px solid #eab308;
+  background: #FFD54F;
+  border: 2px solid #FFB300;
   border-radius: 50%;
-  box-shadow: 0 0 8px #fef08a;
+  box-shadow: 0 0 10px #FFD54F, 0 0 20px rgba(255,213,79,0.4);
   animation: bulbFlicker 1.5s ease-in-out infinite;
 }
 @keyframes bulbFlicker {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px #fef08a; }
-  50% { opacity: 0.85; box-shadow: 0 0 14px #fef08a; }
+  0%, 100% { opacity: 1; box-shadow: 0 0 10px #FFD54F, 0 0 20px rgba(255,213,79,0.4); }
+  50% { opacity: 0.8; box-shadow: 0 0 16px #FFD54F, 0 0 30px rgba(255,213,79,0.5); }
 }
-.bulb-label { font-size: 22rpx; }
+.bulb-label {
+  font-size: 22rpx;
+}
 .fridge-int-title-wrap {
   flex: 1;
   display: flex;
@@ -659,46 +755,49 @@
 }
 .fridge-int-brand {
   font-size: 20rpx;
-  color: #ffffff;
+  color: #FFD54F;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   letter-spacing: 2rpx;
+  text-shadow: 1px 1px 0 #3E2723;
 }
 .fridge-int-temp {
   font-size: 16rpx;
-  color: #ccfbf1;
+  color: #BCAAA4;
   font-family: 'Courier New', monospace;
   margin-top: 2rpx;
 }
 .fridge-int-close {
   width: 56rpx;
   height: 56rpx;
-  background: rgba(255,255,255,0.2);
-  border: 2px solid rgba(255,255,255,0.5);
+  background: rgba(255,179,0,0.2);
+  border: 2px solid rgba(255,213,79,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background 0.15s ease;
 }
-.fridge-int-close:active { background: rgba(255,255,255,0.4); }
+.fridge-int-close:active {
+  background: rgba(255,179,0,0.5);
+}
 .close-icon {
   font-size: 26rpx;
-  color: #ffffff;
+  color: #FFD54F;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
 
-/* 温度条 */
+/* Temperature bar — golden scan */
 .temp-bar {
   height: 8rpx;
-  background: #99f6e4;
+  background: #FFE0B2;
   position: relative;
   overflow: hidden;
 }
 .temp-indicator {
   height: 100%;
   width: 40%;
-  background: linear-gradient(90deg, #14b8a6, transparent);
+  background: linear-gradient(90deg, #FFB300, transparent);
   animation: tempScan 3s linear infinite;
 }
 @keyframes tempScan {
@@ -706,16 +805,16 @@
   100% { transform: translateX(350%); }
 }
 
-/* 冷冻/冷藏区 */
+/* Interior zones */
 .fridge-int-zone {
   padding: 20rpx 20rpx 16rpx;
 }
 .freezer-zone {
-  background: linear-gradient(180deg, #dbeafe 0%, #eff6ff 100%);
-  border-bottom: 3px solid #93c5fd;
+  background: linear-gradient(180deg, #E3F2FD 0%, #BBDEFB 50%, #E3F2FD 100%);
+  border-bottom: 3px solid #64B5F6;
 }
 .main-zone {
-  background: linear-gradient(180deg, #d1fae5 0%, #ecfdf5 100%);
+  background: linear-gradient(180deg, #FFF8E7 0%, #FFF3E0 100%);
 }
 
 .zone-label-row {
@@ -724,25 +823,27 @@
   gap: 8rpx;
   margin-bottom: 16rpx;
 }
-.zone-label-icon { font-size: 24rpx; }
+.zone-label-icon {
+  font-size: 24rpx;
+}
 .zone-label-text {
   flex: 1;
   font-size: 22rpx;
-  color: #1e293b;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   letter-spacing: 1rpx;
 }
 .zone-item-count {
   font-size: 18rpx;
-  color: #64748b;
+  color: #5D4037;
   font-family: 'Courier New', monospace;
-  background: rgba(255,255,255,0.7);
+  background: rgba(255,179,0,0.2);
   padding: 3rpx 10rpx;
-  border: 1px solid #e2e8f0;
+  border: 2px solid #8D6E63;
 }
 
-/* 冰箱内物品格子 */
+/* Interior item cells — warm treasure tiles */
 .fridge-int-grid {
   display: flex;
   flex-wrap: wrap;
@@ -750,9 +851,9 @@
 }
 .int-item-cell {
   width: 120rpx;
-  background: rgba(255,255,255,0.85);
-  border: 2px solid #1e293b;
-  box-shadow: 3px 3px 0 rgba(30,41,59,0.4);
+  background: #FFFDF5;
+  border: 2px solid #5D4037;
+  box-shadow: 3px 3px 0 rgba(93,64,55,0.4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -763,14 +864,25 @@
 }
 .int-item-cell:active {
   transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 rgba(30,41,59,0.4);
+  box-shadow: 1px 1px 0 rgba(93,64,55,0.4);
 }
-.int-item-frozen { border-color: #93c5fd; box-shadow: 3px 3px 0 #60a5fa; }
-.int-item-fresh  { border-color: #6ee7b7; box-shadow: 3px 3px 0 #34d399; }
-.int-item-emoji { font-size: 52rpx; line-height: 1.1; }
+.int-item-frozen {
+  border-color: #42A5F5;
+  box-shadow: 3px 3px 0 #64B5F6;
+  background: #E3F2FD;
+}
+.int-item-fresh {
+  border-color: #66BB6A;
+  box-shadow: 3px 3px 0 #4CAF50;
+  background: #FFF8E7;
+}
+.int-item-emoji {
+  font-size: 52rpx;
+  line-height: 1.1;
+}
 .int-item-name {
   font-size: 18rpx;
-  color: #1e293b;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   text-align: center;
   font-weight: bold;
@@ -779,7 +891,6 @@
 .int-item-dot {
   width: 14rpx;
   height: 14rpx;
-  border-radius: 0;
   margin-top: 2rpx;
 }
 
@@ -788,16 +899,16 @@
   padding: 20rpx 0;
   text-align: center;
   font-size: 22rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
 }
 
-/* 冰箱内隔板 */
+/* Interior shelf bar */
 .fridge-shelf-bar {
   height: 20rpx;
-  background: #0d9488;
-  border-top: 3px solid #1e293b;
-  border-bottom: 3px solid #1e293b;
+  background: linear-gradient(180deg, #8D6E63, #795548);
+  border-top: 3px solid #5D4037;
+  border-bottom: 3px solid #5D4037;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -806,15 +917,15 @@
 .shelf-support {
   width: 10rpx;
   height: 10rpx;
-  background: #134e4a;
-  border: 1px solid #0f766e;
+  background: #FFB300;
+  border: 1px solid #5D4037;
 }
 
-/* 冰箱底部按钮 */
+/* Interior footer — warm action bar */
 .fridge-int-footer {
   padding: 20rpx 20rpx 32rpx;
-  background: #f0fdf4;
-  border-top: 3px solid #6ee7b7;
+  background: linear-gradient(180deg, #FFF8E7, #FFE0B2);
+  border-top: 3px solid #8D6E63;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -823,27 +934,28 @@
   display: flex;
   align-items: center;
   gap: 10rpx;
-  background: #14b8a6;
-  border: 3px solid #1e293b;
-  box-shadow: 4px 4px 0 #1e293b;
+  background: linear-gradient(180deg, #4CAF50, #388E3C);
+  border: 3px solid #5D4037;
+  box-shadow: 4px 4px 0 #5D4037;
   padding: 18rpx 36rpx;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 .int-add-btn:active {
   transform: translate(3px, 3px);
-  box-shadow: 1px 1px 0 #1e293b;
+  box-shadow: 1px 1px 0 #5D4037;
 }
 .int-add-icon {
   font-size: 30rpx;
-  color: #ffffff;
+  color: #FFFDF5;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
 .int-add-text {
   font-size: 26rpx;
-  color: #ffffff;
+  color: #FFFDF5;
   font-family: 'Courier New', monospace;
   font-weight: bold;
+  text-shadow: 1px 1px 0 #2E7D32;
 }
 .fridge-int-drain {
   display: flex;
@@ -852,19 +964,19 @@
 .drain-hole {
   width: 14rpx;
   height: 14rpx;
-  background: #d1fae5;
-  border: 2px solid #6ee7b7;
+  background: #FFE0B2;
+  border: 2px solid #8D6E63;
   border-radius: 50%;
 }
 
 
-/* ============================================================
-   蜘蛛吃食物动画
-   ============================================================ */
+/* =============================================================
+   Spider Animation — Warm Dark Overlay
+   ============================================================= */
 .spider-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(10, 10, 20, 0.92);
+  background: rgba(62, 39, 35, 0.92);
   z-index: 200;
   display: flex;
   align-items: center;
@@ -887,19 +999,19 @@
   justify-content: center;
 }
 
-/* 背景蜘蛛网线 */
+/* Spider web lines — warm brown tones */
 .web-line {
   position: absolute;
   top: 0; left: 50%;
   width: 2rpx;
-  background: linear-gradient(180deg, rgba(148,163,184,0.6) 0%, transparent 80%);
+  background: linear-gradient(180deg, rgba(141,110,99,0.6) 0%, transparent 80%);
   transform-origin: top center;
 }
 .web-line-1 { height: 180rpx; transform: rotate(-30deg); }
 .web-line-2 { height: 220rpx; transform: rotate(0deg); }
 .web-line-3 { height: 180rpx; transform: rotate(30deg); }
 
-/* 食物 */
+/* Food being eaten */
 .spider-food-wrap {
   display: flex;
   flex-direction: column;
@@ -912,16 +1024,19 @@
   transform: scale(0.05) rotate(15deg);
   opacity: 0;
 }
-.spider-food-emoji { font-size: 110rpx; }
+.spider-food-emoji {
+  font-size: 110rpx;
+  filter: drop-shadow(0 4px 8px rgba(62,39,35,0.5));
+}
 .spider-food-label {
-  color: #e2e8f0;
+  color: #FFD54F;
   font-size: 28rpx;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+  text-shadow: 0 2px 8px rgba(62,39,35,0.8);
 }
 
-/* 蜘蛛 */
+/* Spider creature */
 .spider-creature {
   position: absolute;
   font-size: 72rpx;
@@ -964,24 +1079,24 @@
   100% { transform: translate(-50%, -50%) scale(0.95) rotate(5deg); }
 }
 
-/* 蜘蛛丝 */
+/* Spider thread — warm silk */
 .spider-thread {
   position: absolute;
   top: -120rpx;
   left: 50%;
   width: 3rpx;
   height: 120rpx;
-  background: linear-gradient(180deg, rgba(148,163,184,0.3) 0%, rgba(148,163,184,0.8) 100%);
+  background: linear-gradient(180deg, rgba(141,110,99,0.3) 0%, rgba(188,170,164,0.8) 100%);
   transform: translateX(-50%);
 }
 
-/* 提示文字 */
+/* Spider message */
 .spider-msg {
   position: absolute;
   bottom: 20rpx;
   left: 0; right: 0;
   text-align: center;
-  color: #94a3b8;
+  color: #BCAAA4;
   font-size: 24rpx;
   font-family: 'Courier New', monospace;
   letter-spacing: 1rpx;

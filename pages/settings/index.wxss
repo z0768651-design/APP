@@ -1,69 +1,114 @@
-/* ===== 设置页 - 清爽可爱 ===== */
+/* ===== 设置页 - 温暖像素游戏风 (Stardew Valley / Kairosoft) ===== */
+
+/* --- Page --- */
 .settings-page {
   min-height: 100vh;
-  background: #f0fdf8;
+  background: #FFF8E7;
   padding: 24rpx;
   box-sizing: border-box;
 }
 
-/* 顶部 Header */
+/* --- Header (wood-plank game menu title) --- */
 .settings-header {
   text-align: center;
-  padding: 24rpx 0 36rpx;
+  padding: 24rpx 0 32rpx;
+  background: linear-gradient(180deg, #6D4C41 0%, #5D4037 50%, #4E342E 100%);
+  border: 4rpx solid #3E2723;
+  box-shadow: 6rpx 6rpx 0 #8D6E63;
+  margin-bottom: 24rpx;
+  position: relative;
 }
+.settings-header::before,
+.settings-header::after {
+  content: '';
+  position: absolute;
+  width: 16rpx;
+  height: 16rpx;
+  background: #FFB300;
+}
+.settings-header::before { top: -4rpx; left: -4rpx; }
+.settings-header::after  { top: -4rpx; right: -4rpx; }
 .settings-title {
   display: block;
   font-size: 42rpx;
-  color: #1e293b;
+  color: #FFD54F;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 2rpx;
+  letter-spacing: 4rpx;
+  text-shadow: 2rpx 2rpx 0 #3E2723;
 }
 .settings-subtitle {
   display: block;
   font-size: 20rpx;
-  color: #94a3b8;
+  color: #FFCC80;
   font-family: 'Courier New', monospace;
   margin-top: 8rpx;
   letter-spacing: 3rpx;
 }
 
-/* 分节卡片 */
+/* --- Section Card (wood-frame panel) --- */
 .settings-section {
-  background: #ffffff;
-  border: 3px solid #e2e8f0;
-  box-shadow: 4px 4px 0 #e2e8f0;
+  background: #FFFDF5;
+  border: 4rpx solid #5D4037;
+  box-shadow: 6rpx 6rpx 0 #8D6E63;
   padding: 24rpx;
   margin-bottom: 20rpx;
+  position: relative;
 }
-.settings-section:first-of-type { box-shadow: 4px 4px 0 #14b8a6; }
 .section-label {
   display: block;
   font-size: 26rpx;
-  color: #1e293b;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   margin-bottom: 8rpx;
+  text-shadow: 1rpx 1rpx 0 #D7CCC8;
 }
 .section-desc {
   display: block;
   font-size: 20rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
   margin-bottom: 20rpx;
 }
 
-/* 语言选项网格 */
+/* --- City Input (warm game text field) --- */
+.city-input {
+  width: 100%;
+  padding: 14rpx 18rpx;
+  background: #FFF8E7;
+  border: 3rpx solid #8D6E63;
+  font-size: 26rpx;
+  color: #3E2723;
+  margin-bottom: 10rpx;
+  box-sizing: border-box;
+  font-family: 'Courier New', monospace;
+  box-shadow: inset 2rpx 2rpx 0 #E8D5B7;
+}
+.city-input:focus {
+  border-color: #FFB300;
+  background: #FFF8E1;
+  box-shadow: inset 2rpx 2rpx 0 #FFD54F;
+}
+.input-hint {
+  display: block;
+  font-size: 18rpx;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+  margin-top: 8rpx;
+}
+
+/* --- Language Grid (game item category selector) --- */
 .lang-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14rpx;
 }
 .lang-option {
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
-  box-shadow: 3px 3px 0 #e2e8f0;
-  padding: 20rpx 16rpx;
+  background: linear-gradient(180deg, #FFFDF5 0%, #FFF8E7 100%);
+  border: 3rpx solid #8D6E63;
+  box-shadow: 3rpx 3rpx 0 #D7CCC8;
+  padding: 22rpx 16rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,39 +116,45 @@
   position: relative;
 }
 .lang-option.lang-selected {
-  background: #f0fdfa;
-  border-color: #14b8a6;
-  box-shadow: 3px 3px 0 #14b8a6;
+  background: linear-gradient(180deg, #FFF8E1 0%, #FFD54F 100%);
+  border-color: #5D4037;
+  box-shadow: 3rpx 3rpx 0 #8D6E63;
 }
 .lang-option:active {
-  box-shadow: 1px 1px 0 #1e293b;
-  transform: translate(2px, 2px);
+  box-shadow: 1rpx 1rpx 0 #5D4037;
+  transform: translate(2rpx, 2rpx);
 }
-.lang-flag { font-size: 40rpx; }
+.lang-flag {
+  font-size: 40rpx;
+}
 .lang-name {
   font-size: 22rpx;
-  color: #475569;
+  color: #5D4037;
   font-family: 'Courier New', monospace;
 }
-.lang-option.lang-selected .lang-name { color: #14b8a6; font-weight: bold; }
+.lang-option.lang-selected .lang-name {
+  color: #3E2723;
+  font-weight: bold;
+}
 .lang-check {
   position: absolute;
   top: 8rpx;
   right: 8rpx;
-  background: #14b8a6;
-  color: #ffffff;
+  background: linear-gradient(180deg, #FFD54F 0%, #FFB300 100%);
+  color: #3E2723;
   font-size: 16rpx;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  width: 28rpx;
-  height: 28rpx;
+  width: 30rpx;
+  height: 30rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #1e293b;
+  border: 3rpx solid #5D4037;
+  box-shadow: 1rpx 1rpx 0 #8D6E63;
 }
 
-/* 状态统计 */
+/* --- Stats Grid (RPG-style number displays) --- */
 .stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -111,98 +162,153 @@
   margin-top: 16rpx;
 }
 .stat-box {
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
+  background: linear-gradient(180deg, #FFFDF5 0%, #FFF8E1 100%);
+  border: 3rpx solid #8D6E63;
+  box-shadow: 3rpx 3rpx 0 #D7CCC8;
   padding: 24rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8rpx;
 }
-.stat-box-danger { background: #fff1f2; border-color: #fecdd3; }
+.stat-box-danger {
+  background: linear-gradient(180deg, #FFEBEE 0%, #FFCDD2 100%);
+  border-color: #EF5350;
+  box-shadow: 3rpx 3rpx 0 #EF9A9A;
+}
 .stat-big {
-  font-size: 60rpx;
-  color: #14b8a6;
+  font-size: 64rpx;
+  color: #FFB300;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   line-height: 1;
+  text-shadow: 2rpx 2rpx 0 #5D4037;
 }
-.expired-num { color: #fb7185; }
+.expired-num {
+  color: #EF5350;
+  text-shadow: 2rpx 2rpx 0 #5D4037;
+}
 .stat-desc {
   font-size: 20rpx;
-  color: #94a3b8;
+  color: #5D4037;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
 
-/* 操作列表 */
-.action-list { display: flex; flex-direction: column; gap: 12rpx; margin-top: 16rpx; }
+/* --- Action List (game menu items) --- */
+.action-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12rpx;
+  margin-top: 16rpx;
+}
 .action-item {
-  background: #f8fafc;
-  border: 2px solid #e2e8f0;
-  box-shadow: 3px 3px 0 #e2e8f0;
+  background: linear-gradient(180deg, #FFFDF5 0%, #FFF8E7 100%);
+  border: 3rpx solid #8D6E63;
+  box-shadow: 3rpx 3rpx 0 #D7CCC8;
   padding: 20rpx 16rpx;
   display: flex;
   align-items: center;
   gap: 16rpx;
 }
 .action-item:active {
-  box-shadow: 1px 1px 0 #e2e8f0;
-  transform: translate(2px, 2px);
+  box-shadow: 1rpx 1rpx 0 #5D4037;
+  transform: translate(2rpx, 2rpx);
 }
-.action-item-danger { background: #fff1f2; border-color: #fecdd3; box-shadow: 3px 3px 0 #fecdd3; }
+.action-item-danger {
+  background: linear-gradient(180deg, #FFEBEE 0%, #FFCDD2 100%);
+  border-color: #EF5350;
+  box-shadow: 3rpx 3rpx 0 #EF9A9A;
+}
+.action-item-danger:active {
+  box-shadow: 1rpx 1rpx 0 #EF5350;
+}
+
+/* Action icon wrap */
 .action-icon-wrap {
   width: 56rpx;
   height: 56rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #1e293b;
+  border: 3rpx solid #5D4037;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
   font-size: 28rpx;
 }
-.action-blue   { background: #dbeafe; }
-.action-yellow { background: #fef3c7; }
-.action-red    { background: #ffe4e6; }
-.action-info { flex: 1; }
+.action-blue {
+  background: linear-gradient(180deg, #64B5F6 0%, #42A5F5 100%);
+}
+.action-yellow {
+  background: linear-gradient(180deg, #FFD54F 0%, #FFB300 100%);
+}
+.action-red {
+  background: linear-gradient(180deg, #FF8A80 0%, #EF5350 100%);
+}
+.action-icon {
+  font-size: 28rpx;
+}
+
+/* Action info */
+.action-info {
+  flex: 1;
+}
 .action-title {
   display: block;
   font-size: 26rpx;
-  color: #1e293b;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
-.action-title-danger { color: #fb7185; }
+.action-title-danger {
+  color: #C62828;
+}
 .action-desc {
   display: block;
   font-size: 20rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
   margin-top: 4rpx;
 }
-.action-arrow { font-size: 20rpx; color: #cbd5e1; font-family: 'Courier New', monospace; }
-
-/* 颜色图例 */
-.legend-list { display: flex; flex-direction: column; gap: 16rpx; margin-top: 16rpx; }
-.legend-item { display: flex; align-items: center; gap: 16rpx; }
-.legend-dot {
-  width: 24rpx;
-  height: 24rpx;
-  border: 2px solid #1e293b;
-  flex-shrink: 0;
+.action-arrow {
+  font-size: 22rpx;
+  color: #FFB300;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
 }
-.dot-fresh   { background: #10b981; }
-.dot-soon    { background: #f59e0b; }
-.dot-expired { background: #fb7185; }
-.dot-unknown { background: #cbd5e1; }
+
+/* --- Legend (status color dots) --- */
+.legend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.legend-dot {
+  width: 26rpx;
+  height: 26rpx;
+  border: 3rpx solid #5D4037;
+  flex-shrink: 0;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.dot-fresh   { background: #4CAF50; }
+.dot-soon    { background: #FFB300; }
+.dot-expired { background: #EF5350; }
+.dot-unknown { background: #D7CCC8; }
 .legend-text {
   font-size: 24rpx;
-  color: #475569;
+  color: #3E2723;
   font-family: 'Courier New', monospace;
 }
 
-/* 底部装饰 */
+/* --- Footer (cozy pixel decoration) --- */
 .footer {
   text-align: center;
-  padding: 40rpx 0 20rpx;
+  padding: 40rpx 0 24rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -211,20 +317,21 @@
 .footer-pixel {
   display: block;
   font-size: 20rpx;
-  color: #e2e8f0;
+  color: #D7CCC8;
   font-family: 'Courier New', monospace;
-  letter-spacing: 1rpx;
+  letter-spacing: 2rpx;
 }
 .footer-text {
   display: block;
   font-size: 22rpx;
-  color: #94a3b8;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
   letter-spacing: 2rpx;
+  text-shadow: 1rpx 1rpx 0 #D7CCC8;
 }
 .footer-sub {
   display: block;
   font-size: 18rpx;
-  color: #cbd5e1;
+  color: #BCAAA4;
   font-family: 'Courier New', monospace;
 }

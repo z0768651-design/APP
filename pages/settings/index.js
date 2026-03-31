@@ -24,6 +24,13 @@ Page({
     })
   },
 
+  onCityInput(e) {
+    const city = e.detail.value
+    const newSettings = { ...this.data.settings, city }
+    storage.saveSettings(newSettings)
+    this.setData({ settings: newSettings })
+  },
+
   onLangSelect(e) {
     const { id } = e.currentTarget.dataset
     const newSettings = { ...this.data.settings, language: id }

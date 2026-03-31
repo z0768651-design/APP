@@ -1,248 +1,547 @@
-/* ===== 像素之家 - 俯视图 ===== */
+/* =============================================================
+   像素之家 - 温暖像素经营游戏风格
+   参考: 星露谷物语 / 住宅梦物语 / 像素小店
+   配色: 大地色系 + 金色点缀 + 木质边框
+   ============================================================= */
+
+/* ===== 页面容器 ===== */
 .home-wrap {
   min-height: 100vh;
-  background: #1e293b;
+  background: #FFF8E7;
+}
+.home-wrap.light-bg {
+  background: #FFF8E7;
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255,179,0,0.04) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(76,175,80,0.03) 0%, transparent 50%);
 }
 
-/* ===== 顶部问候 ===== */
-.home-header {
-  padding: 32rpx 28rpx 24rpx;
-  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
-  border-bottom: 3px solid #14b8a6;
+/* ===== 顶部状态栏 - RPG风格 ===== */
+.game-header {
+  padding: 24rpx 20rpx 16rpx;
+  background: linear-gradient(180deg, #4E342E 0%, #3E2723 100%);
+  border-bottom: 6rpx solid #FFB300;
+  position: relative;
 }
-.home-greeting-row {
+/* 金色底边光效 */
+.game-header::after {
+  content: '';
+  position: absolute;
+  bottom: -6rpx; left: 0; right: 0;
+  height: 3rpx;
+  background: linear-gradient(90deg, transparent, #FFD54F, transparent);
+}
+
+.header-top-row {
   display: flex;
   align-items: center;
-  gap: 16rpx;
-  margin-bottom: 20rpx;
+  justify-content: space-between;
+  margin-bottom: 14rpx;
+}
+.greeting-area {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
 }
 .time-icon {
-  font-size: 48rpx;
+  font-size: 40rpx;
+  filter: drop-shadow(0 2rpx 4rpx rgba(0,0,0,0.3));
   animation: iconBob 3s ease-in-out infinite;
 }
 @keyframes iconBob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6rpx); }
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-4rpx); }
 }
-.home-greeting-text { display: flex; flex-direction: column; gap: 2rpx; }
+.greeting-info { display: flex; flex-direction: column; gap: 2rpx; }
 .greeting-main {
-  font-size: 40rpx;
-  color: #f1f5f9;
+  font-size: 32rpx;
+  color: #FFD54F;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 2rpx;
+  text-shadow: 1rpx 1rpx 0 #3E2723;
 }
-.greeting-sub {
+.greeting-clock {
   font-size: 22rpx;
-  color: #64748b;
+  color: #FFCC80;
   font-family: 'Courier New', monospace;
 }
-/* 小统计行 */
-.home-mini-stats {
+
+/* 等级和金币 */
+.level-badge {
   display: flex;
-  align-items: center;
-  gap: 20rpx;
-  background: rgba(255,255,255,0.05);
-  border: 2px solid #334155;
-  padding: 14rpx 20rpx;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rpx;
 }
-.mini-stat { display: flex; flex-direction: column; align-items: center; gap: 2rpx; }
-.mini-stat-num {
-  font-size: 36rpx;
-  color: #e2e8f0;
+.level-text {
+  font-size: 28rpx;
+  color: #FFD54F;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+  text-shadow: 2rpx 2rpx 0 #3E2723;
+  background: linear-gradient(180deg, rgba(255,179,0,0.2), transparent);
+  padding: 2rpx 12rpx;
+  border: 2rpx solid #FFB300;
+}
+.coins-text {
+  font-size: 20rpx;
+  color: #FFB300;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  line-height: 1;
-}
-.mini-stat-lbl {
-  font-size: 18rpx;
-  color: #64748b;
-  font-family: 'Courier New', monospace;
-}
-.warn-num { color: #fbbf24; }
-.danger-num { color: #fb7185; }
-.mini-stat-divider {
-  width: 2px;
-  height: 40rpx;
-  background: #334155;
 }
 
-/* ===== 房子容器 ===== */
-.house-container {
-  margin: 24rpx 16rpx;
-  border: 4px solid #475569;
-  box-shadow: 0 0 0 4px #1e293b, 0 0 0 8px #334155;
-  background: #334155;
+/* ===== RPG状态条 ===== */
+.status-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-bottom: 14rpx;
 }
-
-/* 屋顶装饰 */
-.house-roof {
-  background: #14b8a6;
-  border-bottom: 4px solid #1e293b;
-  padding: 12rpx 16rpx;
+.stat-bar-item {
   display: flex;
   align-items: center;
   gap: 8rpx;
 }
-.roof-pixel {
-  width: 18rpx;
-  height: 18rpx;
-  background: #0d9488;
-  border: 2px solid #1e293b;
+.stat-icon { font-size: 24rpx; }
+.stat-bar-track {
+  flex: 1;
+  height: 22rpx;
+  background: #3E2723;
+  border: 3rpx solid #5D4037;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2rpx 4rpx rgba(0,0,0,0.4);
 }
-.roof-p1, .roof-p4 { background: #f59e0b; }
-.roof-p2, .roof-p3 { background: #34d399; }
-.roof-main { flex: 1; text-align: center; }
-.roof-title {
+.stat-bar-fill {
+  height: 100%;
+  position: relative;
+  transition: width 0.5s ease;
+}
+.stat-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent);
+}
+.energy-fill { background: linear-gradient(90deg, #FFB300, #FFC107); }
+.mood-fill { background: linear-gradient(90deg, #EF5350, #FF8A80); }
+.hunger-fill { background: linear-gradient(90deg, #FF9800, #FFB74D); }
+.hygiene-fill { background: linear-gradient(90deg, #42A5F5, #64B5F6); }
+.stat-val {
   font-size: 20rpx;
-  color: #ffffff;
+  color: #FFCC80;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 2rpx;
+  min-width: 48rpx;
+  text-align: right;
 }
 
-/* 房子主体 */
-.house-body {
-  background: #475569;
-  border: 3px solid #64748b;
-}
-
-/* 北墙（顶部）有窗户 */
-.wall-north {
-  height: 32rpx;
-  background: #64748b;
-  border-bottom: 3px solid #1e293b;
+/* 食材概览条 */
+.food-stats-row {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  padding: 0 40rpx;
+  gap: 16rpx;
+  background: rgba(255,179,0,0.1);
+  border: 2rpx solid rgba(255,179,0,0.3);
+  padding: 10rpx 16rpx;
 }
-.window-frame {
-  display: flex;
-  gap: 4rpx;
-  background: #1e293b;
-  border: 2px solid #1e293b;
-  padding: 3rpx;
-}
-.window-pane {
-  width: 24rpx;
-  height: 16rpx;
-  background: #bae6fd;
-  opacity: 0.8;
-  animation: windowShine 4s ease-in-out infinite;
-}
-.window-pane:nth-child(2) { animation-delay: 0.5s; }
-@keyframes windowShine {
-  0%, 100% { background: #bae6fd; opacity: 0.8; }
-  50% { background: #e0f2fe; opacity: 1; }
-}
-.wall-gap { flex: 1; }
-
-/* 楼层行 */
-.floor-row {
-  display: flex;
-  min-height: 280rpx;
-}
-
-/* 房间通用 */
-.room {
-  flex: 1;
+.food-stat {
   display: flex;
   flex-direction: column;
-  border: 2px solid #1e293b;
+  align-items: center;
+  gap: 2rpx;
 }
-.room-label {
+.food-stat-num {
+  font-size: 28rpx;
+  color: #FFD54F;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.food-stat-lbl {
+  font-size: 16rpx;
+  color: #BCAAA4;
+  font-family: 'Courier New', monospace;
+}
+.warn-c { color: #FFB300; }
+.danger-c { color: #EF5350; }
+.food-stat-div {
+  width: 2rpx;
+  height: 32rpx;
+  background: rgba(255,255,255,0.15);
+}
+.food-stat-spacer { flex: 1; }
+.alarm-indicator {
   display: flex;
   align-items: center;
   gap: 6rpx;
-  padding: 6rpx 12rpx;
-  border-bottom: 2px solid #1e293b;
 }
-.room-label-icon { font-size: 20rpx; }
-.room-label-text {
+.alarm-icon { font-size: 20rpx; }
+.alarm-time-txt {
   font-size: 18rpx;
-  color: #ffffff;
+  color: #FFD54F;
+  font-family: 'Courier New', monospace;
+}
+
+/* ===== 房子容器 ===== */
+.house-container {
+  padding: 16rpx 12rpx 8rpx;
+}
+
+/* ===== 屋顶 - 温暖红棕色 ===== */
+.house-roof {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0 20rpx;
+  position: relative;
+}
+.roof-pixel {
+  width: 24rpx;
+  height: 24rpx;
+}
+.roof-p1 { background: #8D6E63; margin-bottom: -4rpx; }
+.roof-p2 { background: #A1887F; width: 20rpx; height: 20rpx; margin-bottom: -2rpx; }
+.roof-p3 { background: #A1887F; width: 20rpx; height: 20rpx; margin-bottom: -2rpx; }
+.roof-p4 { background: #8D6E63; margin-bottom: -4rpx; }
+.roof-main {
+  flex: 1;
+  background: linear-gradient(180deg, #A1887F 0%, #8D6E63 40%, #795548 100%);
+  border: 4rpx solid #5D4037;
+  border-bottom: none;
+  padding: 12rpx 0 8rpx;
+  text-align: center;
+  box-shadow: inset 0 3rpx 0 rgba(255,255,255,0.15);
+}
+.roof-title {
+  font-size: 22rpx;
+  color: #FFD54F;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 1rpx;
+  letter-spacing: 4rpx;
+  text-shadow: 1rpx 1rpx 0 #3E2723;
 }
-.room-floor {
-  flex: 1;
+
+/* ===== 房子主体 ===== */
+.house-body {
+  border: 5rpx solid #5D4037;
+  background: #D7CCC8;
+  position: relative;
+  box-shadow: 6rpx 6rpx 0 #8D6E63;
+}
+
+/* ===== 像素小人 ===== */
+.character {
+  position: absolute;
+  z-index: 10;
+  transition: left 0.6s ease, top 0.6s ease;
+}
+.char-body {
   display: flex;
-  flex-wrap: wrap;
-  align-content: flex-start;
-  gap: 10rpx;
-  padding: 14rpx;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
-
-/* 厨房 */
-.kitchen-room { }
-.kitchen-label { background: #065f46; }
-.kitchen-floor {
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
-    #d1fae5;
+.char-head {
+  width: 28rpx;
+  height: 28rpx;
+  background: #FFCC80;
+  border: 3rpx solid #5D4037;
+  border-radius: 4rpx;
+  position: relative;
 }
-
-/* 客厅 */
-.living-room { }
-.living-label { background: #78350f; }
-.living-floor {
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
-    #fef9c3;
-}
-
-/* 卧室 */
-.bedroom { }
-.bedroom-label { background: #4c1d95; }
-.bedroom-floor {
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 30rpx),
-    #ede9fe;
-}
-
-/* 卫生间 */
-.bathroom { }
-.bathroom-label { background: #1e40af; }
-.bathroom-floor {
-  background:
-    repeating-conic-gradient(#dbeafe 0% 25%, #bfdbfe 0% 50%) 0 0 / 24rpx 24rpx;
-}
-
-/* 竖向隔墙 */
-.wall-vert {
+.char-torso {
   width: 24rpx;
-  background: #64748b;
-  border-left: 2px solid #1e293b;
-  border-right: 2px solid #1e293b;
+  height: 20rpx;
+  background: #42A5F5;
+  border: 2rpx solid #1565C0;
+  margin-top: -2rpx;
+}
+.char-leg {
+  width: 10rpx;
+  height: 14rpx;
+  background: #5D4037;
+  border: 2rpx solid #3E2723;
+  position: absolute;
+  bottom: -14rpx;
+}
+.char-leg-l { left: 2rpx; }
+.char-leg-r { right: 2rpx; }
+.char-walking .char-leg-l {
+  animation: walkL 0.4s ease-in-out infinite alternate;
+}
+.char-walking .char-leg-r {
+  animation: walkR 0.4s ease-in-out infinite alternate;
+}
+@keyframes walkL {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-4rpx); }
+}
+@keyframes walkR {
+  0% { transform: translateY(-4rpx); }
+  100% { transform: translateY(0); }
+}
+.char-shadow {
+  width: 30rpx;
+  height: 8rpx;
+  background: rgba(62,39,35,0.2);
+  border-radius: 50%;
+  margin-top: 4rpx;
+}
+.char-dir-up .char-torso { background: #1E88E5; }
+.char-dir-down .char-torso { background: #42A5F5; }
+.char-dir-left .char-body { transform: scaleX(-1); }
+
+/* ===== 小狗 ===== */
+.dog-character {
+  position: absolute;
+  z-index: 9;
+  transition: left 0.8s ease, top 0.8s ease;
+}
+.dog-body {
+  position: relative;
+  width: 36rpx;
+  height: 30rpx;
+}
+.dog-head {
+  width: 20rpx;
+  height: 18rpx;
+  background: #FFB74D;
+  border: 2rpx solid #5D4037;
+  position: absolute;
+  top: 0;
+  left: 8rpx;
+  border-radius: 3rpx;
+}
+.dog-ear {
+  width: 8rpx;
+  height: 10rpx;
+  background: #FF8F00;
+  border: 2rpx solid #5D4037;
+  position: absolute;
+  top: -6rpx;
+}
+.dog-ear-l { left: 8rpx; }
+.dog-ear-r { right: 8rpx; }
+.dog-eye {
+  width: 4rpx;
+  height: 4rpx;
+  background: #3E2723;
+  position: absolute;
+  top: 6rpx;
+}
+.dog-eye-l { left: 12rpx; }
+.dog-eye-r { right: 12rpx; }
+.dog-nose {
+  width: 6rpx;
+  height: 4rpx;
+  background: #3E2723;
+  position: absolute;
+  top: 12rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.dog-torso {
+  width: 30rpx;
+  height: 16rpx;
+  background: #FFB74D;
+  border: 2rpx solid #5D4037;
+  position: absolute;
+  top: 14rpx;
+  left: 3rpx;
+}
+.dog-tail {
+  width: 10rpx;
+  height: 6rpx;
+  background: #FFB74D;
+  border: 2rpx solid #5D4037;
+  position: absolute;
+  top: 12rpx;
+  right: -8rpx;
+  animation: wagTail 0.5s ease-in-out infinite alternate;
+}
+@keyframes wagTail {
+  0% { transform: rotate(-15deg); }
+  100% { transform: rotate(15deg); }
+}
+.dog-leg {
+  width: 6rpx;
+  height: 8rpx;
+  background: #FF8F00;
+  border: 2rpx solid #5D4037;
+  position: absolute;
+  bottom: -6rpx;
+}
+.dog-leg-fl { left: 4rpx; }
+.dog-leg-fr { left: 14rpx; }
+.dog-leg-bl { right: 10rpx; }
+.dog-leg-br { right: 2rpx; }
+.dog-dir-left .dog-body { transform: scaleX(-1); }
+.dog-walking .dog-leg-fl { animation: walkL 0.3s infinite alternate; }
+.dog-walking .dog-leg-br { animation: walkR 0.3s infinite alternate; }
+.dog-state-happy .dog-tail { animation: wagTail 0.2s infinite alternate; }
+.dog-state-eating .dog-head { animation: dogEat 0.3s infinite alternate; }
+@keyframes dogEat {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(3rpx); }
+}
+.dog-state-sleeping .dog-body { opacity: 0.7; }
+.dog-state-playing .dog-body { animation: dogBounce 0.4s infinite; }
+@keyframes dogBounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-6rpx); }
+}
+.dog-bubble {
+  position: absolute;
+  top: -40rpx;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: #FFFDF5;
+  border: 3rpx solid #5D4037;
+  padding: 4rpx 10rpx;
+  font-size: 18rpx;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all 0.3s;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.dog-bubble.bubble-show {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+.dog-bubble-text { font-size: 18rpx; }
+.dog-shadow {
+  width: 26rpx;
+  height: 6rpx;
+  background: rgba(62,39,35,0.15);
+  border-radius: 50%;
+  position: absolute;
+  bottom: -8rpx;
+  left: 5rpx;
+}
+
+/* ===== 北墙 ===== */
+.wall-north {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  gap: 12rpx;
+  padding: 10rpx 20rpx;
+  background: linear-gradient(180deg, #795548 0%, #8D6E63 100%);
+  border-bottom: 4rpx solid #5D4037;
 }
-.door-opening-h {
+.window-frame {
+  display: flex;
+  gap: 3rpx;
+  background: #5D4037;
+  padding: 4rpx;
+  border: 2rpx solid #3E2723;
+}
+.window-pane {
+  width: 36rpx;
+  height: 32rpx;
+  background: linear-gradient(135deg, #90CAF9 0%, #64B5F6 50%, #42A5F5 100%);
+  border: 1rpx solid #1E88E5;
+}
+.wall-gap { flex: 1; }
+
+/* ===== 房间 ===== */
+.floor-row {
+  display: flex;
+  min-height: 240rpx;
+}
+.room {
+  position: relative;
   display: flex;
   flex-direction: column;
+}
+.kitchen-room { flex: 0 0 39%; }
+.living-room { flex: 0 0 61%; }
+.bedroom { flex: 0 0 60%; }
+.bathroom { flex: 0 0 40%; }
+
+/* 房间标签 */
+.room-label {
+  display: flex;
   align-items: center;
+  gap: 4rpx;
+  padding: 4rpx 10rpx;
+  position: absolute;
+  top: 4rpx;
+  left: 4rpx;
+  z-index: 5;
+  opacity: 0.8;
+}
+.room-label-icon { font-size: 16rpx; }
+.room-label-text {
+  font-size: 14rpx;
+  color: #5D4037;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* 房间地板 */
+.room-floor {
+  flex: 1;
+  position: relative;
+  padding: 24rpx 8rpx 8rpx;
+}
+/* 厨房 - 赭石色瓷砖 */
+.kitchen-floor {
+  background:
+    repeating-conic-gradient(#EFEBE9 0% 25%, #D7CCC8 0% 50%) 0 0 / 40rpx 40rpx;
+}
+/* 客厅 - 温暖木地板 */
+.living-floor {
+  background: repeating-linear-gradient(
+    90deg,
+    #D7CCC8 0, #D7CCC8 30rpx,
+    #EFEBE9 30rpx, #EFEBE9 32rpx
+  );
+}
+/* 卧室 - 柔软地毯 */
+.bedroom-floor {
+  background: #E8D5B7;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0, transparent 16rpx,
+      rgba(93,64,55,0.05) 16rpx, rgba(93,64,55,0.05) 17rpx
+    );
+}
+/* 卫生间 - 浅蓝白瓷砖 */
+.bathroom-floor {
+  background: repeating-conic-gradient(#E3F2FD 0% 25%, #BBDEFB 0% 50%) 0 0 / 36rpx 36rpx;
+}
+
+/* 隔墙 */
+.wall-vert {
+  width: 10rpx;
+  background: linear-gradient(180deg, #795548, #5D4037);
+  border-left: 2rpx solid #3E2723;
+  border-right: 2rpx solid #3E2723;
+  position: relative;
+}
+.door-opening-h {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  height: 50rpx;
+  background: #D7CCC8;
 }
 .door-frame-h {
-  background: #334155;
-  border: 1px solid #94a3b8;
-  padding: 4rpx 2rpx;
+  width: 100%;
+  height: 100%;
+  border-top: 3rpx solid #8D6E63;
+  border-bottom: 3rpx solid #8D6E63;
 }
-.door-emoji-h { font-size: 20rpx; }
 
 /* 走廊 */
 .hallway {
-  height: 36rpx;
-  border-top: 2px solid #1e293b;
-  border-bottom: 2px solid #1e293b;
-  background: #94a3b8;
-  overflow: hidden;
+  height: 20rpx;
+  border-top: 3rpx solid #5D4037;
+  border-bottom: 3rpx solid #5D4037;
 }
 .hallway-floor {
   display: flex;
@@ -250,180 +549,1574 @@
 }
 .floor-tile {
   flex: 1;
-  border-right: 1px solid #64748b;
-  background: #94a3b8;
-  animation: tileShimmer 3s ease-in-out infinite;
+  background: #D7CCC8;
+  border-right: 1rpx solid #BCAAA4;
 }
-.floor-tile:nth-child(odd) { background: #a1afbe; }
-.floor-tile:nth-child(2) { animation-delay: 0.2s; }
-.floor-tile:nth-child(3) { animation-delay: 0.4s; }
-.floor-tile:nth-child(4) { animation-delay: 0.6s; }
-.floor-tile:nth-child(5) { animation-delay: 0.8s; }
-@keyframes tileShimmer {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.85; }
-}
+.floor-tile:last-child { border-right: none; }
 
-/* 南墙（底部）大门 */
+/* 南墙 + 大门 */
 .wall-south {
-  height: 50rpx;
-  background: #64748b;
-  border-top: 3px solid #1e293b;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  padding: 6rpx 20rpx;
+  background: linear-gradient(180deg, #8D6E63, #795548);
+  border-top: 4rpx solid #5D4037;
 }
 .main-door-frame {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: #334155;
-  border: 2px solid #1e293b;
-  border-bottom: none;
-  padding: 4rpx 16rpx 0;
-  transition: background 0.15s ease;
+  gap: 2rpx;
 }
-.main-door-frame:active { background: #475569; }
-.main-door-emoji { font-size: 26rpx; }
+.door-topdown {
+  position: relative;
+  width: 44rpx;
+  height: 28rpx;
+}
+.door-panel {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #A1887F, #8D6E63);
+  border: 3rpx solid #5D4037;
+}
+.door-knob {
+  position: absolute;
+  right: 6rpx;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8rpx;
+  height: 8rpx;
+  background: #FFB300;
+  border: 2rpx solid #5D4037;
+  border-radius: 50%;
+}
 .main-door-label {
   font-size: 14rpx;
-  color: #94a3b8;
+  color: #FFD54F;
   font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-shadow: 1rpx 1rpx 0 #3E2723;
 }
 
-/* ===== 家具通用样式 ===== */
-.furniture-item {
-  width: 110rpx;
-  min-height: 110rpx;
+/* ===== 家具通用 ===== */
+.furn-pos {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 10rpx 6rpx;
+  gap: 2rpx;
   position: relative;
-  gap: 4rpx;
-  border: 2px solid #1e293b;
-  box-shadow: 3px 3px 0 rgba(30,41,59,0.5);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-  background: rgba(255,255,255,0.85);
 }
-.furniture-item:active {
-  transform: translate(2px, 2px);
-  box-shadow: 1px 1px 0 rgba(30,41,59,0.5);
-}
-.furniture-wide {
-  width: 100%;
-  min-height: 80rpx;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding: 10rpx 14rpx;
-  gap: 10rpx;
-}
-
-.furniture-emoji { font-size: 48rpx; line-height: 1; }
-.furniture-wide .furniture-emoji { font-size: 40rpx; }
-.furniture-name {
-  font-size: 18rpx;
-  color: #1e293b;
+.furn-label {
+  font-size: 14rpx;
+  color: #5D4037;
   font-family: 'Courier New', monospace;
   font-weight: bold;
   text-align: center;
 }
-.furniture-wide .furniture-name { font-size: 20rpx; }
-
-/* 冰箱专属样式（有功能高亮） */
-.furniture-fridge {
-  background: #e0f2fe;
-  border-color: #14b8a6;
-  box-shadow: 3px 3px 0 #14b8a6;
-  animation: fridgeGlow 2.5s ease-in-out infinite;
+.furn-active {
+  animation: furnGlow 0.5s ease-in-out infinite alternate;
 }
-@keyframes fridgeGlow {
-  0%, 100% { box-shadow: 3px 3px 0 #14b8a6; border-color: #14b8a6; }
-  50% { box-shadow: 4px 4px 0 #0d9488, 0 0 12px rgba(20,184,166,0.3); border-color: #0d9488; }
-}
-.furniture-fridge .furniture-name { color: #0d9488; }
-.furniture-active {
-  animation: furnitureClick 0.3s ease-out forwards !important;
-}
-@keyframes furnitureClick {
-  0%  { transform: scale(1); }
-  40% { transform: scale(0.88) translate(1px, 1px); }
-  100% { transform: scale(1); }
+@keyframes furnGlow {
+  0% { filter: drop-shadow(0 0 2rpx #FFB300); }
+  100% { filter: drop-shadow(0 0 8rpx #FFD54F); }
 }
 
-/* 冰箱光晕 */
-.furniture-glow {
-  position: absolute;
-  inset: -4rpx;
-  border: 2px solid rgba(20,184,166,0.5);
-  pointer-events: none;
-  animation: glowPulse 2s ease-in-out infinite;
-}
-@keyframes glowPulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
-}
-
-/* 冰箱数字角标 */
+/* 家具徽章 */
 .furniture-badge {
   position: absolute;
   top: -8rpx;
   right: -8rpx;
-  background: #fb7185;
-  border: 2px solid #1e293b;
-  min-width: 32rpx;
-  height: 32rpx;
+  background: #EF5350;
+  border: 2rpx solid #B71C1C;
+  min-width: 24rpx;
+  height: 24rpx;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 6rpx;
+  z-index: 3;
 }
 .badge-num {
-  font-size: 18rpx;
-  color: #ffffff;
+  font-size: 14rpx;
+  color: #fff;
   font-family: 'Courier New', monospace;
   font-weight: bold;
 }
 
-/* 待开放家具 */
-.furniture-coming {
-  background: rgba(255,255,255,0.6);
-  border-color: #cbd5e1;
-  box-shadow: 3px 3px 0 #cbd5e1;
-  opacity: 0.85;
+/* ===== 家具位置 ===== */
+.furn-fridge-pos { margin-bottom: 8rpx; }
+.furn-stove-pos { margin-bottom: 8rpx; }
+.furn-sink-pos {}
+.furn-cabinet-pos {}
+.furn-tv-pos { margin-bottom: 8rpx; }
+.furn-sofa-pos { margin-bottom: 8rpx; }
+.furn-table-pos {}
+.furn-plant-pos {}
+.furn-bed-pos { margin-bottom: 8rpx; }
+.furn-wardrobe-pos { margin-bottom: 8rpx; }
+.furn-desk-pos {}
+.furn-gf-pos {}
+.furn-shower-pos { margin-bottom: 8rpx; }
+.furn-toilet-pos { margin-bottom: 8rpx; }
+.furn-basin-pos {}
+
+/* ===== 冰箱 ===== */
+.topdown-fridge {
+  width: 48rpx;
+  height: 56rpx;
+  background: #FFFDF5;
+  border: 3rpx solid #5D4037;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
 }
-.coming-soon-tag {
+.fridge-top {
+  width: 100%;
+  height: 45%;
+  background: #E3F2FD;
+  border-bottom: 2rpx solid #5D4037;
+}
+.fridge-bottom {
+  width: 100%;
+  height: 55%;
+  background: #FFFDF5;
+}
+.fridge-handle {
   position: absolute;
-  bottom: 4rpx;
   right: 4rpx;
-  font-size: 14rpx;
-  color: #94a3b8;
-  font-family: 'Courier New', monospace;
-  background: rgba(255,255,255,0.8);
-  padding: 1rpx 5rpx;
-  border: 1px solid #e2e8f0;
+  top: 8rpx;
+  width: 4rpx;
+  height: 12rpx;
+  background: #FFB300;
+  border: 1rpx solid #5D4037;
+}
+.fridge-handle-b { top: auto; bottom: 10rpx; }
+
+/* ===== 灶台 ===== */
+.topdown-stove {
+  width: 52rpx;
+  height: 44rpx;
+  background: #424242;
+  border: 3rpx solid #212121;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.stove-burner {
+  width: 14rpx;
+  height: 14rpx;
+  background: #616161;
+  border: 2rpx solid #424242;
+  border-radius: 50%;
+  position: absolute;
+}
+.stove-b1 { top: 4rpx; left: 4rpx; }
+.stove-b2 { top: 4rpx; right: 4rpx; }
+.stove-b3 { bottom: 10rpx; left: 4rpx; }
+.stove-b4 { bottom: 10rpx; right: 4rpx; }
+.stove-knobs {
+  position: absolute;
+  bottom: 2rpx;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 4rpx;
+}
+.stove-knob {
+  width: 6rpx;
+  height: 6rpx;
+  background: #FFB300;
+  border: 1rpx solid #5D4037;
+  border-radius: 50%;
+}
+.stove-flame {
+  position: absolute;
+  top: -8rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rpx;
+  height: 16rpx;
+  background: #FF6D00;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  animation: flameFlicker 0.3s infinite alternate;
+  box-shadow: 0 0 8rpx #FF6D00;
+}
+@keyframes flameFlicker {
+  0% { transform: translateX(-50%) scale(1); opacity: 1; }
+  100% { transform: translateX(-50%) scale(0.8); opacity: 0.8; }
 }
 
-/* ===== 底部提示 ===== */
-.home-footer {
-  padding: 24rpx 28rpx;
+/* ===== 水槽 ===== */
+.topdown-sink {
+  width: 42rpx;
+  height: 36rpx;
+  background: #E0E0E0;
+  border: 3rpx solid #5D4037;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.sink-basin {
+  width: 28rpx;
+  height: 20rpx;
+  background: #BDBDBD;
+  border: 2rpx solid #757575;
+  position: absolute;
+  bottom: 4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.sink-drain {
+  width: 6rpx;
+  height: 6rpx;
+  background: #424242;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.sink-faucet {
+  width: 8rpx;
+  height: 16rpx;
+  background: #9E9E9E;
+  border: 2rpx solid #616161;
+  position: absolute;
+  top: -4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2rpx 2rpx 0 0;
+}
+
+/* ===== 橱柜 ===== */
+.topdown-cabinet {
+  width: 60rpx;
+  height: 28rpx;
+  background: #A1887F;
+  border: 3rpx solid #5D4037;
+  display: flex;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.cabinet-door {
+  flex: 1;
+  border-right: 2rpx solid #795548;
+}
+.cabinet-door:last-child { border-right: none; }
+.cabinet-knob {
+  width: 4rpx;
+  height: 4rpx;
+  background: #FFB300;
+  border: 1rpx solid #5D4037;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 50%;
+}
+.c-k1 { left: 8rpx; }
+.c-k2 { left: 50%; transform: translate(-50%, -50%); }
+.c-k3 { right: 8rpx; }
+
+/* ===== 电视 ===== */
+.topdown-tv {
+  width: 56rpx;
+  height: 40rpx;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.tv-screen {
+  width: 100%;
+  height: 32rpx;
+  background: #212121;
+  border: 3rpx solid #424242;
+}
+.tv-screen.tv-on {
+  background: linear-gradient(135deg, #42A5F5, #64B5F6);
+  animation: tvStatic 0.5s infinite;
+  box-shadow: 0 0 8rpx rgba(66,165,245,0.5);
+}
+@keyframes tvStatic {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.95; }
+}
+.tv-stand {
+  width: 36rpx;
+  height: 8rpx;
+  background: #5D4037;
+  margin: 0 auto;
+  border: 1rpx solid #3E2723;
+}
+
+/* ===== 沙发 ===== */
+.topdown-sofa {
+  width: 68rpx;
+  height: 36rpx;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.sofa-back {
+  width: 100%;
+  height: 12rpx;
+  background: #8D6E63;
+  border: 2rpx solid #5D4037;
+}
+.sofa-seat {
+  width: 100%;
+  height: 24rpx;
+  background: #A1887F;
+  border: 2rpx solid #5D4037;
+  border-top: none;
+}
+.sofa-arm {
+  position: absolute;
+  width: 10rpx;
+  height: 100%;
+  background: #795548;
+  border: 2rpx solid #5D4037;
+  top: 0;
+}
+.sofa-arm-l { left: -8rpx; }
+.sofa-arm-r { right: -8rpx; }
+.sofa-cushion {
+  width: 16rpx;
+  height: 12rpx;
+  background: #BCAAA4;
+  border: 1rpx solid #8D6E63;
+  position: absolute;
+  bottom: 4rpx;
+}
+.s-c1 { left: 6rpx; }
+.s-c2 { left: 50%; transform: translateX(-50%); }
+.s-c3 { right: 6rpx; }
+
+/* ===== 茶几 ===== */
+.topdown-table {
+  width: 40rpx;
+  height: 28rpx;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.table-top {
+  width: 100%;
+  height: 100%;
+  background: #A1887F;
+  border: 3rpx solid #5D4037;
+}
+.table-cup {
+  width: 12rpx;
+  height: 12rpx;
+  background: #FFFDF5;
+  border: 2rpx solid #8D6E63;
+  border-radius: 50%;
+  position: absolute;
+  top: 6rpx;
+  right: 6rpx;
+}
+.cup-has-tea { background: #4CAF50; border-color: #2E7D32; }
+
+/* ===== 盆栽 ===== */
+.topdown-plant {
+  width: 32rpx;
+  height: 40rpx;
+  position: relative;
+}
+.plant-leaf {
+  width: 10rpx;
+  height: 10rpx;
+  background: #4CAF50;
+  border: 2rpx solid #2E7D32;
+  position: absolute;
+  border-radius: 0 50% 0 50%;
+}
+.plant-l1 { top: 0; left: 12rpx; transform: rotate(-30deg); }
+.plant-l2 { top: 4rpx; left: 4rpx; transform: rotate(-60deg); }
+.plant-l3 { top: 4rpx; right: 4rpx; transform: rotate(30deg); }
+.plant-l4 { top: 10rpx; left: 8rpx; transform: rotate(10deg); }
+.plant-pot {
+  width: 20rpx;
+  height: 18rpx;
+  background: #A1887F;
+  border: 2rpx solid #5D4037;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.plant-watered .plant-leaf { background: #66BB6A; }
+
+/* ===== 床 ===== */
+.topdown-bed {
+  width: 64rpx;
+  height: 80rpx;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.bed-frame {
+  width: 100%;
+  height: 100%;
+  background: #A1887F;
+  border: 3rpx solid #5D4037;
+}
+.bed-pillow {
+  width: 24rpx;
+  height: 16rpx;
+  background: #FFFDF5;
+  border: 2rpx solid #8D6E63;
+  position: absolute;
+  top: 6rpx;
+}
+.bed-p1 { left: 6rpx; }
+.bed-p2 { right: 6rpx; }
+.bed-blanket {
+  position: absolute;
+  bottom: 4rpx;
+  left: 4rpx;
+  right: 4rpx;
+  height: 40rpx;
+  background: #FFB74D;
+  border: 2rpx solid #F57C00;
+}
+.bed-sleeping .bed-blanket { background: #64B5F6; border-color: #42A5F5; }
+.sleep-zzz {
+  position: absolute;
+  top: -20rpx;
+  right: -10rpx;
+  animation: zzzFloat 1.5s infinite;
+}
+@keyframes zzzFloat {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-16rpx); opacity: 0; }
+}
+.zzz-text { font-size: 20rpx; }
+
+/* ===== 衣柜 ===== */
+.topdown-wardrobe {
+  width: 44rpx;
+  height: 52rpx;
+  background: #8D6E63;
+  border: 3rpx solid #5D4037;
+  display: flex;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.wardrobe-door {
+  flex: 1;
+}
+.wd-l { border-right: 2rpx solid #5D4037; background: #A1887F; }
+.wd-r { background: #8D6E63; }
+.wardrobe-knob {
+  width: 6rpx;
+  height: 6rpx;
+  background: #FFB300;
+  border: 1rpx solid #5D4037;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.wk-l { left: 14rpx; }
+.wk-r { right: 14rpx; }
+.wardrobe-mirror {
+  position: absolute;
+  top: 6rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16rpx;
+  height: 20rpx;
+  background: #90CAF9;
+  border: 2rpx solid #5D4037;
+}
+
+/* ===== 书桌 ===== */
+.topdown-desk {
+  width: 52rpx;
+  height: 36rpx;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.desk-surface {
+  width: 100%;
+  height: 28rpx;
+  background: #A1887F;
+  border: 3rpx solid #5D4037;
+}
+.desk-lamp {
+  width: 8rpx;
+  height: 12rpx;
+  background: #9E9E9E;
+  border: 1rpx solid #616161;
+  position: absolute;
+  top: 2rpx;
+  right: 6rpx;
+}
+.lamp-on {
+  background: #FFD54F;
+  box-shadow: 0 0 10rpx rgba(255,213,79,0.6);
+}
+.desk-book {
+  width: 14rpx;
+  height: 10rpx;
+  background: #42A5F5;
+  border: 1rpx solid #1E88E5;
+  position: absolute;
+  top: 8rpx;
+  left: 6rpx;
+}
+.desk-chair {
+  width: 20rpx;
+  height: 14rpx;
+  background: #795548;
+  border: 2rpx solid #5D4037;
+  position: absolute;
+  bottom: -4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===== 女友沙发 + 角色 ===== */
+.topdown-gf-sofa {
+  width: 40rpx;
+  height: 28rpx;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.gf-sofa-back {
+  width: 100%;
+  height: 10rpx;
+  background: #CE93D8;
+  border: 2rpx solid #AB47BC;
+}
+.gf-sofa-seat {
+  width: 100%;
+  height: 18rpx;
+  background: #E1BEE7;
+  border: 2rpx solid #AB47BC;
+  border-top: none;
+}
+.gf-char {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8rpx;
+  margin-top: -16rpx;
 }
-.footer-hint {
+.gf-hair {
+  width: 22rpx;
+  height: 10rpx;
+  background: #5D4037;
+  border: 2rpx solid #3E2723;
+  border-radius: 6rpx 6rpx 0 0;
+}
+.gf-head {
+  width: 20rpx;
+  height: 18rpx;
+  background: #FFCC80;
+  border: 2rpx solid #5D4037;
+  margin-top: -2rpx;
+}
+.gf-body {
+  width: 18rpx;
+  height: 16rpx;
+  background: #EF9A9A;
+  border: 2rpx solid #EF5350;
+  margin-top: -2rpx;
+}
+.gf-active .gf-body {
+  animation: gfBounce 0.5s ease-in-out infinite;
+}
+@keyframes gfBounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-3rpx); }
+}
+.gf-bubble {
+  position: absolute;
+  top: -36rpx;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  background: #FCE4EC;
+  border: 3rpx solid #EF5350;
+  padding: 4rpx 10rpx;
+  font-size: 16rpx;
+  opacity: 0;
+  transition: all 0.3s;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+  white-space: nowrap;
+}
+.gf-bubble.bubble-show {
+  transform: translateX(-50%) scale(1);
+  opacity: 1;
+}
+
+/* ===== 淋浴 ===== */
+.topdown-shower {
+  width: 44rpx;
+  height: 48rpx;
+  background: #E3F2FD;
+  border: 3rpx solid #42A5F5;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.shower-base {
+  width: 32rpx;
+  height: 32rpx;
+  background: #BBDEFB;
+  border: 2rpx solid #64B5F6;
+  position: absolute;
+  bottom: 4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.shower-head {
+  width: 16rpx;
+  height: 6rpx;
+  background: #9E9E9E;
+  border: 2rpx solid #616161;
+  position: absolute;
+  top: 4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.shower-water {
+  width: 2rpx;
+  height: 0;
+  background: #42A5F5;
+  position: absolute;
+  top: 12rpx;
+}
+.shower-active .shower-water {
+  height: 24rpx;
+  animation: waterDrip 0.5s infinite;
+}
+@keyframes waterDrip {
+  0% { opacity: 1; }
+  100% { opacity: 0.3; }
+}
+.w1 { left: 12rpx; animation-delay: 0s; }
+.w2 { left: 20rpx; animation-delay: 0.15s; }
+.w3 { left: 28rpx; animation-delay: 0.3s; }
+.shower-drain {
+  width: 8rpx;
+  height: 8rpx;
+  background: #757575;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 10rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===== 马桶 ===== */
+.topdown-toilet {
+  width: 32rpx;
+  height: 44rpx;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.toilet-tank {
+  width: 24rpx;
+  height: 14rpx;
+  background: #FFFDF5;
+  border: 3rpx solid #BDBDBD;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.toilet-seat {
+  width: 28rpx;
+  height: 24rpx;
+  background: #FFFDF5;
+  border: 3rpx solid #BDBDBD;
+  border-radius: 0 0 10rpx 10rpx;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.toilet-lid {
+  width: 22rpx;
+  height: 16rpx;
+  background: #F5F5F5;
+  border: 2rpx solid #E0E0E0;
+  border-radius: 0 0 8rpx 8rpx;
+  position: absolute;
+  bottom: 4rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.toilet-hole {
+  width: 12rpx;
+  height: 8rpx;
+  background: #90CAF9;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 8rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===== 洗手台 ===== */
+.topdown-basin {
+  width: 40rpx;
+  height: 32rpx;
+  position: relative;
+  box-shadow: 2rpx 2rpx 0 #8D6E63;
+}
+.basin-counter {
+  width: 100%;
+  height: 100%;
+  background: #FFFDF5;
+  border: 3rpx solid #BDBDBD;
+}
+.basin-bowl {
+  width: 20rpx;
+  height: 14rpx;
+  background: #E3F2FD;
+  border: 2rpx solid #90CAF9;
+  border-radius: 0 0 50% 50%;
+  position: absolute;
+  bottom: 6rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.basin-faucet {
+  width: 6rpx;
+  height: 10rpx;
+  background: #9E9E9E;
+  border: 1rpx solid #616161;
+  position: absolute;
+  top: 2rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.basin-mirror {
+  width: 20rpx;
+  height: 4rpx;
+  background: #90CAF9;
+  border: 1rpx solid #64B5F6;
+  position: absolute;
+  top: -6rpx;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ===== 天气卡片 - 卷轴风 ===== */
+.weather-card {
+  position: fixed;
+  top: 160rpx;
+  left: 50%;
+  transform: translateX(-50%) scale(0.8);
+  width: 600rpx;
+  background: linear-gradient(180deg, #FFFEF9 0%, #FFF8E7 100%);
+  border: 5rpx solid #5D4037;
+  box-shadow: 8rpx 8rpx 0 rgba(93,64,55,0.5);
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  padding: 24rpx;
+}
+.weather-card.weather-show {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) scale(1);
+}
+.weather-close {
+  position: absolute;
+  top: 8rpx;
+  right: 8rpx;
+  width: 40rpx;
+  height: 40rpx;
+  background: #EF5350;
+  border: 3rpx solid #B71C1C;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 22rpx;
-  color: #475569;
+  font-weight: bold;
+}
+.weather-content {}
+.weather-header {
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+.weather-icon { font-size: 56rpx; }
+.weather-info { flex: 1; }
+.weather-city {
+  display: block;
+  font-size: 28rpx;
+  color: #3E2723;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+.weather-time {
+  display: block;
+  font-size: 18rpx;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+}
+.weather-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 16rpx;
+  background: #FFF8E1;
+  border: 3rpx solid #8D6E63;
+  margin-bottom: 12rpx;
+}
+.weather-temp {}
+.temp-val {
+  font-size: 48rpx;
+  color: #FFB300;
   font-family: 'Courier New', monospace;
   font-weight: bold;
-  letter-spacing: 1rpx;
+  text-shadow: 2rpx 2rpx 0 #8D6E63;
 }
-.footer-sub {
+.temp-range {
+  display: block;
   font-size: 18rpx;
-  color: #334155;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+}
+.weather-condition { text-align: right; }
+.condition-label {
+  display: block;
+  font-size: 26rpx;
+  color: #3E2723;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+.humidity {
+  display: block;
+  font-size: 18rpx;
+  color: #42A5F5;
+  font-family: 'Courier New', monospace;
+}
+.weather-advice {
+  font-size: 22rpx;
+  color: #5D4037;
+  font-family: 'Courier New', monospace;
+  padding: 10rpx 16rpx;
+  background: rgba(255,179,0,0.1);
+  border-left: 4rpx solid #FFB300;
+}
+
+/* ===== 面板弹窗系统 - 游戏对话框 ===== */
+.panel-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(62,39,35,0.7);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.panel-overlay.panel-show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.panel-box {
+  width: 640rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+  background: linear-gradient(180deg, #FFFEF9 0%, #FFF8E7 100%);
+  border: 6rpx solid #5D4037;
+  box-shadow: 10rpx 10rpx 0 rgba(93,64,55,0.5);
+  position: relative;
+}
+/* 四角金色装饰 */
+.panel-box::before {
+  content: '';
+  position: absolute;
+  top: -6rpx; left: -6rpx;
+  width: 20rpx; height: 20rpx;
+  background: #FFB300;
+  border: 3rpx solid #5D4037;
+  z-index: 2;
+}
+.panel-box::after {
+  content: '';
+  position: absolute;
+  top: -6rpx; right: -6rpx;
+  width: 20rpx; height: 20rpx;
+  background: #FFB300;
+  border: 3rpx solid #5D4037;
+  z-index: 2;
+}
+
+/* 面板头部 - 木质标题栏 */
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 18rpx 24rpx;
+  background: linear-gradient(180deg, #795548 0%, #5D4037 100%);
+  border-bottom: 4rpx solid #3E2723;
+}
+.panel-emoji { font-size: 36rpx; filter: drop-shadow(0 2rpx 2rpx rgba(0,0,0,0.3)); }
+.panel-title {
+  font-size: 30rpx;
+  color: #FFD54F;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-shadow: 1rpx 1rpx 0 #3E2723;
+  flex: 1;
+}
+
+/* 各面板头部颜色变化 */
+.fridge-panel-header { background: linear-gradient(180deg, #42A5F5, #1E88E5); border-color: #0D47A1; }
+.cook-panel-header { background: linear-gradient(180deg, #FF8A65, #F4511E); border-color: #BF360C; }
+.sink-panel-header { background: linear-gradient(180deg, #64B5F6, #42A5F5); border-color: #1565C0; }
+.cabinet-panel-header { background: linear-gradient(180deg, #A1887F, #795548); border-color: #3E2723; }
+.tv-panel-header { background: linear-gradient(180deg, #78909C, #546E7A); border-color: #263238; }
+.sofa-panel-header { background: linear-gradient(180deg, #A1887F, #8D6E63); border-color: #5D4037; }
+.table-panel-header { background: linear-gradient(180deg, #8D6E63, #795548); border-color: #4E342E; }
+.plant-panel-header { background: linear-gradient(180deg, #66BB6A, #43A047); border-color: #1B5E20; }
+.bed-panel-header { background: linear-gradient(180deg, #7986CB, #5C6BC0); border-color: #283593; }
+.wardrobe-panel-header { background: linear-gradient(180deg, #A1887F, #795548); border-color: #3E2723; }
+.desk-panel-header { background: linear-gradient(180deg, #FFB74D, #FF9800); border-color: #E65100; }
+.shower-panel-header { background: linear-gradient(180deg, #4FC3F7, #29B6F6); border-color: #0277BD; }
+.toilet-panel-header { background: linear-gradient(180deg, #90A4AE, #78909C); border-color: #37474F; }
+.basin-panel-header { background: linear-gradient(180deg, #80DEEA, #4DD0E1); border-color: #006064; }
+.door-panel-header { background: linear-gradient(180deg, #A1887F, #6D4C41); border-color: #3E2723; }
+.dog-panel-header { background: linear-gradient(180deg, #FFB74D, #FF9800); border-color: #E65100; }
+.gf-panel-header { background: linear-gradient(180deg, #F48FB1, #EC407A); border-color: #880E4F; }
+
+/* 面板内容 */
+.panel-body {
+  padding: 20rpx 24rpx;
+}
+.panel-desc {
+  font-size: 24rpx;
+  color: #5D4037;
+  font-family: 'Courier New', monospace;
+  line-height: 1.6;
+}
+.panel-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10rpx 0;
+  border-bottom: 2rpx solid #F5E6CC;
+}
+.panel-info-row:last-child { border-bottom: none; }
+.panel-info-label {
+  font-size: 24rpx;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+}
+.panel-info-val {
+  font-size: 24rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.panel-divider {
+  height: 4rpx;
+  background: repeating-linear-gradient(90deg, #8D6E63 0, #8D6E63 12rpx, transparent 12rpx, transparent 24rpx);
+  margin: 16rpx 0;
+}
+
+/* 面板按钮区 */
+.panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  padding: 16rpx 24rpx 24rpx;
+  border-top: 3rpx solid #F5E6CC;
+}
+.dog-actions { flex-wrap: wrap; }
+.panel-btn {
+  flex: 1;
+  min-width: 200rpx;
+  padding: 16rpx 20rpx;
+  background: #FFFDF5;
+  border: 4rpx solid #8D6E63;
+  box-shadow: 4rpx 4rpx 0 #D7CCC8;
+  text-align: center;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.panel-btn:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 2rpx 2rpx 0 #D7CCC8;
+}
+.panel-btn-primary {
+  background: linear-gradient(180deg, #FFD54F 0%, #FFB300 100%);
+  border-color: #5D4037;
+  box-shadow: 4rpx 4rpx 0 #5D4037;
+}
+.panel-btn-primary:active {
+  box-shadow: 2rpx 2rpx 0 #5D4037;
+}
+.panel-btn-text {
+  font-size: 24rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.panel-btn-primary .panel-btn-text {
+  text-shadow: 1rpx 1rpx 0 rgba(255,255,255,0.3);
+}
+
+/* ===== 进度条 ===== */
+.cooking-progress-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10rpx;
+  padding: 16rpx 0;
+}
+.cooking-name {
+  font-size: 24rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.progress-track {
+  width: 100%;
+  height: 28rpx;
+  background: #3E2723;
+  border: 3rpx solid #5D4037;
+  overflow: hidden;
+  box-shadow: inset 0 2rpx 4rpx rgba(0,0,0,0.4);
+}
+.progress-fill {
+  height: 100%;
+  position: relative;
+  transition: width 0.3s;
+}
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 40%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.35), transparent);
+}
+.cook-progress-fill { background: linear-gradient(90deg, #FF8A65, #FF5722); }
+.study-progress-fill { background: linear-gradient(90deg, #AB47BC, #CE93D8); }
+.shower-progress-fill { background: linear-gradient(90deg, #42A5F5, #64B5F6); }
+.cooking-pct {
+  font-size: 22rpx;
+  color: #FFB300;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* ===== 菜谱列表 ===== */
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-top: 12rpx;
+}
+.recipe-item {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  padding: 14rpx 16rpx;
+  background: #FFF8E1;
+  border: 3rpx solid #8D6E63;
+  box-shadow: 3rpx 3rpx 0 #D7CCC8;
+  position: relative;
+  transition: transform 0.08s, box-shadow 0.08s;
+}
+.recipe-item:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 1rpx 1rpx 0 #D7CCC8;
+}
+.recipe-badge {
+  position: absolute;
+  top: -6rpx;
+  right: -4rpx;
+  background: #4CAF50;
+  border: 2rpx solid #2E7D32;
+  color: #fff;
+  font-size: 14rpx;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  padding: 2rpx 8rpx;
+}
+.recipe-emoji { font-size: 36rpx; }
+.recipe-info { flex: 1; }
+.recipe-name {
+  display: block;
+  font-size: 24rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.recipe-effect {
+  display: block;
+  font-size: 18rpx;
+  color: #4CAF50;
+  font-family: 'Courier New', monospace;
+}
+.recipe-cost {
+  font-size: 22rpx;
+  color: #FFB300;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* 菜谱步骤 */
+.recipe-steps-view { padding: 8rpx 0; }
+.recipe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+.recipe-title {
+  font-size: 28rpx;
+  color: #3E2723;
+  font-weight: bold;
+  font-family: 'Courier New', monospace;
+}
+.recipe-diff {
+  font-size: 18rpx;
+  color: #FFB300;
+  background: #FFF8E1;
+  border: 2rpx solid #FFB300;
+  padding: 2rpx 10rpx;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.recipe-steps-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+.step-item {
+  display: flex;
+  gap: 10rpx;
+  padding: 8rpx 0;
+  border-bottom: 1rpx solid #F5E6CC;
+}
+.step-num {
+  width: 36rpx;
+  height: 36rpx;
+  background: linear-gradient(180deg, #FFD54F, #FFB300);
+  border: 2rpx solid #5D4037;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.step-text {
+  font-size: 22rpx;
+  color: #5D4037;
+  font-family: 'Courier New', monospace;
+  line-height: 1.5;
+}
+
+/* ===== 加载/新闻 ===== */
+.loading-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  padding: 30rpx 0;
+}
+.loading-spinner {
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid #D7CCC8;
+  border-top-color: #FFB300;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-size: 22rpx;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+.news-item {
+  display: flex;
+  gap: 12rpx;
+  padding: 12rpx;
+  background: #FFF8E1;
+  border: 2rpx solid #8D6E63;
+  box-shadow: 2rpx 2rpx 0 #D7CCC8;
+}
+.news-num {
+  width: 32rpx;
+  height: 32rpx;
+  background: linear-gradient(180deg, #FFD54F, #FFB300);
+  border: 2rpx solid #5D4037;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+.news-content { flex: 1; }
+.news-title {
+  display: block;
+  font-size: 22rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  line-height: 1.4;
+}
+.news-meta {
+  display: block;
+  font-size: 16rpx;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+  margin-top: 4rpx;
+}
+
+/* ===== 小狗属性 ===== */
+.dog-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+  margin-bottom: 12rpx;
+}
+
+/* ===== 面板标签页 ===== */
+.panel-tabs {
+  display: flex;
+  border-bottom: 3rpx solid #5D4037;
+}
+.tab-item {
+  flex: 1;
+  padding: 14rpx 0;
+  text-align: center;
+  background: #EFEBE9;
+  font-size: 22rpx;
+  color: #5D4037;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  border-right: 2rpx solid #D7CCC8;
+}
+.tab-item:last-child { border-right: none; }
+.tab-item.tab-active {
+  background: #FFD54F;
+  color: #3E2723;
+}
+
+/* ===== 语言学习卡 ===== */
+.lang-card-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  padding: 16rpx 0;
+}
+.lang-card {
+  width: 400rpx;
+  height: 240rpx;
+  perspective: 1000rpx;
+  position: relative;
+}
+.lang-card-front, .lang-card-back {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  transition: transform 0.5s;
+  border: 4rpx solid #5D4037;
+  box-shadow: 4rpx 4rpx 0 #8D6E63;
+}
+.lang-card-front {
+  background: linear-gradient(180deg, #FFF8E1 0%, #FFD54F 100%);
+  transform: rotateY(0deg);
+}
+.lang-card-back {
+  background: linear-gradient(180deg, #E8EAF6 0%, #C5CAE9 100%);
+  transform: rotateY(180deg);
+}
+.lang-card.flipped .lang-card-front { transform: rotateY(-180deg); }
+.lang-card.flipped .lang-card-back { transform: rotateY(0deg); }
+.card-icon { font-size: 56rpx; margin-bottom: 8rpx; }
+.card-zh {
+  font-size: 32rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.card-en {
+  font-size: 36rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  text-shadow: 1rpx 1rpx 0 #9FA8DA;
+}
+.card-phonetic {
+  font-size: 22rpx;
+  color: #5C6BC0;
+  font-family: 'Courier New', monospace;
+  margin-top: 8rpx;
+}
+.lang-card-nav {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+}
+.nav-btn {
+  width: 56rpx;
+  height: 56rpx;
+  background: linear-gradient(180deg, #FFD54F, #FFB300);
+  border: 3rpx solid #5D4037;
+  box-shadow: 3rpx 3rpx 0 #5D4037;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+  color: #3E2723;
+  font-weight: bold;
+}
+.nav-btn:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 1rpx 1rpx 0 #5D4037;
+}
+.card-counter {
+  font-size: 22rpx;
+  color: #5D4037;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12rpx;
+  padding: 30rpx 0;
+}
+.empty-icon { font-size: 56rpx; }
+.empty-text {
+  font-size: 22rpx;
+  color: #8D6E63;
   font-family: 'Courier New', monospace;
   text-align: center;
+}
+
+/* ===== 闹钟 ===== */
+.sleeping-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16rpx;
+  padding: 20rpx 0;
+}
+.sleep-emoji { font-size: 56rpx; }
+.sleep-text {
+  font-size: 26rpx;
+  color: #5C6BC0;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.alarm-section {
+  padding: 8rpx 0;
+}
+.alarm-section-title {
+  display: block;
+  font-size: 24rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  margin-bottom: 12rpx;
+}
+.alarm-picker-row {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  flex-wrap: wrap;
+}
+.alarm-picker-box {
+  background: #FFF8E1;
+  border: 3rpx solid #8D6E63;
+  padding: 8rpx 20rpx;
+  box-shadow: 2rpx 2rpx 0 #D7CCC8;
+}
+.alarm-picker-val {
+  font-size: 32rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.alarm-colon {
+  font-size: 32rpx;
+  color: #3E2723;
+  font-weight: bold;
+}
+.alarm-set-btn {
+  background: linear-gradient(180deg, #FFD54F, #FFB300);
+  border: 3rpx solid #5D4037;
+  padding: 8rpx 20rpx;
+  box-shadow: 3rpx 3rpx 0 #5D4037;
+}
+.alarm-set-btn:active {
+  transform: translate(2rpx, 2rpx);
+  box-shadow: 1rpx 1rpx 0 #5D4037;
+}
+.alarm-set-text {
+  font-size: 22rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.alarm-cancel-btn {
+  background: #FFEBEE;
+  border: 3rpx solid #EF5350;
+  padding: 8rpx 16rpx;
+}
+.alarm-cancel-text {
+  font-size: 20rpx;
+  color: #EF5350;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+.alarm-status {
+  display: block;
+  font-size: 20rpx;
+  color: #FFB300;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  margin-top: 12rpx;
+}
+
+/* ===== 女朋友面板 ===== */
+.gf-mood-bar {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  margin-bottom: 16rpx;
+}
+.gf-mood-label {
+  font-size: 22rpx;
+  color: #5D4037;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  min-width: 80rpx;
+}
+.gf-mood-val {
+  font-size: 20rpx;
+  color: #EC407A;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  min-width: 48rpx;
+}
+.gf-tone-select {
+  margin-bottom: 16rpx;
+}
+.tone-label {
+  font-size: 20rpx;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+  margin-bottom: 8rpx;
+}
+.tone-buttons {
+  display: flex;
+  gap: 10rpx;
+}
+.tone-btn {
+  flex: 1;
+  padding: 10rpx;
+  background: #FFF8E1;
+  border: 3rpx solid #8D6E63;
+  text-align: center;
+  font-size: 20rpx;
+  font-family: 'Courier New', monospace;
+  box-shadow: 2rpx 2rpx 0 #D7CCC8;
+}
+.tone-btn:active {
+  transform: translate(1rpx, 1rpx);
+  box-shadow: 1rpx 1rpx 0 #D7CCC8;
+}
+.tone-btn.tone-active {
+  background: linear-gradient(180deg, #F48FB1, #EC407A);
+  border-color: #880E4F;
+  color: #fff;
+  box-shadow: 2rpx 2rpx 0 #880E4F;
+}
+.gf-response-box {
+  background: #FCE4EC;
+  border: 3rpx solid #F48FB1;
+  padding: 16rpx;
+  margin-bottom: 12rpx;
+  min-height: 60rpx;
+  box-shadow: inset 0 2rpx 4rpx rgba(236,64,122,0.1);
+}
+.gf-response-text {
+  font-size: 24rpx;
+  color: #880E4F;
+  font-family: 'Courier New', monospace;
+  line-height: 1.6;
+}
+.gf-stats {
+  font-size: 18rpx;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+}
+
+/* ===== 浮动提示 ===== */
+.game-toast {
+  position: fixed;
+  top: 200rpx;
+  left: 50%;
+  transform: translateX(-50%) translateY(-30rpx);
+  background: linear-gradient(180deg, #FFFEF9, #FFF8E7);
+  border: 5rpx solid #5D4037;
+  box-shadow: 6rpx 6rpx 0 rgba(93,64,55,0.5);
+  padding: 18rpx 36rpx;
+  display: flex;
+  align-items: center;
+  gap: 14rpx;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s, transform 0.3s;
+  max-width: 600rpx;
+}
+.game-toast.toast-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.toast-icon { font-size: 36rpx; }
+.toast-text {
+  font-size: 24rpx;
+  color: #3E2723;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+}
+
+/* ===== 底部 ===== */
+.home-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6rpx;
+  padding: 24rpx 0 16rpx;
+}
+.footer-hint {
+  font-size: 20rpx;
+  color: #8D6E63;
+  font-family: 'Courier New', monospace;
+}
+.footer-sub {
+  font-size: 16rpx;
+  color: #BCAAA4;
+  font-family: 'Courier New', monospace;
 }
