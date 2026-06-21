@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 450" width="920" height="450">
+  <rect width="920" height="450" fill="white"/>
+
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M 0,1 L 9,5 L 0,9 Z" fill="black"/>
+    </marker>
+    <marker id="ah-rev" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto-start-reverse">
+      <path d="M 0,1 L 9,5 L 0,9 Z" fill="black"/>
+    </marker>
+  </defs>
+
+  <!-- Y axis -->
+  <line x1="100" y1="360" x2="100" y2="48" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- X axis -->
+  <line x1="100" y1="360" x2="890" y2="360" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+
+  <!-- Y axis label (rotated) -->
+  <text transform="translate(22, 210) rotate(-90)" text-anchor="middle"
+        font-family="Arial, sans-serif" font-size="14" fill="black">Integrator output [V]</text>
+
+  <!-- X axis label -->
+  <text x="895" y="364" font-family="Arial, sans-serif" font-size="14" fill="black">time</text>
+
+  <!--
+    Data: 2.5 4 5.5 7 4.5 6 7.5 9  9 9 9 9 9 9 9 9
+          2.5 4 5.5 7 4.5 6 7.5 9  9 9 9 9 9 9 9 9
+    Y mapping (1-10 scale, 30px/unit): y = 330 - (val-1)*30
+      2.5 → 285,  4 → 240,  5.5 → 195,  7 → 150
+      4.5 → 225,  6 → 180,  7.5 → 135,  9 → 90
+    X: step width = 22px, starting at x=100
+      steps 0-6 : x=100 → 254  (Integration period)
+      steps 7-15: x=254 → 452  (Holding period, 9×22=198)
+      steps 16-22: x=452 → 606 (Change Vcm section)
+      steps 23-31: x=606 → 804 (final hold, 9×22=198)
+  -->
+
+  <!-- Step waveform -->
+  <path d="M 100,285
+    L 122,285 L 122,240
+    L 144,240 L 144,195
+    L 166,195 L 166,150
+    L 188,150 L 188,225
+    L 210,225 L 210,180
+    L 232,180 L 232,135
+    L 254,135 L 254,90
+    L 452,90
+    L 452,285
+    L 474,285 L 474,240
+    L 496,240 L 496,195
+    L 518,195 L 518,150
+    L 540,150 L 540,225
+    L 562,225 L 562,180
+    L 584,180 L 584,135
+    L 606,135 L 606,90
+    L 804,90"
+    stroke="black" stroke-width="2.5" fill="none" stroke-linejoin="miter"/>
+
+  <!-- 250mV Y-axis reference: double arrow from starting level (y=285) to baseline (y=360) -->
+  <line x1="68" y1="285" x2="68" y2="360"
+        stroke="black" stroke-width="1.5"
+        marker-start="url(#ah-rev)" marker-end="url(#ah)"/>
+  <text x="38" y="328" font-family="Arial, sans-serif" font-size="13" fill="black" text-anchor="middle">250mV</text>
+
+  <!-- 250mV step drop arrow: from y=150 (val=7) down to y=225 (val=4.5), placed at x=200 -->
+  <line x1="200" y1="150" x2="200" y2="225"
+        stroke="black" stroke-width="1.5"
+        marker-start="url(#ah-rev)" marker-end="url(#ah)"/>
+  <text x="215" y="193" font-family="Arial, sans-serif" font-size="13" fill="black">250mV</text>
+
+  <!-- Dashed vertical lines at period boundaries -->
+  <line x1="254" y1="90" x2="254" y2="390" stroke="black" stroke-width="1.2" stroke-dasharray="7,4"/>
+  <line x1="452" y1="90" x2="452" y2="390" stroke="black" stroke-width="1.2" stroke-dasharray="7,4"/>
+
+  <!-- Integration period bracket -->
+  <line x1="100" y1="390" x2="254" y2="390"
+        stroke="black" stroke-width="1.5"
+        marker-start="url(#ah-rev)" marker-end="url(#ah)"/>
+  <text x="177" y="412" font-family="Arial, sans-serif" font-size="13" fill="black" text-anchor="middle">Integration period</text>
+
+  <!-- Holding period bracket -->
+  <line x1="254" y1="390" x2="452" y2="390"
+        stroke="black" stroke-width="1.5"
+        marker-start="url(#ah-rev)" marker-end="url(#ah)"/>
+  <text x="353" y="412" font-family="Arial, sans-serif" font-size="13" fill="black" text-anchor="middle">Holding period</text>
+
+  <!-- Change Vcm upward arrow and label -->
+  <line x1="452" y1="435" x2="452" y2="392"
+        stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
+  <text x="462" y="435" font-family="Arial, sans-serif" font-size="13" fill="black">Change Vcm from 250mV to 0V</text>
+</svg>
