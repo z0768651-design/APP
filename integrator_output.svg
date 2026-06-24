@@ -1,92 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 450" width="920" height="450">
-  <rect width="920" height="450" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 430" width="920" height="430">
+  <rect width="920" height="430" fill="white"/>
 
   <defs>
-    <marker id="ah" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-      <path d="M 0,1 L 9,5 L 0,9 Z" fill="black"/>
+    <marker id="arw" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L9,4 L0,8 Z" fill="black"/>
     </marker>
-    <marker id="ah-rev" markerWidth="10" markerHeight="10" refX="0" refY="5" orient="auto-start-reverse">
-      <path d="M 0,1 L 9,5 L 0,9 Z" fill="black"/>
+    <marker id="arw-both" markerWidth="10" markerHeight="8" refX="1" refY="4" orient="auto-start-reverse">
+      <path d="M0,0 L9,4 L0,8 Z" fill="black"/>
     </marker>
   </defs>
 
-  <!-- Y axis -->
-  <line x1="100" y1="360" x2="100" y2="48" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
-  <!-- X axis -->
-  <line x1="100" y1="360" x2="890" y2="360" stroke="black" stroke-width="2" marker-end="url(#ah)"/>
+  <!-- ====== TOP-LEFT: PTAT PLOT ====== -->
+  <!-- Y-axis -->
+  <line x1="58" y1="178" x2="58" y2="25" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
+  <!-- X-axis -->
+  <line x1="58" y1="178" x2="228" y2="178" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
+  <!-- V label -->
+  <text x="48" y="28" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="end">V</text>
+  <!-- Temp. label -->
+  <text x="228" y="198" font-family="Arial, sans-serif" font-size="13" text-anchor="end">Temp.</text>
+  <!-- PTAT line (positive slope) -->
+  <line x1="70" y1="160" x2="210" y2="48" stroke="black" stroke-width="2.2"/>
+  <!-- PTAT label -->
+  <text x="120" y="78" font-family="Arial, sans-serif" font-size="14" font-style="italic" fill="black">PTAT</text>
 
-  <!-- Y axis label (rotated) -->
-  <text transform="translate(22, 210) rotate(-90)" text-anchor="middle"
-        font-family="Arial, sans-serif" font-size="14" fill="black">Integrator output [V]</text>
+  <!-- ====== BOTTOM-LEFT: CTAT PLOT ====== -->
+  <!-- Y-axis -->
+  <line x1="58" y1="385" x2="58" y2="232" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
+  <!-- X-axis -->
+  <line x1="58" y1="385" x2="228" y2="385" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
+  <!-- V label -->
+  <text x="48" y="235" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="end">V</text>
+  <!-- Temp. label -->
+  <text x="228" y="405" font-family="Arial, sans-serif" font-size="13" text-anchor="end">Temp.</text>
+  <!-- CTAT line (negative slope) -->
+  <line x1="70" y1="250" x2="210" y2="368" stroke="black" stroke-width="2.2"/>
+  <!-- CTAT label -->
+  <text x="125" y="345" font-family="Arial, sans-serif" font-size="14" font-style="italic" fill="black">CTAT</text>
 
-  <!-- X axis label -->
-  <text x="895" y="364" font-family="Arial, sans-serif" font-size="14" fill="black">time</text>
+  <!-- ====== RIGHT CURLY BRACE: PTAT → α ====== -->
+  <path d="M 238,35  C 278,35  270,107  315,107
+           M 315,107 C 270,107 278,178  238,178"
+        stroke="black" stroke-width="2" fill="none"/>
 
-  <!--
-    Data: 2.5 4 5.5 7 4.5 6 7.5 9  9 9 9 9 9 9 9 9
-          2.5 4 5.5 7 4.5 6 7.5 9  9 9 9 9 9 9 9 9
-    Y mapping (1-10 scale, 30px/unit): y = 330 - (val-1)*30
-      2.5 → 285,  4 → 240,  5.5 → 195,  7 → 150
-      4.5 → 225,  6 → 180,  7.5 → 135,  9 → 90
-    X: step width = 22px, starting at x=100
-      steps 0-6 : x=100 → 254  (Integration period)
-      steps 7-15: x=254 → 452  (Holding period, 9×22=198)
-      steps 16-22: x=452 → 606 (Change Vcm section)
-      steps 23-31: x=606 → 804 (final hold, 9×22=198)
-  -->
+  <!-- ====== RIGHT CURLY BRACE: CTAT → 1 ====== -->
+  <path d="M 238,240 C 278,240 270,312 315,312
+           M 315,312 C 270,312 278,385 238,385"
+        stroke="black" stroke-width="2" fill="none"/>
 
-  <!-- Step waveform -->
-  <path d="M 100,285
-    L 122,285 L 122,240
-    L 144,240 L 144,195
-    L 166,195 L 166,150
-    L 188,150 L 188,225
-    L 210,225 L 210,180
-    L 232,180 L 232,135
-    L 254,135 L 254,90
-    L 452,90
-    L 452,285
-    L 474,285 L 474,240
-    L 496,240 L 496,195
-    L 518,195 L 518,150
-    L 540,150 L 540,225
-    L 562,225 L 562,180
-    L 584,180 L 584,135
-    L 606,135 L 606,90
-    L 804,90"
-    stroke="black" stroke-width="2.5" fill="none" stroke-linejoin="miter"/>
+  <!-- ====== α LABEL + ARROW TO ADDER ====== -->
+  <text x="340" y="112" font-family="Arial, sans-serif" font-size="18" font-style="italic" text-anchor="middle">α</text>
+  <line x1="340" y1="120" x2="392" y2="190" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
 
-  <!-- 250mV Y-axis reference: double arrow from starting level (y=285) to baseline (y=360) -->
-  <line x1="68" y1="285" x2="68" y2="360"
-        stroke="black" stroke-width="1.5"
-        marker-start="url(#ah-rev)" marker-end="url(#ah)"/>
-  <text x="38" y="328" font-family="Arial, sans-serif" font-size="13" fill="black" text-anchor="middle">250mV</text>
+  <!-- ====== 1 LABEL + ARROW TO ADDER ====== -->
+  <text x="340" y="308" font-family="Arial, sans-serif" font-size="18" text-anchor="middle">1</text>
+  <line x1="340" y1="298" x2="392" y2="228" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
 
-  <!-- 250mV step drop arrow: from y=150 (val=7) down to y=225 (val=4.5), placed at x=200 -->
-  <line x1="200" y1="150" x2="200" y2="225"
-        stroke="black" stroke-width="1.5"
-        marker-start="url(#ah-rev)" marker-end="url(#ah)"/>
-  <text x="215" y="193" font-family="Arial, sans-serif" font-size="13" fill="black">250mV</text>
+  <!-- ====== SUMMING JUNCTION ⊕ ====== -->
+  <circle cx="400" cy="210" r="20" stroke="black" stroke-width="2.2" fill="white"/>
+  <line x1="387" y1="210" x2="413" y2="210" stroke="black" stroke-width="2.2"/>
+  <line x1="400" y1="197" x2="400" y2="223" stroke="black" stroke-width="2.2"/>
 
-  <!-- Dashed vertical lines at period boundaries -->
-  <line x1="254" y1="90" x2="254" y2="390" stroke="black" stroke-width="1.2" stroke-dasharray="7,4"/>
-  <line x1="452" y1="90" x2="452" y2="390" stroke="black" stroke-width="1.2" stroke-dasharray="7,4"/>
+  <!-- ====== OUTPUT ARROW → RIGHT PLOT ====== -->
+  <line x1="420" y1="210" x2="520" y2="210" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
 
-  <!-- Integration period bracket -->
-  <line x1="100" y1="390" x2="254" y2="390"
-        stroke="black" stroke-width="1.5"
-        marker-start="url(#ah-rev)" marker-end="url(#ah)"/>
-  <text x="177" y="412" font-family="Arial, sans-serif" font-size="13" fill="black" text-anchor="middle">Integration period</text>
+  <!-- ====== RIGHT: COMBINED PLOT ====== -->
+  <!-- Y-axis -->
+  <line x1="540" y1="360" x2="540" y2="52" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
+  <!-- X-axis -->
+  <line x1="540" y1="360" x2="850" y2="360" stroke="black" stroke-width="1.5" marker-end="url(#arw)"/>
+  <!-- V label -->
+  <text x="530" y="55" font-family="Arial, sans-serif" font-size="15" font-weight="bold" text-anchor="end">V</text>
+  <!-- Temp. label -->
+  <text x="845" y="380" font-family="Arial, sans-serif" font-size="13" text-anchor="end">Temp.</text>
 
-  <!-- Holding period bracket -->
-  <line x1="254" y1="390" x2="452" y2="390"
-        stroke="black" stroke-width="1.5"
-        marker-start="url(#ah-rev)" marker-end="url(#ah)"/>
-  <text x="353" y="412" font-family="Arial, sans-serif" font-size="13" fill="black" text-anchor="middle">Holding period</text>
+  <!-- αV_PTAT: thin dashed line, positive slope -->
+  <line x1="555" y1="320" x2="810" y2="92" stroke="black" stroke-width="1.3" stroke-dasharray="8,5"/>
+  <!-- αV_PTAT label (subscript) -->
+  <text x="815" y="88" font-family="Arial, sans-serif" font-style="italic">
+    <tspan font-size="14">αV</tspan><tspan font-size="10" dy="4">PTAT</tspan>
+  </text>
 
-  <!-- Change Vcm upward arrow and label -->
-  <line x1="452" y1="435" x2="452" y2="392"
-        stroke="black" stroke-width="1.5" marker-end="url(#ah)"/>
-  <text x="462" y="435" font-family="Arial, sans-serif" font-size="13" fill="black">Change Vcm from 250mV to 0V</text>
+  <!-- V_CTAT: thin dashed line, negative slope -->
+  <line x1="555" y1="92" x2="810" y2="320" stroke="black" stroke-width="1.3" stroke-dasharray="8,5"/>
+  <!-- V_CTAT label (subscript) -->
+  <text x="815" y="325" font-family="Arial, sans-serif" font-style="italic">
+    <tspan font-size="14">V</tspan><tspan font-size="10" dy="4">CTAT</tspan>
+  </text>
+
+  <!-- Crossing point: x=(555+810)/2=682.5, y=(320+92)/2=206 -->
+  <!-- Bandgap reference: thick solid nearly-flat line (the sum) -->
+  <line x1="555" y1="198" x2="810" y2="201" stroke="black" stroke-width="3.5"/>
+
+  <!-- Crossing-point marker (small X where the dashed lines meet) -->
+  <!-- The lines cross at approximately (682, 206) -->
 </svg>
